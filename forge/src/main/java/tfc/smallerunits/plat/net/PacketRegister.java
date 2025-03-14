@@ -49,10 +49,10 @@ public class PacketRegister {
 		int id = buf.readByte();
 		PacketEntry<?> entry = entries.get(id);
 		Packet packet = entry.fabricator.apply(buf);
-		packet.handle(new NetCtx(handler, responseSender, player, direction, context));
+		packet.handle(new ForgeNetCtx(handler, responseSender, player, direction, context));
 	}
 	
-	public <T extends Packet> void registerMessage(int indx, Class<T> clazz, BiConsumer<Packet, FriendlyByteBuf> writer, Function<FriendlyByteBuf, T> fabricator, BiConsumer<Packet, NetCtx> handler) {
+	public <T extends Packet> void registerMessage(int indx, Class<T> clazz, BiConsumer<Packet, FriendlyByteBuf> writer, Function<FriendlyByteBuf, T> fabricator, BiConsumer<Packet, ForgeNetCtx> handler) {
 		entries.put(
 				indx,
 				new PacketEntry<>(clazz, writer, fabricator, handler)
@@ -66,7 +66,7 @@ public class PacketRegister {
  				writer::accept,
  				fabricator,
  				(pkt, ctx) -> {
- 					NetCtx ctx1 = new NetCtx(
+ 					ForgeNetCtx ctx1 = new ForgeNetCtx(
  							ctx.get().getNetworkManager().getPacketListener(),
  							new PacketSender(this, (pkt1) -> {
  								if (ctx.get().getDirection().getReceptionSide().isServer()) {
@@ -109,9 +109,9 @@ public class PacketRegister {
 		Class<T> clazz;
 		BiConsumer<Packet, FriendlyByteBuf> writer;
 		Function<FriendlyByteBuf, T> fabricator;
-		BiConsumer<Packet, NetCtx> handler;
+		BiConsumer<Packet, ForgeNetCtx> handler;
 		
-		public PacketEntry(Class<T> clazz, BiConsumer<Packet, FriendlyByteBuf> writer, Function<FriendlyByteBuf, T> fabricator, BiConsumer<Packet, NetCtx> handler) {
+		public PacketEntry(Class<T> clazz, BiConsumer<Packet, FriendlyByteBuf> writer, Function<FriendlyByteBuf, T> fabricator, BiConsumer<Packet, ForgeNetCtx> handler) {
 			this.clazz = clazz;
 			this.writer = writer;
 			this.fabricator = fabricator;

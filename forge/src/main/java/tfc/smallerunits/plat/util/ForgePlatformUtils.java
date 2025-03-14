@@ -45,7 +45,6 @@ import org.jetbrains.annotations.Nullable;
 import tfc.smallerunits.plat.CapabilityProvider;
 import tfc.smallerunits.plat.itf.CapabilityLike;
 import tfc.smallerunits.simulation.level.ITickerLevel;
-import tfc.smallerunits.utils.scale.ResizingUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -53,28 +52,28 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class PlatformUtils {
-	public static boolean isDevEnv() {
+public class ForgePlatformUtils extends PlatformUtils {
+	public boolean isDevEnv() {
 		return !FMLEnvironment.production;
 	}
 	
-	public static boolean isLoaded(String mod) {
+	public boolean isLoaded(String mod) {
 		return ModList.get().isLoaded(mod);
 	}
 	
-	public static boolean isClient() {
+	public boolean isClient() {
 		return FMLEnvironment.dist.isClient();
 	}
 	
-	public static ResourceLocation getRegistryName(BlockEntity be) {
+	public ResourceLocation getRegistryName(BlockEntity be) {
 		return be.getLevel().registryAccess().registryOrThrow(Registries.BLOCK_ENTITY_TYPE).getKey(be.getType());
 	}
 	
-	public static boolean shouldCaptureBlockSnapshots(Level level) {
+	public boolean shouldCaptureBlockSnapshots(Level level) {
 		return level.captureBlockSnapshots;
 	}
 	
-	public static double getStepHeight(LocalPlayer player) {
+	public double getStepHeight(LocalPlayer player) {
 		return player.maxUpStep();
 	}
 
@@ -91,7 +90,7 @@ public class PlatformUtils {
 //	}
 	
 	// entity
-	public static PortalInfo createPortalInfo(Entity pEntity, Level a) {
+	public PortalInfo createPortalInfo(Entity pEntity, Level a) {
 		ITickerLevel lvl = (ITickerLevel) a;
 		
 		Vec3 pos = pEntity.getPosition(1);
@@ -106,7 +105,7 @@ public class PlatformUtils {
 		);
 	}
 	
-	public static Entity migrateEntity(Entity pEntity, ServerLevel serverLevel, int upb, Level lvl) {
+	public Entity migrateEntity(Entity pEntity, ServerLevel serverLevel, int upb, Level lvl) {
 		return pEntity.changeDimension((ServerLevel) lvl, new ITeleporter() {
 			@Override
 			public Entity placeEntity(Entity entity1, ServerLevel currentWorld, ServerLevel destWorld, float yaw, Function<Boolean, Entity> repositionEntity) {
@@ -156,7 +155,7 @@ public class PlatformUtils {
 	// config
 	private static final ArrayList<Runnable> toRun = new ArrayList<>();
 	
-	public static void delayConfigInit(Runnable r) {
+	public void delayConfigInit(Runnable r) {
 		if (hasConfigLib()) {
 			if (r == null) {
 				for (Runnable runnable : toRun) {
@@ -175,81 +174,81 @@ public class PlatformUtils {
 	}
 	
 	// block entity
-	public static void beLoaded(BlockEntity pBlockEntity, Level level) {
+	public void beLoaded(BlockEntity pBlockEntity, Level level) {
 	}
 	
-	public static void dataPacket(BlockEntity be, CompoundTag tag) {
+	public void dataPacket(BlockEntity be, CompoundTag tag) {
 		be.onDataPacket(null, ClientboundBlockEntityDataPacket.create(be, (e) -> tag));
 	}
 	
-	public static <T extends BlockEntity> AABB getRenderBox(T pBlockEntity) {
+	public <T extends BlockEntity> AABB getRenderBox(T pBlockEntity) {
 		return pBlockEntity.getRenderBoundingBox();
 	}
 	
 	// events
-	public static void preTick(ServerLevel level, BooleanSupplier pHasTimeLeft) {
+	public void preTick(ServerLevel level, BooleanSupplier pHasTimeLeft) {
 		MinecraftForge.EVENT_BUS.post(new TickEvent.LevelTickEvent(LogicalSide.SERVER, TickEvent.Phase.START, level, pHasTimeLeft));
 	}
 	
-	public static void postTick(ServerLevel level, BooleanSupplier pHasTimeLeft) {
+	public void postTick(ServerLevel level, BooleanSupplier pHasTimeLeft) {
 		MinecraftForge.EVENT_BUS.post(new TickEvent.LevelTickEvent(LogicalSide.SERVER, TickEvent.Phase.END, level, pHasTimeLeft));
 	}
 	
-	public static void loadLevel(ServerLevel serverLevel) {
+	public void loadLevel(ServerLevel serverLevel) {
 		MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(serverLevel));
 	}
 	
-	public static void unloadLevel(Level level) {
+	public void unloadLevel(Level level) {
 		MinecraftForge.EVENT_BUS.post(new LevelEvent.Unload(level));
 	}
 	
-	public static void chunkLoaded(LevelChunk bvci) {
+	public void chunkLoaded(LevelChunk bvci) {
 		MinecraftForge.EVENT_BUS.post(new ChunkEvent.Load(bvci, false));
 	}
 	
 	// reach
-	public static double getReach(LivingEntity entity, double reach) {
+	public double getReach(LivingEntity entity, double reach) {
 		if (entity.getAttributes().hasAttribute(ForgeMod.BLOCK_REACH.get()))
 			reach = entity.getAttributeValue(ForgeMod.BLOCK_REACH.get());
 		return reach;
 	}
 	
-	public static double getReach(LivingEntity entity) {
+	public double getReach(LivingEntity entity) {
 		return getReach(entity, 7);
 	}
 	
-	public static AttributeInstance getReachAttrib(LivingEntity livingEntity) {
+	public AttributeInstance getReachAttrib(LivingEntity livingEntity) {
 		return livingEntity.getAttribute(ForgeMod.BLOCK_REACH.get());
 	}
 	
 	// tabs
-	public static SUTabBuilder tab(String name, Supplier<ItemStack> icon) {
-		return new SUTabBuilder(name, icon);
+	public SUTabBuilder tab(String name, Supplier<ItemStack> icon) {
+		return new ForgeSUTabBuilder(name, icon);
 	}
 	
-	public static void customPayload(ClientboundCustomPayloadPacket clientboundCustomPayloadPacket, Object context, PacketListener listener) {
+	public void customPayload(ClientboundCustomPayloadPacket clientboundCustomPayloadPacket, Object context, PacketListener listener) {
 		if (!net.minecraftforge.network.NetworkHooks.onCustomPayload(clientboundCustomPayloadPacket, ((tfc.smallerunits.networking.hackery.NetworkContext) context).connection)) {
 			clientboundCustomPayloadPacket.handle((ClientGamePacketListener) listener);
 		}
 	}
 	
-	public static void injectCrashReport(String smallerUnits, Supplier<String> o) {
+	public void injectCrashReport(String smallerUnits, Supplier<String> o) {
 		CrashReportCallables.registerCrashCallable("Smaller Units", o);
 	}
 	
-	public static void updateModelData(ClientLevel level, BlockEntity be) {
+	public void updateModelData(ClientLevel level, BlockEntity be) {
 		Objects.requireNonNull(level.getModelDataManager()).requestRefresh(be);
 	}
 	
-	public static int getLightEmission(BlockState state, BlockGetter level, BlockPos pPos) {
+	public int getLightEmission(BlockState state, BlockGetter level, BlockPos pPos) {
 		return state.getLightEmission(level, pPos);
 	}
 	
-	public static boolean collisionExtendsVertically(BlockState blockstate, Level lvl, BlockPos blockpos1, Entity entity) {
+	public boolean collisionExtendsVertically(BlockState blockstate, Level lvl, BlockPos blockpos1, Entity entity) {
 		return blockstate.collisionExtendsVertically(lvl, blockpos1, entity);
 	}
 	
-	public static void startupWarning(String msg) {
+	public void startupWarning(String msg) {
 		ModLoader.get().addWarning(new ModLoadingWarning(
 				ModLoadingContext.get().getActiveContainer().getModInfo(),
 				ModLoadingStage.CONSTRUCT,
@@ -258,27 +257,27 @@ public class PlatformUtils {
 		));
 	}
 	
-	public static CapabilityLike getSuCap(LevelChunk levelChunk) {
+	public CapabilityLike getSuCap(LevelChunk levelChunk) {
 		return levelChunk.getCapability(CapabilityProvider.SU_CAPABILITY_TOKEN).orElse(null);
 	}
 	
-	public static CompoundTag chunkCapNbt(LevelChunk basicVerticalChunk) {
+	public CompoundTag chunkCapNbt(LevelChunk basicVerticalChunk) {
 		return basicVerticalChunk.writeCapsToNBT();
 	}
 	
-	public static void readChunkCapNbt(LevelChunk shell, CompoundTag capabilities) {
+	public void readChunkCapNbt(LevelChunk shell, CompoundTag capabilities) {
 		shell.readCapsFromNBT(capabilities);
 	}
 	
-	public static Tag serializeEntity(Entity ent) {
+	public Tag serializeEntity(Entity ent) {
 		return ((Entity) ent).serializeNBT();
 	}
 	
-	public static boolean canRenderIn(BakedModel model, BlockState block, RandomSource randomSource, Object modelData, RenderType chunkBufferLayer) {
+	public boolean canRenderIn(BakedModel model, BlockState block, RandomSource randomSource, Object modelData, RenderType chunkBufferLayer) {
 		return (model.getRenderTypes(block, randomSource, (ModelData) modelData).contains(chunkBufferLayer));
 	}
 	
-	public static void tesselate(BlockRenderDispatcher dispatcher, BlockAndTintGetter wld, BakedModel blockModel, BlockState block, BlockPos offsetPos, PoseStack stk, VertexConsumer consumer, boolean b, RandomSource randomSource, int i, int i1, Object modelData, RenderType chunkBufferLayer) {
+	public void tesselate(BlockRenderDispatcher dispatcher, BlockAndTintGetter wld, BakedModel blockModel, BlockState block, BlockPos offsetPos, PoseStack stk, VertexConsumer consumer, boolean b, RandomSource randomSource, int i, int i1, Object modelData, RenderType chunkBufferLayer) {
 		dispatcher.getModelRenderer().tesselateBlock(
 				wld, dispatcher.getBlockModel(block),
 				block, offsetPos, stk,
@@ -289,7 +288,7 @@ public class PlatformUtils {
 		);
 	}
 	
-	public static boolean isFabric() {
+	public boolean isFabric() {
 		return false;
 	}
 }

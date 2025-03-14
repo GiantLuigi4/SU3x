@@ -4,7 +4,7 @@ import net.minecraft.network.PacketListener;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
 
-public class NetCtx {
+public class ForgeNetCtx extends NetCtx {
 	Player sender;
 	PacketListener handler;
 	PacketSender responseSender;
@@ -12,12 +12,8 @@ public class NetCtx {
 	
 	NetworkEvent.Context context;
 	
-	public NetCtx(PacketListener handler, PacketSender responseSender, Player player, NetworkDirection direction, NetworkEvent.Context context) {
-		this.handler = handler;
-		this.responseSender = responseSender;
-		this.sender = player;
-		this.direction = direction;
-		this.context = context;
+	public ForgeNetCtx(PacketListener handler, PacketSender responseSender, Player player, NetworkDirection direction, NetworkEvent.Context context) {
+		super(handler, responseSender, player, direction);
 	}
 	
 	public Player getSender() {

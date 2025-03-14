@@ -7,20 +7,12 @@ import net.minecraft.world.item.ItemStack;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class SUTabBuilder {
-	public SUTabBuilder setTitle(Component component) {
-		throw new RuntimeException("h");
-	}
-	
-	public SUTabBuilder addItem(Supplier<ItemStack> supplier) {
-		throw new RuntimeException("h");
-	}
-	
-	public CreativeModeTab build() {
-		throw new RuntimeException("h");
-	}
-	
-	public SUTabBuilder addItems(Consumer<Consumer<ItemStack>> populator) {
-		throw new RuntimeException("h");
-	}
+public abstract class SUTabBuilder {
+    public abstract SUTabBuilder setTitle(Component component);
+
+    public abstract SUTabBuilder addItem(Supplier<ItemStack> supplier);
+
+    public abstract CreativeModeTab build();
+
+    public abstract SUTabBuilder addItems(Consumer<Consumer<ItemStack>> populator);
 }

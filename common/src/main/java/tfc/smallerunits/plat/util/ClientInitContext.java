@@ -4,8 +4,6 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 
 import java.util.function.Supplier;
 
-public class ClientInitContext {
-	public void registerRenderer(Supplier<BlockEntityWithoutLevelRenderer> renderer) {
-		throw new RuntimeException();
-	}
+public abstract class ClientInitContext {
+    abstract void registerRenderer(Supplier<BlockEntityWithoutLevelRenderer> renderer);
 }

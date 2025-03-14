@@ -12,7 +12,6 @@ import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkContext;
 import tfc.smallerunits.networking.hackery.NetworkHandlingContext;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
-import tfc.smallerunits.plat.net.NetworkDirection;
 import tfc.smallerunits.utils.IHateTheDistCleaner;
 import tfc.smallerunits.utils.PositionalInfo;
 

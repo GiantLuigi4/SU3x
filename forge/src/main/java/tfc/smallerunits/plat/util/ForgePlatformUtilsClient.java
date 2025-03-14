@@ -16,42 +16,41 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.LogicalSide;
-import tfc.smallerunits.utils.IHateTheDistCleaner;
 
-public class PlatformUtilsClient {
-	public static void postTick(ClientLevel fakeClientLevel) {
+public class ForgePlatformUtilsClient extends PlatformUtilsClient {
+	public void postTick(ClientLevel fakeClientLevel) {
 		MinecraftForge.EVENT_BUS.post(new TickEvent.LevelTickEvent(LogicalSide.CLIENT, TickEvent.Phase.END, fakeClientLevel, () -> true));
 	}
 	
-	public static void preTick(ClientLevel fakeClientLevel) {
+	public void preTick(ClientLevel fakeClientLevel) {
 		MinecraftForge.EVENT_BUS.post(new TickEvent.LevelTickEvent(LogicalSide.CLIENT, TickEvent.Phase.START, fakeClientLevel, () -> true));
 	}
 	
-	public static boolean checkRenderLayer(FluidState fluid, RenderType chunkBufferLayer) {
+	public boolean checkRenderLayer(FluidState fluid, RenderType chunkBufferLayer) {
 		return ItemBlockRenderTypes.getRenderLayer(fluid).equals(chunkBufferLayer);
 	}
 	
-	public static boolean checkRenderLayer(BlockState state, RenderType chunkBufferLayer) {
+	public boolean checkRenderLayer(BlockState state, RenderType chunkBufferLayer) {
 		return ItemBlockRenderTypes.getChunkRenderType(state).equals(chunkBufferLayer);
 	}
 	
-	public static void onLoad(ClientLevel fakeClientLevel) {
+	public void onLoad(ClientLevel fakeClientLevel) {
 		MinecraftForge.EVENT_BUS.post(new LevelEvent.Load(fakeClientLevel));
 	}
 	
-	public static void handlePacketClient(ClientGamePacketListener packetListener, ClientboundCustomPayloadPacket clientboundCustomPayloadPacket) {
+	public void handlePacketClient(ClientGamePacketListener packetListener, ClientboundCustomPayloadPacket clientboundCustomPayloadPacket) {
 		clientboundCustomPayloadPacket.handle(packetListener);
 	}
 	
-	public static void recieveBeData(BlockEntity be, CompoundTag tag) {
+	public void recieveBeData(BlockEntity be, CompoundTag tag) {
 		be.load(tag);
 	}
 	
-	public static SoundType getSoundType(BlockState blockstate, ClientLevel tickerClientLevel, BlockPos pPos) {
+	public SoundType getSoundType(BlockState blockstate, ClientLevel tickerClientLevel, BlockPos pPos) {
 		return blockstate.getSoundType(tickerClientLevel, pPos, null);
 	}
 	
-	public static ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk) {
+	public ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk) {
 		IHateTheDistCleaner.currentRenderChunk.set(chunk);
 		return chunk;
 	}
