@@ -5,11 +5,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
 
 public class ForgeNetCtx extends NetCtx {
-	Player sender;
-	PacketListener handler;
-	PacketSender responseSender;
-	NetworkDirection direction;
-	
 	NetworkEvent.Context context;
 	
 	public ForgeNetCtx(PacketListener handler, PacketSender responseSender, Player player, NetworkDirection direction, NetworkEvent.Context context) {

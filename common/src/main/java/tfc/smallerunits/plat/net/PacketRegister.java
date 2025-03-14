@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class PacketRegister {
+public abstract class PacketRegister {
 	public final ResourceLocation channel;
 	
 	public PacketRegister(
@@ -19,17 +19,13 @@ public class PacketRegister {
 			Predicate<String> clientChecker,
 			Predicate<String> serverChecker
 	) {
-		throw new RuntimeException();
+		this.channel = name;
 	}
 	
 	public net.minecraft.network.protocol.Packet<?> toVanillaPacket(Packet wrapperPacket, NetworkDirection toClient) {
 		throw new RuntimeException();
 	}
-	
-	private void handlePacket(PacketListener handler, FriendlyByteBuf buf, PacketSender responseSender, Player player, NetworkDirection direction) {
-		throw new RuntimeException();
-	}
-	
+
 	public <T extends Packet> void registerMessage(int indx, Class<T> clazz, BiConsumer<Packet, FriendlyByteBuf> writer, Function<FriendlyByteBuf, T> fabricator, BiConsumer<Packet, NetCtx> handler) {
 		throw new RuntimeException();
 	}
