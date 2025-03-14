@@ -1,4 +1,4 @@
-package tfc.smallerunits.plat;
+package tfc.smallerunits.forge;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -36,9 +36,7 @@ public class CapabilityProvider implements ICapabilityProvider, INBTSerializable
 				new CapabilityProvider(new SUCapability(event.getObject().getLevel(), event.getObject()))
 		);
 	}
-	
-	// I can't remember the CCA equivalent to this, but I know it's an entry point
-	
+
 	/**
 	 * Runs during game load
 	 *

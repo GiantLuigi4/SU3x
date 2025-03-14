@@ -6,12 +6,12 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import tfc.smallerunits.utils.config.annoconfg.ConfigEntry;
-import tfc.smallerunits.utils.config.annoconfg.annotation.format.*;
-import tfc.smallerunits.utils.config.annoconfg.annotation.value.*;
-import tfc.smallerunits.utils.config.annoconfg.handle.UnsafeHandle;
-import tfc.smallerunits.utils.config.annoconfg.util.ConfigEnum;
-import tfc.smallerunits.utils.config.annoconfg.util.EnumType;
+import tfc.smallerunits.plat.config.annoconfg.ConfigEntry;
+import tfc.smallerunits.plat.config.annoconfg.annotation.format.*;
+import tfc.smallerunits.plat.config.annoconfg.annotation.value.*;
+import tfc.smallerunits.plat.config.annoconfg.handle.UnsafeHandle;
+import tfc.smallerunits.plat.config.annoconfg.util.ConfigEnum;
+import tfc.smallerunits.plat.config.annoconfg.util.EnumType;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-public class AnnoCFG {
+public class ForgeAnnoCFG {
 	private ForgeConfigSpec mySpec;
 	
 	private final HashMap<String, ConfigEntry> handles = new HashMap<>();
 	
-	private static final ArrayList<AnnoCFG> configs = new ArrayList<>();
+	private static final ArrayList<ForgeAnnoCFG> configs = new ArrayList<>();
 	
-	public AnnoCFG(Class<?> clazz) {
+	public ForgeAnnoCFG(Class<?> clazz) {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addListener(this::onConfigChange);
 		ForgeConfigSpec.Builder configBuilder = new ForgeConfigSpec.Builder();

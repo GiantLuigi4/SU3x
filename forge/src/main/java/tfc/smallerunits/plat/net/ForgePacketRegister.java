@@ -44,7 +44,6 @@ public class ForgePacketRegister extends PacketRegister {
  		};
 	}
 
-	@Override
 	private void handlePacket(PacketListener handler, FriendlyByteBuf buf, PacketSender responseSender, Player player, NetworkDirection direction, NetworkEvent.Context context) {
 		int id = buf.readByte();
 		PacketEntry<?> entry = entries.get(id);

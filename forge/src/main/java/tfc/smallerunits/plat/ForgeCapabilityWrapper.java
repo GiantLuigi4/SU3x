@@ -3,10 +3,10 @@ package tfc.smallerunits.plat;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.CapabilityDispatcher;
 
-public class CapabilityWrapper {
+public class ForgeCapabilityWrapper extends CapabilityWrapper {
 	CapabilityDispatcher dispatcher;
 	
-	public CapabilityWrapper(CapabilityDispatcher dispatcher) {
+	public ForgeCapabilityWrapper(CapabilityDispatcher dispatcher) {
 		this.dispatcher = dispatcher;
 	}
 	

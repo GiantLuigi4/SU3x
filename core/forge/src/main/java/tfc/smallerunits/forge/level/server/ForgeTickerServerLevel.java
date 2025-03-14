@@ -1,4 +1,4 @@
-package tfc.smallerunits.simulation.level.server;
+package tfc.smallerunits.forge.level.server;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -19,7 +19,8 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.jetbrains.annotations.Nullable;
 import tfc.smallerunits.data.storage.IRegion;
-import tfc.smallerunits.plat.CapabilityWrapper;
+import tfc.smallerunits.plat.ForgeCapabilityWrapper;
+import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
 import tfc.smallerunits.utils.scale.ResizingUtils;
 
 import java.util.List;
@@ -29,12 +30,12 @@ public class ForgeTickerServerLevel extends AbstractTickerServerLevel {
 		super(server, data, p_8575_, dimType, progressListener, generator, p_8579_, p_8580_, spawners, p_8582_, parent, upb, region);
 	}
 	
-	CapabilityWrapper wrapper;
+	ForgeCapabilityWrapper wrapper;
 	
 	@Override
-	public CapabilityWrapper getCaps() {
+	public ForgeCapabilityWrapper getCaps() {
 		if (getCapabilities() == null) return  null;
-		if (wrapper == null) wrapper = new CapabilityWrapper(getCapabilities());
+		if (wrapper == null) wrapper = new ForgeCapabilityWrapper(getCapabilities());
 		return wrapper;
 	}
 	

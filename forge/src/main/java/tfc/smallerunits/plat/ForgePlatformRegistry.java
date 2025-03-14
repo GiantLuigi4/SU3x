@@ -12,10 +12,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-public class PlatformRegistry<T> {
+public class ForgePlatformRegistry<T> extends PlatformRegistry<T> {
 	DeferredRegister<T> internal;
 	
-	public PlatformRegistry(Class<T> cls, String modid) {
+	public ForgePlatformRegistry(Class<T> cls, String modid) {
+		super(cls, modid);
+
 		if (cls.equals(Item.class)) {
 			internal = (DeferredRegister<T>) DeferredRegister.create(ForgeRegistries.ITEMS, modid);
 		} else if (cls.equals(Block.class)) {

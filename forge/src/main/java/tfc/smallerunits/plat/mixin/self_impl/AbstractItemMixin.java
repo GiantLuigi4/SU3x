@@ -2,6 +2,7 @@ package tfc.smallerunits.plat.mixin.self_impl;
 
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.spongepowered.asm.mixin.Mixin;
+import tfc.smallerunits.plat.util.AbstractItem;
 import tfc.smallerunits.plat.util.ForgeClientInitContext;
 
 import java.util.function.Consumer;

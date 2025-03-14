@@ -1,13 +1,8 @@
-package tfc.smallerunits.plat.mixin.self_impl;
+package tfc.smallerunits.forge.mixin.self_impl;
 
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.multiplayer.ClientPacketListener;
-import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.progress.ChunkProgressListener;
-import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -21,7 +16,6 @@ import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
 import tfc.smallerunits.simulation.level.server.ForgeTickerServerLevel;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 @Mixin(AbstractTickerServerLevel.class)
 public class TickerServerLevelMixin {

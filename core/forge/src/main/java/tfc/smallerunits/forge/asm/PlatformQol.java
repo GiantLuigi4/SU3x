@@ -1,4 +1,4 @@
-package tfc.smallerunits.plat.asm;
+package tfc.smallerunits.forge.asm;
 
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import net.minecraft.core.BlockPos;

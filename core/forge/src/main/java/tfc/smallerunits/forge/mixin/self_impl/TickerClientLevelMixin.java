@@ -1,4 +1,4 @@
-package tfc.smallerunits.plat.mixin.self_impl;
+package tfc.smallerunits.forge.mixin.self_impl;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;

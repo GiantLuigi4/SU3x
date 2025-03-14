@@ -1,4 +1,4 @@
-package tfc.smallerunits.simulation.level.client;
+package tfc.smallerunits.forge.level.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.dimension.DimensionType;
 import tfc.smallerunits.data.storage.IRegion;
+import tfc.smallerunits.simulation.level.client.AbstractTickerClientLevel;
 
 import java.util.function.Supplier;
 
