@@ -12,7 +12,7 @@ import tfc.smallerunits.plat.net.PacketTarget;
 
 import java.util.function.BiConsumer;
 
-@Mixin(PacketTarget.class)
+@Mixin(value = PacketTarget.class, remap = false)
 public class PacketTargets {
     @Shadow
     @Mutable
@@ -26,7 +26,6 @@ public class PacketTargets {
 
     /**
      * @author GiantLuigi4
-     * @reason Implement method
      */
     @Overwrite
     public static PacketTarget trackingChunk(LevelChunk chunk) {
@@ -37,7 +36,6 @@ public class PacketTargets {
 
     /**
      * @author GiantLuigi4
-     * @reason Implement method
      */
     @Overwrite
     public static PacketTarget player(ServerPlayer player) {

@@ -12,7 +12,7 @@ import tfc.smallerunits.plat.util.ForgeSUTabBuilder;
 
 import java.util.function.Supplier;
 
-@Mixin(PlatformProvider.class)
+@Mixin(value = PlatformProvider.class, remap = false)
 public class PlatformProviderMixin {
     @Shadow
     @Mutable
@@ -28,7 +28,6 @@ public class PlatformProviderMixin {
 
     /**
      * @author GiantLuigi4
-     * @reason implement
      */
     @Overwrite
     public static ForgeSUTabBuilder makeTabBuilder(String name, Supplier<ItemStack> icon) {

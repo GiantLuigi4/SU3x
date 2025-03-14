@@ -13,8 +13,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
-    implementation project(":core:common")
-    implementation rootProject.project(":common")
+//    implementation rootProject.project(":core:common")
+    implementation project(":common")
 }
 
 loom {

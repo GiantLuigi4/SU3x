@@ -2,11 +2,11 @@ package tfc.smallerunits.utils.config;
 
 import tfc.smallerunits.SmallerUnits;
 import tfc.smallerunits.plat.config.AnnoCFG;
-import tfc.smallerunits.utils.config.annoconfg.ConfigSide;
-import tfc.smallerunits.utils.config.annoconfg.annotation.format.*;
-import tfc.smallerunits.utils.config.annoconfg.annotation.value.Default;
-import tfc.smallerunits.utils.config.annoconfg.annotation.value.DoubleRange;
-import tfc.smallerunits.utils.config.annoconfg.annotation.value.IntRange;
+import tfc.smallerunits.plat.config.annoconfg.ConfigSide;
+import tfc.smallerunits.plat.config.annoconfg.annotation.format.*;
+import tfc.smallerunits.plat.config.annoconfg.annotation.value.Default;
+import tfc.smallerunits.plat.config.annoconfg.annotation.value.DoubleRange;
+import tfc.smallerunits.plat.config.annoconfg.annotation.value.IntRange;
 
 @Config(type = ConfigSide.SERVER, namespace = "smallerunits")
 public class ServerConfig {
@@ -14,7 +14,7 @@ public class ServerConfig {
 		return false;
 	}
 	
-	private static final AnnoCFG CFG = new AnnoCFG(ServerConfig.class);
+	private static final AnnoCFG CFG = AnnoCFG.of(ServerConfig.class);
 	
 	@Comment({
 			"Restrictions on Units Per Block",

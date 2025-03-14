@@ -35,6 +35,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.ITeleporter;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ChunkEvent;
@@ -42,7 +43,7 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.jetbrains.annotations.Nullable;
-import tfc.smallerunits.plat.CapabilityProvider;
+import tfc.smallerunits.plat.internal.ToolProvider;
 import tfc.smallerunits.plat.itf.CapabilityLike;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 
@@ -114,7 +115,7 @@ public class ForgePlatformUtils extends PlatformUtils {
 				currentWorld.getProfiler().popPush("reloading");
 				Entity newEntity = entity1.getType().create(destWorld);
 				if (newEntity != null) {
-					ResizingUtils.resizeForUnit(entity1, 1f / upb);
+					ToolProvider.RESIZING.resizeForUnit(entity1, 1f / upb);
 					
 					newEntity.restoreFrom(entity1);
 					newEntity.moveTo(portalinfo.pos.x, portalinfo.pos.y, portalinfo.pos.z, portalinfo.yRot, newEntity.getXRot());
@@ -227,7 +228,10 @@ public class ForgePlatformUtils extends PlatformUtils {
 	}
 	
 	public void customPayload(ClientboundCustomPayloadPacket clientboundCustomPayloadPacket, Object context, PacketListener listener) {
-		if (!net.minecraftforge.network.NetworkHooks.onCustomPayload(clientboundCustomPayloadPacket, ((tfc.smallerunits.networking.hackery.NetworkContext) context).connection)) {
+		if (!net.minecraftforge.network.NetworkHooks.onCustomPayload(
+				clientboundCustomPayloadPacket,
+				ToolProvider.ACTIVE_CONTEXT.apply(context)
+		)) {
 			clientboundCustomPayloadPacket.handle((ClientGamePacketListener) listener);
 		}
 	}
@@ -258,7 +262,7 @@ public class ForgePlatformUtils extends PlatformUtils {
 	}
 	
 	public CapabilityLike getSuCap(LevelChunk levelChunk) {
-		return levelChunk.getCapability(CapabilityProvider.SU_CAPABILITY_TOKEN).orElse(null);
+		return (CapabilityLike) levelChunk.getCapability((Capability<?>) ToolProvider.CAPABILITY.get()).orElse(null);
 	}
 	
 	public CompoundTag chunkCapNbt(LevelChunk basicVerticalChunk) {

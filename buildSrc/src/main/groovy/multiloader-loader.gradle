@@ -11,34 +11,41 @@ configurations {
     }
 }
 
+String relPath(String tgt) {
+    String pth = project.parent.path
+    if (pth.equals(":")) pth = ""
+    return pth + tgt
+}
+
 dependencies {
-    compileOnly(project(':common')) {
+    String pth = relPath(':common')
+    compileOnly(project(pth)) {
         capabilities {
             requireCapability "$group:$mod_id"
         }
     }
-    commonJava project(path: ':common', configuration: 'commonJava')
-    commonResources project(path: ':common', configuration: 'commonResources')
+    commonJava project(path: pth, configuration: 'commonJava')
+    commonResources project(path: pth, configuration: 'commonResources')
 }
 
-tasks.named('compileJava', JavaCompile) {
-    dependsOn(configurations.commonJava)
-    source(configurations.commonJava)
-}
-
-processResources {
-    dependsOn(configurations.commonResources)
-    from(configurations.commonResources)
-}
-
-tasks.named('javadoc', Javadoc).configure {
-    dependsOn(configurations.commonJava)
-    source(configurations.commonJava)
-}
-
-tasks.named('sourcesJar', Jar) {
-    dependsOn(configurations.commonJava)
-    from(configurations.commonJava)
-    dependsOn(configurations.commonResources)
-    from(configurations.commonResources)
-}
+//tasks.named('compileJava', JavaCompile) {
+//    dependsOn(configurations.commonJava)
+//    source(configurations.commonJava)
+//}
+//
+//processResources {
+//    dependsOn(configurations.commonResources)
+//    from(configurations.commonResources)
+//}
+//
+//tasks.named('javadoc', Javadoc).configure {
+//    dependsOn(configurations.commonJava)
+//    source(configurations.commonJava)
+//}
+//
+//tasks.named('sourcesJar', Jar) {
+//    dependsOn(configurations.commonJava)
+//    from(configurations.commonJava)
+//    dependsOn(configurations.commonResources)
+//    from(configurations.commonResources)
+//}

@@ -1,13 +1,13 @@
 package tfc.smallerunits.utils.config;
 
 import tfc.smallerunits.plat.config.AnnoCFG;
-import tfc.smallerunits.utils.config.annoconfg.ConfigSide;
-import tfc.smallerunits.utils.config.annoconfg.annotation.format.*;
-import tfc.smallerunits.utils.config.annoconfg.annotation.value.Default;
+import tfc.smallerunits.plat.config.annoconfg.ConfigSide;
+import tfc.smallerunits.plat.config.annoconfg.annotation.format.*;
+import tfc.smallerunits.plat.config.annoconfg.annotation.value.Default;
 
 @Config(type = ConfigSide.COMMON, namespace = "smallerunits")
 public class CommonConfig {
-    private static final AnnoCFG CFG = new AnnoCFG(CommonConfig.class);
+    private static final AnnoCFG CFG = AnnoCFG.of(CommonConfig.class);
 	
 	private static boolean getFalse() {
         return false;

@@ -1,7 +1,7 @@
 package tfc.smallerunits.plat.config.annoconfg.handle;
 
 import sun.misc.Unsafe;
-import tfc.smallerunits.utils.config.annoconfg.util.EnumType;
+import tfc.smallerunits.plat.config.annoconfg.util.EnumType;
 
 import java.lang.reflect.Field;
 import java.util.function.Consumer;

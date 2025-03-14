@@ -16,6 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.LogicalSide;
+import tfc.smallerunits.plat.internal.ToolProvider;
 
 public class ForgePlatformUtilsClient extends PlatformUtilsClient {
 	public void postTick(ClientLevel fakeClientLevel) {
@@ -51,7 +52,7 @@ public class ForgePlatformUtilsClient extends PlatformUtilsClient {
 	}
 	
 	public ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk) {
-		IHateTheDistCleaner.currentRenderChunk.set(chunk);
+		ToolProvider.currentRenderChunk.set(chunk);
 		return chunk;
 	}
 }
