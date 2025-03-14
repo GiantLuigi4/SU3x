@@ -5,11 +5,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-import tfc.smallerunits.UnitSpace;
-import tfc.smallerunits.data.access.SUScreenAttachments;
-import tfc.smallerunits.networking.hackery.NetworkingHacks;
-import tfc.smallerunits.simulation.level.ITickerLevel;
-import tfc.smallerunits.utils.PositionalInfo;
+import tfc.smallerunits.core.UnitSpace;
+import tfc.smallerunits.core.data.access.SUScreenAttachments;
+import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.core.simulation.level.ITickerLevel;
+import tfc.smallerunits.core.utils.PositionalInfo;
 
 @Mixin(Screen.class)
 public class ScreenMixin implements SUScreenAttachments {

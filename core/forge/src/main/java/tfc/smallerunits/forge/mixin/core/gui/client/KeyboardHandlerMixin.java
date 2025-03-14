@@ -10,10 +10,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tfc.smallerunits.data.access.SUScreenAttachments;
-import tfc.smallerunits.networking.hackery.NetworkingHacks;
-import tfc.smallerunits.simulation.level.ITickerLevel;
-import tfc.smallerunits.utils.PositionalInfo;
+import tfc.smallerunits.core.data.access.SUScreenAttachments;
+import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.core.simulation.level.ITickerLevel;
+import tfc.smallerunits.core.utils.PositionalInfo;
 
 @Mixin(KeyboardHandler.class)
 public class KeyboardHandlerMixin {

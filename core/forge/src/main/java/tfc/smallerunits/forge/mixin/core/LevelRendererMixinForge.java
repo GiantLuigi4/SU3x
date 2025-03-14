@@ -15,10 +15,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tfc.smallerunits.client.render.TileRendererHelper;
-import tfc.smallerunits.data.storage.Region;
-import tfc.smallerunits.data.tracking.RegionalAttachments;
-import tfc.smallerunits.simulation.level.client.AbstractTickerClientLevel;
+import tfc.smallerunits.core.client.render.TileRendererHelper;
+import tfc.smallerunits.core.data.storage.Region;
+import tfc.smallerunits.core.data.tracking.RegionalAttachments;
+import tfc.smallerunits.core.simulation.level.client.AbstractTickerClientLevel;
 
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixinForge {

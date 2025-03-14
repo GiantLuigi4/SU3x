@@ -6,15 +6,15 @@ import net.minecraftforge.network.NetworkEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import tfc.smallerunits.data.access.PacketListenerAccessor;
-import tfc.smallerunits.data.access.SUScreenAttachments;
-import tfc.smallerunits.logging.Loggers;
-import tfc.smallerunits.networking.hackery.NetworkContext;
-import tfc.smallerunits.networking.hackery.NetworkHandlingContext;
-import tfc.smallerunits.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.core.data.access.PacketListenerAccessor;
+import tfc.smallerunits.core.data.access.SUScreenAttachments;
+import tfc.smallerunits.core.logging.Loggers;
+import tfc.smallerunits.core.networking.hackery.NetworkContext;
+import tfc.smallerunits.core.networking.hackery.NetworkHandlingContext;
+import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.core.utils.IHateTheDistCleaner;
+import tfc.smallerunits.core.utils.PositionalInfo;
 import tfc.smallerunits.plat.net.NetworkDirection;
-import tfc.smallerunits.utils.IHateTheDistCleaner;
-import tfc.smallerunits.utils.PositionalInfo;
 
 @Mixin(value = NetworkEvent.Context.class, remap = false)
 public class NetworkContextMixin {

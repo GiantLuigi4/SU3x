@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tfc.smallerunits.simulation.level.ITickerLevel;
+import tfc.smallerunits.level.SimpleTickerLevel;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin {
@@ -20,7 +20,7 @@ public abstract class PlayerMixin {
 	public void afflictMiningSpeed(BlockState pState, BlockPos pos, CallbackInfoReturnable<Float> cir) {
 		//noinspection ConstantConditions
 		if (!((Object) this instanceof FakePlayer)) {
-			if (((Player) (Object) this).level() instanceof ITickerLevel tickerWorld) {
+			if (((Player) (Object) this).level() instanceof SimpleTickerLevel tickerWorld) {
 				cir.setReturnValue(cir.getReturnValue() * tickerWorld.getUPB());
 			}
 		}

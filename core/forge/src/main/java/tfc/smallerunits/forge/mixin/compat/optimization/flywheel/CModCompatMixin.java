@@ -16,10 +16,10 @@
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //import tfc.smallerunits.client.abstraction.IFrustum;
-//import tfc.smallerunits.data.storage.IRegion;
-//import tfc.smallerunits.data.tracking.RegionalAttachments;
-//import tfc.smallerunits.simulation.level.ITickerLevel;
-//import tfc.smallerunits.utils.asm.ModCompatClient;
+//import tfc.smallerunits.core.data.storage.IRegion;
+//import tfc.smallerunits.core.data.tracking.RegionalAttachments;
+//import tfc.smallerunits.core.simulation.level.ITickerLevel;
+//import tfc.smallerunits.core.utils.asm.ModCompatClient;
 //
 //@Mixin(value = ModCompatClient.class, remap = false)
 //public class CModCompatMixin {

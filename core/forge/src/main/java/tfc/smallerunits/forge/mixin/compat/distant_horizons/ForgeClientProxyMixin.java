@@ -10,7 +10,7 @@
 //import org.spongepowered.asm.mixin.injection.At;
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//import tfc.smallerunits.simulation.level.ITickerLevel;
+//import tfc.smallerunits.core.simulation.level.ITickerLevel;
 //
 ///**
 // * When something happens to a small world, distant horizons should not acknowledge it

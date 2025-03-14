@@ -9,6 +9,6 @@ import java.util.function.Supplier;
 public class ToolProvider {
     public static final IResizingUtil RESIZING = null;
     public static final Supplier<Object> CAPABILITY = null;
-    public static final Function<Object, Connection> ACTIVE_CONTEXT = null; // ((tfc.smallerunits.networking.hackery.NetworkContext) context).connection
+    public static final Function<Object, Connection> ACTIVE_CONTEXT = null; // ((tfc.smallerunits.core.networking.hackery.NetworkContext) context).connection
     public static ThreadLocal<ChunkRenderDispatcher.RenderChunk> currentRenderChunk = new ThreadLocal<>();
 }

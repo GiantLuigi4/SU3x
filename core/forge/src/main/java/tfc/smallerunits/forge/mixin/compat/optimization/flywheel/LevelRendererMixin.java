@@ -12,8 +12,8 @@
 //import org.spongepowered.asm.mixin.injection.At;
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//import tfc.smallerunits.data.storage.IRegion;
-//import tfc.smallerunits.data.tracking.RegionalAttachments;
+//import tfc.smallerunits.core.data.storage.IRegion;
+//import tfc.smallerunits.core.data.tracking.RegionalAttachments;
 //
 //import javax.annotation.Nullable;
 //

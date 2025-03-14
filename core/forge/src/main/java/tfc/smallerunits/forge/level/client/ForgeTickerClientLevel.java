@@ -11,8 +11,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.dimension.DimensionType;
-import tfc.smallerunits.data.storage.IRegion;
-import tfc.smallerunits.simulation.level.client.AbstractTickerClientLevel;
+import tfc.smallerunits.core.simulation.level.client.AbstractTickerClientLevel;
+import tfc.smallerunits.storage.IRegion;
 
 import java.util.function.Supplier;
 

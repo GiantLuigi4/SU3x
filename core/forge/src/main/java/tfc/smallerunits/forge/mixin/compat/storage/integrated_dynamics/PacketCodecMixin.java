@@ -9,8 +9,8 @@
 //import org.spongepowered.asm.mixin.injection.At;
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//import tfc.smallerunits.data.access.LevelDescripted;
-//import tfc.smallerunits.networking.hackery.NetworkingHacks;
+//import tfc.smallerunits.core.data.access.LevelDescripted;
+//import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
 //
 //import java.util.Map;
 //

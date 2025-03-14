@@ -7,7 +7,7 @@
 //import org.spongepowered.asm.mixin.injection.At;
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
+//import tfc.smallerunits.core.simulation.chunk.BasicVerticalChunk;
 //
 //@Mixin(value = CompassService.class, remap = false)
 //public class IWishThisArrayCouldntBeAccessed {

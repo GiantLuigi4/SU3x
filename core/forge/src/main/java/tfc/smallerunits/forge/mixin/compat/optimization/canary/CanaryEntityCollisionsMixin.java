@@ -15,8 +15,8 @@
 //import org.spongepowered.asm.mixin.injection.At;
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
-//import tfc.smallerunits.simulation.level.ITickerLevel;
+//import tfc.smallerunits.core.simulation.chunk.BasicVerticalChunk;
+//import tfc.smallerunits.core.simulation.level.ITickerLevel;
 //
 //@Mixin(value = CanaryEntityCollisions.class, remap = false)
 //public class CanaryEntityCollisionsMixin {

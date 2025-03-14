@@ -18,23 +18,23 @@ public class MixinConnector implements IMixinConfigPlugin {
 	private static final HashMap<String, String> dependencies = new HashMap<>();
 	
 	static {
-		pkgLookup.add("tfc.smallerunits.mixin.compat.");
+		pkgLookup.add("tfc.smallerunits.core.mixin.compat.");
 		pkgLookup.add("tfc.smallerunits.plat.mixin.compat.");
-		classLookup.add("tfc.smallerunits.mixin.dangit.block_pos.RSNetworkNodeMixin");
+		classLookup.add("tfc.smallerunits.core.mixin.dangit.block_pos.RSNetworkNodeMixin");
 		
 		{
 			ArrayList<String> incompat = new ArrayList<>();
 			incompat.add("me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
-			incompatibilityMap.put("tfc.smallerunits.mixin.LevelRendererMixinBlocks", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.LevelRendererMixinBlocks", incompat);
 			
 			incompat = new ArrayList<>();
 			incompat.add("virtuoel.pehkui.api.ScaleTypes");
-			incompatibilityMap.put("tfc.smallerunits.mixin.core.gui.server.dist.AbstractContainerMenuMixin", incompat);
-			incompatibilityMap.put("tfc.smallerunits.mixin.core.gui.server.dist.AbstractFurnaceBlockEntityMixin", incompat);
-			incompatibilityMap.put("tfc.smallerunits.mixin.core.gui.server.dist.BrewingStandBlockEntityMixin", incompat);
-			incompatibilityMap.put("tfc.smallerunits.mixin.core.gui.server.dist.EnderChestBlockEntityMixin", incompat);
-			incompatibilityMap.put("tfc.smallerunits.mixin.core.gui.server.dist.ItemCombinerMenuMixin", incompat);
-			incompatibilityMap.put("tfc.smallerunits.mixin.core.gui.server.dist.RandomizableContainerBlockEntityMixin", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.core.gui.server.dist.AbstractContainerMenuMixin", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.core.gui.server.dist.AbstractFurnaceBlockEntityMixin", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.core.gui.server.dist.BrewingStandBlockEntityMixin", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.core.gui.server.dist.EnderChestBlockEntityMixin", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.core.gui.server.dist.ItemCombinerMenuMixin", incompat);
+			incompatibilityMap.put("tfc.smallerunits.core.mixin.core.gui.server.dist.RandomizableContainerBlockEntityMixin", incompat);
 		}
 		
 		{
@@ -44,8 +44,8 @@ public class MixinConnector implements IMixinConfigPlugin {
 			dependencies.put("tfc.smallerunits.plat.mixin.compat.optimization.flywheel.TickerClientLevelMixin", "com.jozufozu.flywheel.api.FlywheelWorld");
 		}
 		{
-			dependencies.put("tfc.smallerunits.mixin.compat.optimization.sodium.UnitCapabilityHandlerMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
-			dependencies.put("tfc.smallerunits.mixin.compat.optimization.sodium.LevelMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
+			dependencies.put("tfc.smallerunits.core.mixin.compat.optimization.sodium.UnitCapabilityHandlerMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
+			dependencies.put("tfc.smallerunits.core.mixin.compat.optimization.sodium.LevelMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
 		}
 	}
 	
@@ -127,8 +127,8 @@ public class MixinConnector implements IMixinConfigPlugin {
 	@Override
 	public void preApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 //		if (
-//				mixinClassName.equals("tfc.smallerunits.mixin.LevelRendererMixinBlocks") ||
-//						mixinClassName.equals("tfc.smallerunits.mixin.core.gui.client.expansion.DebugScreenOverlayMixin")
+//				mixinClassName.equals("tfc.smallerunits.core.mixin.LevelRendererMixinBlocks") ||
+//						mixinClassName.equals("tfc.smallerunits.core.mixin.core.gui.client.expansion.DebugScreenOverlayMixin")
 //		) {
 //			try {
 //				FileOutputStream outputStream = new FileOutputStream(targetClass.name.substring(targetClass.name.lastIndexOf("/") + 1) + "-pre.class");
@@ -141,7 +141,7 @@ public class MixinConnector implements IMixinConfigPlugin {
 //				e.printStackTrace();
 //			}
 //		}
-		if (mixinClassName.equals("tfc.smallerunits.mixin.LevelRendererMixin")) {
+		if (mixinClassName.equals("tfc.smallerunits.core.mixin.LevelRendererMixin")) {
 			String target = ASMAPI.mapMethod("m_172993_"); // renderChunkLayer
 			String desc = "(Lnet/minecraft/client/renderer/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack;DDDLorg/joml/Matrix4f;)V"; // TODO: I'd like to not assume Mojmap
 			
@@ -181,8 +181,8 @@ public class MixinConnector implements IMixinConfigPlugin {
 	@Override
 	public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
 //		if (
-//				mixinClassName.equals("tfc.smallerunits.mixin.LevelRendererMixin") ||
-//						mixinClassName.equals("tfc.smallerunits.mixin.core.gui.client.expansion.DebugScreenOverlayMixin")
+//				mixinClassName.equals("tfc.smallerunits.core.mixin.LevelRendererMixin") ||
+//						mixinClassName.equals("tfc.smallerunits.core.mixin.core.gui.client.expansion.DebugScreenOverlayMixin")
 //		) {
 //			try {
 //				FileOutputStream outputStream = new FileOutputStream(targetClass.name.substring(targetClass.name.lastIndexOf("/") + 1) + "-post.class");

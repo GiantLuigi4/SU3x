@@ -2,7 +2,7 @@
 //
 //import com.jozufozu.flywheel.api.FlywheelWorld;
 //import org.spongepowered.asm.mixin.Mixin;
-//import tfc.smallerunits.simulation.level.client.ForgeTickerClientLevel;
+//import tfc.smallerunits.core.simulation.level.client.ForgeTickerClientLevel;
 //
 //// TODO: switch out instance distance managers
 //@Mixin(ForgeTickerClientLevel.class)

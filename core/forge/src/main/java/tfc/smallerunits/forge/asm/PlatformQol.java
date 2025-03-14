@@ -16,17 +16,17 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidType;
 import org.apache.commons.lang3.tuple.MutableTriple;
-import tfc.smallerunits.data.storage.RegionPos;
-import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
-import tfc.smallerunits.simulation.level.ITickerLevel;
-import tfc.smallerunits.utils.math.HitboxScaling;
-import tfc.smallerunits.utils.scale.ResizingUtils;
+import tfc.smallerunits.core.data.storage.RegionPos;
+import tfc.smallerunits.core.simulation.chunk.BasicVerticalChunk;
+import tfc.smallerunits.core.utils.math.HitboxScaling;
+import tfc.smallerunits.core.utils.scale.ResizingUtils;
+import tfc.smallerunits.level.SimpleTickerLevel;
 
 import java.util.Map;
 
 public class PlatformQol {
 	public static void runSUFluidCheck(Entity entity, Level level, RegionPos regionPos, Object2DoubleMap<TagKey<Fluid>> fluidHeight, Object2DoubleMap<FluidType> forgeFluidTypeHeight) {
-		AABB aabb = HitboxScaling.getOffsetAndScaledBox(entity.getBoundingBox().deflate(0.001D), entity.getPosition(0), ((ITickerLevel) level).getUPB(), regionPos);
+		AABB aabb = HitboxScaling.getOffsetAndScaledBox(entity.getBoundingBox().deflate(0.001D), entity.getPosition(0), ((SimpleTickerLevel) level).getUPB(), regionPos);
 		
 		int minX = Mth.floor(aabb.minX);
 		int maxX = Mth.ceil(aabb.maxX);
@@ -38,7 +38,7 @@ public class PlatformQol {
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		it.unimi.dsi.fastutil.objects.Object2ObjectMap<FluidType, MutableTriple<Double, Vec3, Integer>> interimCalcs = new it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap<>(FluidType.SIZE.get() - 1);
 		
-		double scale = ((ITickerLevel) level).getUPB();
+		double scale = ((SimpleTickerLevel) level).getUPB();
 		
 		for (int x = minX; x < maxX; ++x) {
 			for (int z = minZ; z < maxZ; ++z) {

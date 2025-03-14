@@ -8,7 +8,7 @@
 //import org.spongepowered.asm.mixin.injection.At;
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//import tfc.smallerunits.utils.asm.ModCompat;
+//import tfc.smallerunits.core.utils.asm.ModCompat;
 //
 //@Mixin(value = ModCompat.class, remap = false)
 //public class ModCompatMixin {

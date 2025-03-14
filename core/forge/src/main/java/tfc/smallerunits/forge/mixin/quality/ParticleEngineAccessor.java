@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tfc.smallerunits.client.render.compat.UnitParticleEngine;
+import tfc.smallerunits.core.client.render.compat.UnitParticleEngine;
 
 import java.util.Map;
 

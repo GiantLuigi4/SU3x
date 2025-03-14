@@ -11,8 +11,8 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tfc.smallerunits.data.capability.ISUCapability;
-import tfc.smallerunits.data.capability.SUCapability;
+import tfc.smallerunits.core.data.capability.ISUCapability;
+import tfc.smallerunits.core.data.capability.SUCapability;
 
 @ApiStatus.Internal
 public class CapabilityProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {

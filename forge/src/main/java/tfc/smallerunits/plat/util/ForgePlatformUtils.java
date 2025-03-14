@@ -43,9 +43,9 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.jetbrains.annotations.Nullable;
+import tfc.smallerunits.level.SimpleTickerLevel;
 import tfc.smallerunits.plat.internal.ToolProvider;
 import tfc.smallerunits.plat.itf.CapabilityLike;
-import tfc.smallerunits.simulation.level.ITickerLevel;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -92,7 +92,7 @@ public class ForgePlatformUtils extends PlatformUtils {
 	
 	// entity
 	public PortalInfo createPortalInfo(Entity pEntity, Level a) {
-		ITickerLevel lvl = (ITickerLevel) a;
+		SimpleTickerLevel lvl = (SimpleTickerLevel) a;
 		
 		Vec3 pos = pEntity.getPosition(1);
 		BlockPos bp = lvl.getRegion().pos.toBlockPos();
@@ -130,7 +130,7 @@ public class ForgePlatformUtils extends PlatformUtils {
 			@Override
 			public PortalInfo getPortalInfo(Entity entity1, ServerLevel destWorld, Function<ServerLevel, PortalInfo> defaultPortalInfo) {
 				Vec3 pos = entity1.getPosition(1);
-				BlockPos bp = ((ITickerLevel) serverLevel).getRegion().pos.toBlockPos();
+				BlockPos bp = ((SimpleTickerLevel) serverLevel).getRegion().pos.toBlockPos();
 				pos = pos.scale(1d / upb);
 				pos = pos.add(bp.getX(), bp.getY(), bp.getZ());
 				return new PortalInfo(

@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import tfc.smallerunits.SmallerUnits;
+import tfc.smallerunits.core.SmallerUnits;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;

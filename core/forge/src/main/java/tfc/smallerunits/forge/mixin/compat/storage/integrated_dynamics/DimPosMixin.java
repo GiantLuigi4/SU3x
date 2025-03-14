@@ -15,11 +15,11 @@
 //import org.spongepowered.asm.mixin.injection.Inject;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//import tfc.smallerunits.data.access.LevelDescripted;
-//import tfc.smallerunits.data.storage.IRegion;
-//import tfc.smallerunits.data.tracking.RegionalAttachments;
-//import tfc.smallerunits.networking.hackery.NetworkingHacks;
-//import tfc.smallerunits.simulation.level.ITickerLevel;
+//import tfc.smallerunits.core.data.access.LevelDescripted;
+//import tfc.smallerunits.core.data.storage.IRegion;
+//import tfc.smallerunits.core.data.tracking.RegionalAttachments;
+//import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
+//import tfc.smallerunits.core.simulation.level.ITickerLevel;
 //
 //import java.lang.ref.WeakReference;
 //

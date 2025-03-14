@@ -18,10 +18,10 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.jetbrains.annotations.Nullable;
-import tfc.smallerunits.data.storage.IRegion;
+import tfc.smallerunits.core.simulation.level.server.AbstractTickerServerLevel;
+import tfc.smallerunits.core.utils.scale.ResizingUtils;
 import tfc.smallerunits.plat.CapabilityWrapper;
-import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
-import tfc.smallerunits.utils.scale.ResizingUtils;
+import tfc.smallerunits.storage.IRegion;
 
 import java.util.List;
 

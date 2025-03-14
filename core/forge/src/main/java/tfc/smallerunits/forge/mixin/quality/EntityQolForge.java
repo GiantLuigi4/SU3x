@@ -16,12 +16,12 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tfc.smallerunits.data.storage.Region;
-import tfc.smallerunits.data.storage.RegionPos;
-import tfc.smallerunits.data.tracking.RegionalAttachments;
+import tfc.smallerunits.core.data.storage.Region;
+import tfc.smallerunits.core.data.storage.RegionPos;
+import tfc.smallerunits.core.data.tracking.RegionalAttachments;
+import tfc.smallerunits.core.utils.math.HitboxScaling;
 import tfc.smallerunits.forge.asm.PlatformQol;
-import tfc.smallerunits.simulation.level.ITickerLevel;
-import tfc.smallerunits.utils.math.HitboxScaling;
+import tfc.smallerunits.level.SimpleTickerLevel;
 
 import java.util.function.BiConsumer;
 
@@ -67,9 +67,9 @@ public abstract class EntityQolForge {
 		SU$runPerWorld((level, pos) -> {
 			if (!forgeFluidTypeOnEyes.isAir()) return;
 			
-			AABB aabb = HitboxScaling.getOffsetAndScaledBox(this.getBoundingBox().deflate(0.001D), this.getPosition(0), ((ITickerLevel) level).getUPB(), pos);
+			AABB aabb = HitboxScaling.getOffsetAndScaledBox(this.getBoundingBox().deflate(0.001D), this.getPosition(0), ((SimpleTickerLevel) level).getUPB(), pos);
 			
-			double d0 = (this.getEyeHeight()/* - (double) 0.11111111F*/) * ((ITickerLevel) level).getUPB();
+			double d0 = (this.getEyeHeight()/* - (double) 0.11111111F*/) * ((SimpleTickerLevel) level).getUPB();
 			BlockPos blockpos = new BlockPos((int) aabb.getCenter().x, (int) (aabb.minY + d0), (int) aabb.getCenter().z);
 			FluidState fluidstate = level.getFluidState(blockpos);
 			double d1 = ((float) blockpos.getY() + fluidstate.getHeight(level, blockpos));
