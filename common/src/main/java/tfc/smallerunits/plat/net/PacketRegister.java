@@ -2,9 +2,7 @@ package tfc.smallerunits.plat.net;
 
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.PacketListener;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -12,8 +10,8 @@ import java.util.function.Predicate;
 
 public abstract class PacketRegister {
 	public final ResourceLocation channel;
-	
-	public PacketRegister(
+
+	protected PacketRegister(
 			ResourceLocation name,
 			String networkVersion,
 			Predicate<String> clientChecker,
@@ -21,8 +19,17 @@ public abstract class PacketRegister {
 	) {
 		this.channel = name;
 	}
-	
-	public net.minecraft.network.protocol.Packet<?> toVanillaPacket(Packet wrapperPacket, NetworkDirection toClient) {
+
+    public static PacketRegister of(
+			ResourceLocation name,
+			String networkVersion,
+			Predicate<String> clientChecker,
+			Predicate<String> serverChecker
+	) {
+		throw new RuntimeException("Check platform module self-impl mixins");
+    }
+
+    public net.minecraft.network.protocol.Packet<?> toVanillaPacket(Packet wrapperPacket, NetworkDirection toClient) {
 		throw new RuntimeException();
 	}
 

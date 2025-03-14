@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.client.access.tracking.FastCapabilityHandler;
 import tfc.smallerunits.data.capability.ISUCapability;
-import tfc.smallerunits.plat.CapabilityProvider;
+import tfc.smallerunits.forge.CapabilityProvider;
 
 @Mixin(LevelChunk.class)
 public abstract class FastCapabilityChunkMixin implements FastCapabilityHandler {

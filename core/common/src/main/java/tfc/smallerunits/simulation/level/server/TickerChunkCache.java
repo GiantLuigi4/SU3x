@@ -30,7 +30,7 @@ import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.data.storage.RegionPos;
 import tfc.smallerunits.data.tracking.RegionalAttachments;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
-import tfc.smallerunits.plat.util.PlatformUtils;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.simulation.WorldStitcher;
 import tfc.smallerunits.simulation.block.ParentLookup;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
@@ -255,7 +255,7 @@ public class TickerChunkCache extends ServerChunkCache implements ITickerChunkCa
             holders.add(holder);
         }
         bvci.holder = holder;
-        PlatformUtils.chunkLoaded(bvci);
+        PlatformProvider.UTILS.chunkLoaded(bvci);
 
         return bvci;
     }

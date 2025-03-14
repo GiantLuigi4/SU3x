@@ -16,7 +16,7 @@ String relPath(String tgt) {
     pth = pth.substring(0, pth.lastIndexOf("_"))
     if (pth.equals(":")) pth = ""
     tgt = tgt.replace(":", "_")
-    println(pth + tgt)
+//    println(pth + tgt)
     return pth + tgt
 }
 

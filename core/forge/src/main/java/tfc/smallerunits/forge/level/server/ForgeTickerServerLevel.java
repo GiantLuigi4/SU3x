@@ -19,7 +19,7 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.jetbrains.annotations.Nullable;
 import tfc.smallerunits.data.storage.IRegion;
-import tfc.smallerunits.plat.ForgeCapabilityWrapper;
+import tfc.smallerunits.plat.CapabilityWrapper;
 import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
 import tfc.smallerunits.utils.scale.ResizingUtils;
 
@@ -29,13 +29,13 @@ public class ForgeTickerServerLevel extends AbstractTickerServerLevel {
 	public ForgeTickerServerLevel(MinecraftServer server, ServerLevelData data, ResourceKey<Level> p_8575_, DimensionType dimType, ChunkProgressListener progressListener, ChunkGenerator generator, boolean p_8579_, long p_8580_, List<CustomSpawner> spawners, boolean p_8582_, Level parent, int upb, IRegion region) {
 		super(server, data, p_8575_, dimType, progressListener, generator, p_8579_, p_8580_, spawners, p_8582_, parent, upb, region);
 	}
-	
-	ForgeCapabilityWrapper wrapper;
+
+	CapabilityWrapper wrapper;
 	
 	@Override
-	public ForgeCapabilityWrapper getCaps() {
+	public CapabilityWrapper getCaps() {
 		if (getCapabilities() == null) return  null;
-		if (wrapper == null) wrapper = new ForgeCapabilityWrapper(getCapabilities());
+		if (wrapper == null) wrapper = CapabilityWrapper.of(getCapabilities());
 		return wrapper;
 	}
 	

@@ -16,8 +16,8 @@ import net.minecraft.world.level.storage.ServerLevelData;
 import tfc.smallerunits.SmallerUnits;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.plat.util.PlatformProvider;
-import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
+import tfc.smallerunits.simulation.level.client.AbstractTickerClientLevel;
 import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
 import tfc.smallerunits.simulation.level.server.LevelSourceProviderProvider;
 import tfc.smallerunits.utils.IHateTheDistCleaner;
@@ -51,7 +51,7 @@ public class Region extends IRegion {
         if (levels[upb] == null) {
             try {
                 ThreadLocals.levelLocal.set(parent);
-                levels[upb] = new TickerServerLevel(
+                levels[upb] = AbstractTickerServerLevel.createServerLevel(
                         srv,
                         // TODO: wrap level data
                         (ServerLevelData) parent.getLevelData(),
@@ -94,7 +94,7 @@ public class Region extends IRegion {
         if (levels[upb] == null) {
             try {
                 ThreadLocals.levelLocal.set(parent);
-                levels[upb] = new TickerClientLevel(
+                levels[upb] = AbstractTickerClientLevel.createClientLevel(
                         (ClientLevel) parent,
                         IHateTheDistCleaner.getConnection((ClientLevel) parent), ((ClientLevel) parent).getLevelData(),
                         parent.dimension(), Holder.direct(parent.dimensionType()),

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class SUNetworkRegistry {
 	public static final String networkingVersion = "2.0.0";
 	protected static String serverVersion = "";
-	public static final PacketRegister NETWORK_INSTANCE = new PacketRegister(
+	public static final PacketRegister NETWORK_INSTANCE = PacketRegister.of(
 			new ResourceLocation("smaller_units", "main"),
 			networkingVersion,
 			(s) -> compareVersionsClient(networkingVersion, s),

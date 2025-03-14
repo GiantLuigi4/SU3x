@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tfc.smallerunits.data.storage.IRegion;
+import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.data.storage.RegionPos;
 import tfc.smallerunits.data.tracking.RegionalAttachments;
-import tfc.smallerunits.plat.asm.PlatformQol;
+import tfc.smallerunits.forge.asm.PlatformQol;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.utils.math.HitboxScaling;
 
@@ -86,7 +86,7 @@ public abstract class EntityQolForge {
 		if (touchingUnloadedChunk()) return;
 		Vec3 position = getPosition(0);
 		RegionPos regionPos = new RegionPos(new BlockPos((int) position.x, (int) position.y, (int) position.z));
-		IRegion region = ((RegionalAttachments) level).SU$getRegionMap().get(regionPos);
+		Region region = ((RegionalAttachments) level).SU$getRegionMap().get(regionPos);
 		if (region != null) {
 			for (Level regionLevel : region.getLevels()) {
 				if (regionLevel != null) {

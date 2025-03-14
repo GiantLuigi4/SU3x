@@ -6,19 +6,19 @@ plugins {
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
 
-    config("${mod_id}.mixins.json")
-    config("${mod_id}.forge.mixins.json")
+    config("${mod_id}-core.mixins.json")
+    config("${mod_id}-core.forge.mixins.json")
 }
 
 legacyForge {
     version = "${minecraft_version}-${forge_version}"
 
-    validateAccessTransformers = true
+//    validateAccessTransformers = true
 
-//    def at = project(':core:core_common').file('src/main/resources/META-INF/accesstransformer.cfg')
-//    if (at.exists()) {
-//        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
-//    }
+    def at = getProject(project, ':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = [at.path]
+    }
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
@@ -46,7 +46,7 @@ legacyForge {
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
-    compileOnly project(":core:core_common")
+    compileOnly getProject(project, ":common")
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }

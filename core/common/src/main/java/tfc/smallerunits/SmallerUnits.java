@@ -19,12 +19,10 @@ import tfc.smallerunits.networking.hackery.InfoRegistry;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.networking.sync.SyncPacketS2C;
 import tfc.smallerunits.plat.util.PlatformProvider;
-import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.utils.config.ClientConfig;
 import tfc.smallerunits.utils.config.CommonConfig;
 import tfc.smallerunits.utils.config.ServerConfig;
-import tfc.smallerunits.utils.scale.PehkuiSupport;
 
 import java.util.ArrayDeque;
 import java.util.function.Consumer;
@@ -48,13 +46,13 @@ public abstract class SmallerUnits extends AbstractMod {
 	private static boolean isVivecraftPresent;
 	private static boolean isOFPresent;
 	private static boolean isSodiumPresent =
-			PlatformUtils.isLoaded("sodium") ||
-			PlatformUtils.isLoaded("rubidium") ||
-			PlatformUtils.isLoaded("embeddium") ||
-			PlatformUtils.isLoaded("magnesium")
+			PlatformProvider.UTILS.isLoaded("sodium") ||
+			PlatformProvider.UTILS.isLoaded("rubidium") ||
+			PlatformProvider.UTILS.isLoaded("embeddium") ||
+			PlatformProvider.UTILS.isLoaded("magnesium")
 			;
 	
-	private static final boolean isImmPrtlPresent = PlatformUtils.isLoaded("imm_ptl_core");
+	private static final boolean isImmPrtlPresent = PlatformProvider.UTILS.isLoaded("imm_ptl_core");
 
 	public SmallerUnits() {
 		prepare();
@@ -70,11 +68,11 @@ public abstract class SmallerUnits extends AbstractMod {
 		registerAttachment();
 		registerSetup(this::setup);
 		/* in game events */
-		if (PlatformUtils.isClient()) registerTick(TickType.CLIENT, Phase.START, SyncPacketS2C::tick);
+		if (PlatformProvider.UTILS.isClient()) registerTick(TickType.CLIENT, Phase.START, SyncPacketS2C::tick);
 
 		registerChunkStatus(SmallerUnits::onChunkLoaded, SmallerUnits::onChunkUnloaded);
 
-		if (PlatformUtils.isClient()) {
+		if (PlatformProvider.UTILS.isClient()) {
 			ClientConfig.init();
 //			ClientCompatConfig.init();
 		}
@@ -94,15 +92,15 @@ public abstract class SmallerUnits extends AbstractMod {
 		}, (obj, ctx) -> {
 		});
 
-		if (PlatformUtils.isClient()) {
+		if (PlatformProvider.UTILS.isClient()) {
 			registerAtlas(SmallerUnits::onTextureStitch);
 		}
 
-		isVivecraftPresent = PlatformUtils.isLoaded("vivecraft");
+		isVivecraftPresent = PlatformProvider.UTILS.isLoaded("vivecraft");
 		try {
 			Class<?> clazz = Class.forName("net.optifine.Config");
 			if (clazz != null) {
-				PlatformUtils.startupWarning(ChatFormatting.YELLOW + "Smaller Units" + ChatFormatting.RESET + "\nSU and Optifine are " + ChatFormatting.RED + ChatFormatting.BOLD + "highly incompatible" + ChatFormatting.RESET + " with eachother.");
+				PlatformProvider.UTILS.startupWarning(ChatFormatting.YELLOW + "Smaller Units" + ChatFormatting.RESET + "\nSU and Optifine are " + ChatFormatting.RED + ChatFormatting.BOLD + "highly incompatible" + ChatFormatting.RESET + " with eachother.");
 				isOFPresent = true;
 			}
 		} catch (Throwable ignored) {

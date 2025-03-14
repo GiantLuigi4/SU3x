@@ -64,12 +64,12 @@ import tfc.smallerunits.client.access.tracking.SUCapableChunk;
 import tfc.smallerunits.data.access.EntityAccessor;
 import tfc.smallerunits.data.capability.ISUCapability;
 import tfc.smallerunits.data.capability.SUCapabilityManager;
+import tfc.smallerunits.data.storage.IRegion;
 import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.plat.CapabilityWrapper;
 import tfc.smallerunits.plat.util.PlatformProvider;
-import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.block.ParentLookup;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.simulation.level.EntityManager;
@@ -155,11 +155,11 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 	//	public final UnitSpace parentU;
 	public final Region region;
 	protected final ArrayList<Runnable> completeOnTick = new ArrayList<>();
-	int upb;
+	public final int upb;
 	
 	public final SUSaveWorld saveWorld;
 	
-	public AbstractTickerServerLevel(MinecraftServer server, ServerLevelData data, ResourceKey<Level> p_8575_, DimensionType dimType, ChunkProgressListener progressListener, ChunkGenerator generator, boolean p_8579_, long p_8580_, List<CustomSpawner> spawners, boolean p_8582_, Level parent, int upb, Region region) {
+	public AbstractTickerServerLevel(MinecraftServer server, ServerLevelData data, ResourceKey<Level> p_8575_, DimensionType dimType, ChunkProgressListener progressListener, ChunkGenerator generator, boolean p_8579_, long p_8580_, List<CustomSpawner> spawners, boolean p_8582_, Level parent, int upb, IRegion region) {
 		super(
 				server,
 				Util.backgroundExecutor(),
@@ -189,7 +189,7 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		}, () -> null,
 				upb
 		);
-		this.region = region;
+		this.region = (Region) region;
 		this.blockTicks = new SUTickList<>(null, null);
 		this.fluidTicks = new SUTickList<>(null, null);
 		
@@ -1254,5 +1254,9 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		}
 		
 		this.blockEvents.addAll(this.blockEventsToReschedule);
+	}
+
+	public static AbstractTickerServerLevel createServerLevel(MinecraftServer server, ServerLevelData data, ResourceKey<Level> p_8575_, DimensionType dimType, ChunkProgressListener progressListener, ChunkGenerator generator, boolean p_8579_, long p_8580_, List<CustomSpawner> spawners, boolean p_8582_, Level parent, int upb, IRegion region) {
+		throw new RuntimeException("Check platform module self-impl mixins");
 	}
 }

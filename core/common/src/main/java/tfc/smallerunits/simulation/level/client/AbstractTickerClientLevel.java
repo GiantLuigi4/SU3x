@@ -65,12 +65,11 @@ import tfc.smallerunits.client.render.compat.UnitParticleEngine;
 import tfc.smallerunits.data.access.EntityAccessor;
 import tfc.smallerunits.data.capability.ISUCapability;
 import tfc.smallerunits.data.capability.SUCapabilityManager;
+import tfc.smallerunits.data.storage.IRegion;
 import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.plat.util.PlatformProvider;
-import tfc.smallerunits.plat.util.PlatformUtils;
-import tfc.smallerunits.plat.util.PlatformUtilsClient;
 import tfc.smallerunits.simulation.block.ParentLookup;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.simulation.level.ITickerChunkCache;
@@ -131,10 +130,10 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 	// if I do Minecraft.getInstance().getTextureManager(), it messes up particle textures
 	UnitParticleEngine particleEngine = new UnitParticleEngine(this, new TextureManager(Minecraft.getInstance().getResourceManager()));
 	
-	public AbstractTickerClientLevel(ClientLevel parent, ClientPacketListener p_205505_, ClientLevelData p_205506_, ResourceKey<Level> p_205507_, Holder<DimensionType> p_205508_, int p_205509_, int p_205510_, Supplier<ProfilerFiller> p_205511_, LevelRenderer p_205512_, boolean p_205513_, long p_205514_, int upb, Region region) {
+	public AbstractTickerClientLevel(ClientLevel parent, ClientPacketListener p_205505_, ClientLevelData p_205506_, ResourceKey<Level> p_205507_, Holder<DimensionType> p_205508_, int p_205509_, int p_205510_, Supplier<ProfilerFiller> p_205511_, LevelRenderer p_205512_, boolean p_205513_, long p_205514_, int upb, IRegion region) {
 		super(p_205505_, p_205506_, p_205507_, p_205508_, p_205509_, p_205510_, p_205511_, p_205512_, p_205513_, p_205514_);
 		this.parent = new WeakReference<>(parent);
-		this.region = region;
+		this.region = (Region) region;
 		this.chunkSource = new TickerClientChunkCache(this, 0, upb);
 		this.upb = upb;
 		this.isClientSide = true;
@@ -1032,5 +1031,9 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 					pDistanceDelay, p_233611_
 			);
 		});
+	}
+
+	public static AbstractTickerClientLevel createClientLevel(ClientLevel parent, ClientPacketListener p_205505_, ClientLevel.ClientLevelData p_205506_, ResourceKey<Level> p_205507_, Holder<DimensionType> p_205508_, int p_205509_, int p_205510_, Supplier<ProfilerFiller> p_205511_, LevelRenderer p_205512_, boolean p_205513_, long p_205514_, int upb, IRegion region) {
+		throw new RuntimeException("Check platform module self-impl mixins");
 	}
 }
