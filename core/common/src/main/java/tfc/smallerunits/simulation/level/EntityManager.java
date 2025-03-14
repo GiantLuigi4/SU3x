@@ -16,8 +16,9 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.*;
 import tfc.smallerunits.data.access.EntityManagerAccessor;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
-import tfc.smallerunits.simulation.level.server.TickerServerLevel;
+import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
 import tfc.smallerunits.simulation.level.server.saving.SUSaveWorld;
 
 import java.io.File;
@@ -94,7 +95,7 @@ public class EntityManager<T extends EntityAccess> extends PersistentEntitySecti
 	
 	public EntityManager(ITickerLevel wld, Class<T> p_157503_, LevelCallback<T> p_157504_, EntityPersistentStorage<T> p_157505_) {
 		super(p_157503_, new SUCallbacks<T>(wld, p_157504_), p_157505_);
-		if (wld instanceof TickerServerLevel tkLvl)
+		if (wld instanceof AbstractTickerServerLevel tkLvl)
 			this.world = tkLvl.saveWorld;
 		this.level = (Level) wld;
 	}
@@ -157,7 +158,7 @@ public class EntityManager<T extends EntityAccess> extends PersistentEntitySecti
 		ListTag ents = new ListTag();
 		section.getEntities().forEach((ent) -> {
 			if (ent instanceof Entity) {
-				ents.add(PlatformUtils.serializeEntity((Entity) ent));
+				ents.add(PlatformProvider.UTILS.serializeEntity((Entity) ent));
 			} else {
 				throw new RuntimeException("Idk what to do with " + ent.getClass());
 			}

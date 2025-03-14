@@ -40,6 +40,7 @@ import tfc.smallerunits.client.render.util.SUTesselator;
 import tfc.smallerunits.data.capability.ISUCapability;
 import tfc.smallerunits.data.capability.SUCapabilityManager;
 import tfc.smallerunits.data.storage.RegionPos;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.utils.config.ClientConfig;
@@ -234,7 +235,7 @@ public class AssortedQol {
 						/* calculate reach distance */
 						double reach = 7;
 						if (pEntity instanceof LivingEntity le) {
-							reach = PlatformUtils.getReach(le);
+							reach = PlatformProvider.UTILS.getReach(le);
 						}
 						
 						Vec3 start = new Vec3(pCamX, pCamY, pCamZ);

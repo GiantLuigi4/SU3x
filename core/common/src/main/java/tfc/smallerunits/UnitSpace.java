@@ -27,6 +27,7 @@ import tfc.smallerunits.networking.SUNetworkRegistry;
 import tfc.smallerunits.networking.sync.RemoveUnitPacketS2C;
 import tfc.smallerunits.networking.sync.SyncPacketS2C;
 import tfc.smallerunits.plat.net.PacketTarget;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.simulation.level.ITickerLevel;
@@ -222,7 +223,7 @@ public class UnitSpace {
 			} else if (level instanceof RegionalAttachments) {
 				Region r = ((RegionalAttachments) level).SU$getRegion(new RegionPos(pos));
 				if (r == null) {
-					if (PlatformUtils.isDevEnv())
+					if (PlatformProvider.UTILS.isDevEnv())
 						Loggers.UNITSPACE_LOGGER.error("Client: Region@" + new RegionPos(pos) + " was null");
 					return;
 				}

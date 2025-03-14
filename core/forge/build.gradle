@@ -15,10 +15,10 @@ legacyForge {
 
     validateAccessTransformers = true
 
-    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
-    if (at.exists()) {
-        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
-    }
+//    def at = project(':core:core_common').file('src/main/resources/META-INF/accesstransformer.cfg')
+//    if (at.exists()) {
+//        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+//    }
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
@@ -46,7 +46,7 @@ legacyForge {
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
-    compileOnly project(":core:common")
+    compileOnly project(":core:core_common")
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }

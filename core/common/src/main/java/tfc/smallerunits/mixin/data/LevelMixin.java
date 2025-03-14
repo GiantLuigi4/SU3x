@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.client.access.tracking.SUCapableWorld;
 import tfc.smallerunits.client.render.SUVBOEmitter;
 import tfc.smallerunits.logging.Loggers;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 
 @Mixin(Level.class)
@@ -24,6 +25,6 @@ public class LevelMixin implements SUCapableWorld {
 	@Inject(at = @At("HEAD"), method = "close")
 	public void preClose(CallbackInfo ci) {
 		if (emitter != null) emitter.free();
-		if (PlatformUtils.isDevEnv()) Loggers.WORLD_LOGGER.info("World " + toString() + " offloaded!");
+		if (PlatformProvider.UTILS.isDevEnv()) Loggers.WORLD_LOGGER.info("World " + toString() + " offloaded!");
 	}
 }

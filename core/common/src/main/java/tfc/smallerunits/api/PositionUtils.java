@@ -11,6 +11,7 @@ import net.minecraft.world.phys.Vec3;
 import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.data.storage.RegionPos;
 import tfc.smallerunits.data.tracking.RegionalAttachments;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.simulation.level.ITickerLevel;
@@ -127,7 +128,7 @@ public class PositionUtils {
 		if (lvl.isEmptyBlock(pos)) {
 			BlockPos blockpos1 = pos.below();
 			BlockState blockstate = lvl.getBlockState(blockpos1);
-			if (PlatformUtils.collisionExtendsVertically(blockstate, lvl, blockpos1, entity)) {
+			if (PlatformProvider.UTILS.collisionExtendsVertically(blockstate, lvl, blockpos1, entity)) {
 				return blockpos1;
 			}
 		}

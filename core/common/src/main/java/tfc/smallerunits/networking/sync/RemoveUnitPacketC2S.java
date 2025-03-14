@@ -12,6 +12,7 @@ import tfc.smallerunits.data.capability.SUCapabilityManager;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.plat.net.NetCtx;
 import tfc.smallerunits.plat.net.Packet;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 
 public class RemoveUnitPacketC2S extends Packet {
@@ -37,7 +38,7 @@ public class RemoveUnitPacketC2S extends Packet {
 		super.handle(ctx);
 		ctx.enqueueWork(() -> {
 			if (checkServer(ctx)) {
-				double reach = PlatformUtils.getReach(ctx.getSender());
+				double reach = PlatformProvider.UTILS.getReach(ctx.getSender());
 				reach *= 1.1; // help account for lag
 				reach += 1; // TODO: do this a bit better, helps account for player scaling
 				Vec3 pos = ctx.getSender().getPosition(0);

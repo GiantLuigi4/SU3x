@@ -17,6 +17,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.data.storage.RegionPos;
 import tfc.smallerunits.data.tracking.RegionalAttachments;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.WorldStitcher;
 import tfc.smallerunits.simulation.block.ParentLookup;
@@ -179,7 +180,7 @@ public class TickerClientChunkCache extends ClientChunkCache implements ITickerC
 		bvci.setLightCorrect(true);
 		getLightEngine().setLightEnabled(new ChunkPos(pChunkX, pChunkZ), true);
 		((ClientLevel) level).onChunkLoaded(ckPos);
-		PlatformUtils.chunkLoaded(bvci);
+		PlatformProvider.UTILS.chunkLoaded(bvci);
 		
 		return bvci;
 	}

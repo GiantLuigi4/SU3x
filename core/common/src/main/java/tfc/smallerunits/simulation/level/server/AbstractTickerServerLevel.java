@@ -68,6 +68,7 @@ import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.plat.CapabilityWrapper;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.block.ParentLookup;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
@@ -227,7 +228,7 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		this.getDataStorage().dataFolder = new File(saveWorld.file + "/data/");
 		
 		this.entityManager = new EntityManager<>(this, Entity.class, new EntityCallbacks(), new EntityStorage(this, noAccess.getDimensionPath(p_8575_).resolve("entities"), server.getFixerUpper(), server.forceSynchronousWrites(), server));
-		PlatformUtils.loadLevel(this);
+		PlatformProvider.UTILS.loadLevel(this);
 	}
 	
 	@Override
@@ -425,7 +426,7 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		NetworkingHacks.LevelDescriptor descriptor = NetworkingHacks.unitPos.get();
 		NetworkingHacks.setPos(descriptor.parent());
 		
-		Entity entity = PlatformUtils.migrateEntity(pEntity, this, upb, lvl);
+		Entity entity = PlatformProvider.UTILS.migrateEntity(pEntity, this, upb, lvl);
 		
 		NetworkingHacks.setPos(descriptor);
 		
@@ -934,8 +935,8 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		if (parent == null) return;
 		// compensate for create creating a level
 		ThreadLocals.levelLocal.set(parent);
-		
-		PlatformUtils.preTick(this, pHasTimeLeft);
+
+		PlatformProvider.UTILS.preTick(this, pHasTimeLeft);
 		
 		randomTickCount = Integer.MIN_VALUE;
 		
@@ -994,8 +995,8 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		entitiesGrabbedByBlocks.clear();
 		
 		saveWorld.tick();
-		
-		PlatformUtils.postTick(this, pHasTimeLeft);
+
+		PlatformProvider.UTILS.postTick(this, pHasTimeLeft);
 		
 		ThreadLocals.levelLocal.remove();
 	}

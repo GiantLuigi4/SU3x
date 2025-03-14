@@ -16,6 +16,7 @@ import tfc.smallerunits.data.storage.RegionPos;
 import tfc.smallerunits.data.tracking.RegionalAttachments;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.utils.config.CommonConfig;
@@ -48,7 +49,7 @@ public class PositionalInfo {
 		oPos = new Vec3(pEntity.xo, pEntity.yo, pEntity.zo);
 		oldPos = new Vec3(pEntity.xOld, pEntity.yOld, pEntity.zOld);
 		Level clvl = null;
-		if (PlatformUtils.isClient()) {
+		if (PlatformProvider.UTILS.isClient()) {
 			if (pEntity.level().isClientSide) {
 				if (pEntity instanceof Player player) {
 					if (cacheParticleEngine) {
@@ -62,7 +63,7 @@ public class PositionalInfo {
 	}
 	
 	public void scalePlayerReach(Player pPlayer, int upb) {
-		AttributeInstance instance = PlatformUtils.getReachAttrib(pPlayer);
+		AttributeInstance instance = PlatformProvider.UTILS.getReachAttrib(pPlayer);
 		instance.removeModifier(SU_REACH_UUID);
 		instance.addPermanentModifier(
 				new AttributeModifier(SU_REACH_UUID, "su:reach", upb, AttributeModifier.Operation.MULTIPLY_TOTAL)
@@ -137,7 +138,7 @@ public class PositionalInfo {
 		
 		if (isReachSet) {
 			if (pEntity instanceof LivingEntity livingEntity) {
-				AttributeInstance instance = PlatformUtils.getReachAttrib(livingEntity);
+				AttributeInstance instance = PlatformProvider.UTILS.getReachAttrib(livingEntity);
 				instance.removeModifier(SU_REACH_UUID);
 				isReachSet = false;
 			}
@@ -161,7 +162,7 @@ public class PositionalInfo {
 	}
 	
 	public void resetClient(Player player) {
-		if (PlatformUtils.isClient()) {
+		if (PlatformProvider.UTILS.isClient()) {
 			if (player.level().isClientSide) {
 				IHateTheDistCleaner.resetClient(player, lvl, particleEngine);
 				if (clientLevel != null) IHateTheDistCleaner.setClientLevel(clientLevel);
@@ -170,7 +171,7 @@ public class PositionalInfo {
 	}
 	
 	public void setupClient(Player player, Level spaceLevel, boolean updateParticleEngine) {
-		if (PlatformUtils.isClient()) {
+		if (PlatformProvider.UTILS.isClient()) {
 			if (player.level().isClientSide) {
 				Object o = IHateTheDistCleaner.adjustClient(player, spaceLevel, particleEngine != null);
 			}

@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.utils.config.compat.ClientCompatConfig;
 
@@ -15,19 +16,19 @@ import java.util.List;
 public class SodiumDebugOverlayMixin {
 	@Unique
 	private static String getSodiumName() {
-		if (PlatformUtils.isLoaded("embeddium")) return "Embeddium";
-		else if (PlatformUtils.isLoaded("rubidium")) return "Rubidium";
-		else if (PlatformUtils.isLoaded("sodium")) return "Sodium";
-		else if (PlatformUtils.isLoaded("magnesium")) return "Magnesium";
+		if (PlatformProvider.UTILS.isLoaded("embeddium")) return "Embeddium";
+		else if (PlatformProvider.UTILS.isLoaded("rubidium")) return "Rubidium";
+		else if (PlatformProvider.UTILS.isLoaded("sodium")) return "Sodium";
+		else if (PlatformProvider.UTILS.isLoaded("magnesium")) return "Magnesium";
 		return null;
 	}
 	
 	@Unique
 	private static boolean isSodiumPresent() {
-		if (PlatformUtils.isLoaded("embeddium")) return true;
-		else if (PlatformUtils.isLoaded("rubidium")) return true;
-		else if (PlatformUtils.isLoaded("sodium")) return true;
-		else if (PlatformUtils.isLoaded("magnesium")) return true;
+		if (PlatformProvider.UTILS.isLoaded("embeddium")) return true;
+		else if (PlatformProvider.UTILS.isLoaded("rubidium")) return true;
+		else if (PlatformProvider.UTILS.isLoaded("sodium")) return true;
+		else if (PlatformProvider.UTILS.isLoaded("magnesium")) return true;
 		return false;
 	}
 	

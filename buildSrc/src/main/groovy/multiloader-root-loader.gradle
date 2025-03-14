@@ -11,17 +11,8 @@ configurations {
     }
 }
 
-String relPath(String tgt) {
-    String pth = project.path
-    pth = pth.substring(0, pth.lastIndexOf("_"))
-    if (pth.equals(":")) pth = ""
-    tgt = tgt.replace(":", "_")
-    println(pth + tgt)
-    return pth + tgt
-}
-
 dependencies {
-    String pth = relPath(':common')
+    String pth = ':common'
     compileOnly(project(pth)) {
         capabilities {
 //            requireCapability "$group:$mod_id"

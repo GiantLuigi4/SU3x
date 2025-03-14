@@ -157,7 +157,7 @@ public class TickerChunkCache extends ServerChunkCache implements ITickerChunkCa
     }
 
     public ParentLookup getLookup() {
-        return ((TickerServerLevel) level).lookup;
+        return ((AbstractTickerServerLevel) level).lookup;
     }
 
     WeakReference<Level>[] neighbors = new WeakReference[Direction.values().length];
@@ -168,7 +168,7 @@ public class TickerChunkCache extends ServerChunkCache implements ITickerChunkCa
             if (neighborChunk != null) return neighborChunk;
             if (!pLoad) return null;
 
-            Region r = ((TickerServerLevel) level).region;
+            Region r = ((AbstractTickerServerLevel) level).region;
             RegionPos pos = r.pos;
 
             int x = pChunkX < 0 ? -1 : ((pChunkX > upb) ? 1 : 0);
@@ -184,7 +184,7 @@ public class TickerChunkCache extends ServerChunkCache implements ITickerChunkCa
             pChunkY = ((pChunkY < 0) ? pChunkY + upb : ((pChunkY > upb) ? (pChunkX - (upb * 32)) : pChunkY));
             pChunkZ = ((pChunkZ < 0) ? pChunkZ + upb : ((pChunkZ > upb) ? (pChunkX - (upb * 32)) : pChunkZ));
 
-            Level parent = ((TickerServerLevel) level).parent.get();
+            Level parent = ((AbstractTickerServerLevel) level).parent.get();
             Region otherRegion = null;
             Level level = null;
             otherRegion = ((RegionalAttachments) ((ServerChunkCache) parent.getChunkSource()).chunkMap).SU$getRegion(pos);
@@ -246,7 +246,7 @@ public class TickerChunkCache extends ServerChunkCache implements ITickerChunkCa
                 ), getLookup(), upb
         );
         ck[yPos] = bvci;
-        ((TickerServerLevel) level).saveWorld.load(bvci, bvci.getPos(), bvci.yPos);
+        ((AbstractTickerServerLevel) level).saveWorld.load(bvci, bvci.getPos(), bvci.yPos);
         synchronized (newChunks) {
             newChunks.add(bvci);
         }
@@ -262,7 +262,7 @@ public class TickerChunkCache extends ServerChunkCache implements ITickerChunkCa
 
     @Override
     public void save(boolean p_8420_) {
-//		((TickerServerLevel)level).saveWorld.saveAllChunks();
+//		((AbstractTickerServerLevel)level).saveWorld.saveAllChunks();
     }
 
     @Override

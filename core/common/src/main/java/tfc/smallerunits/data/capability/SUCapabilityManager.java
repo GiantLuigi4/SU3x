@@ -8,6 +8,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import tfc.smallerunits.UnitSpace;
 import tfc.smallerunits.client.access.tracking.FastCapabilityHandler;
 import tfc.smallerunits.plat.net.PacketTarget;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 
 // so I mostly just abandoned any documentation that I was given and write this
@@ -27,7 +28,7 @@ public class SUCapabilityManager {
 	public static ISUCapability getCapability(LevelChunk chunk) {
 		if (chunk instanceof FastCapabilityHandler)
 			return ((FastCapabilityHandler) chunk).getSUCapability();
-		return (ISUCapability) PlatformUtils.getSuCap(chunk);
+		return (ISUCapability) PlatformProvider.UTILS.getSuCap(chunk);
 	}
 	
 	public static ISUCapability getCapability(Level lvl, ChunkAccess chunk) {
@@ -45,7 +46,7 @@ public class SUCapabilityManager {
 		ChunkAccess access = world.getChunk(/* CC safety */ pos.getWorldPosition());
 		if (!(access instanceof LevelChunk)) return getCapability(world.getChunkAt(pos.getWorldPosition()));
 		if (access instanceof FastCapabilityHandler chunk) return chunk.getSUCapability();
-		return (ISUCapability) PlatformUtils.getSuCap((LevelChunk) access);
+		return (ISUCapability) PlatformProvider.UTILS.getSuCap((LevelChunk) access);
 	}
 	
 	public static void onChunkLoad(LevelChunk chunk) {

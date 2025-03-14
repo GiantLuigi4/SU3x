@@ -8,6 +8,7 @@ import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBundlePacket;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class BundledPacketHandler implements Packet {
     public void handle(PacketListener packetListener, NetworkContext context) {
         for (Packet child : children) {
             if (child instanceof ClientboundCustomPayloadPacket clientboundCustomPayloadPacket) {
-                PlatformUtils.customPayload(clientboundCustomPayloadPacket, context, packetListener);
+                PlatformProvider.UTILS.customPayload(clientboundCustomPayloadPacket, context, packetListener);
             } else {
                 child.handle(packetListener);
             }

@@ -18,6 +18,7 @@ import tfc.smallerunits.networking.SUNetworkRegistry;
 import tfc.smallerunits.networking.hackery.InfoRegistry;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.networking.sync.SyncPacketS2C;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.utils.config.ClientConfig;
@@ -172,11 +173,12 @@ public abstract class SmallerUnits extends AbstractMod {
 	}
 	
 	private void setupCfg() {
-		PlatformUtils.delayConfigInit(null);
+		PlatformProvider.UTILS.delayConfigInit(null);
 	}
 	
 	private void setup() {
-		if (PlatformUtils.isLoaded("pehkui")) PehkuiSupport.setup();
+//		if (PlatformProvider.UTILS.isLoaded("pehkui"))
+//			PehkuiSupport.setup();
 		setupCfg();
 	}
 

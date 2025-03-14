@@ -68,6 +68,7 @@ import tfc.smallerunits.data.capability.SUCapabilityManager;
 import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.plat.util.PlatformUtilsClient;
 import tfc.smallerunits.simulation.block.ParentLookup;
@@ -165,8 +166,8 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 			cache.put(pos, Pair.of(state, new VecMap<>(2)));
 			return state;
 		};
-		
-		PlatformUtilsClient.onLoad(this);
+
+		PlatformProvider.UTILS_CLIENT.onLoad(this);
 	}
 	
 	public UnitParticleEngine getParticleEngine() {
@@ -193,7 +194,7 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 	
 	@Override
 	protected void finalize() throws Throwable {
-		PlatformUtils.unloadLevel(this);
+		PlatformProvider.UTILS.unloadLevel(this);
 		super.finalize();
 	}
 	
@@ -353,7 +354,7 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 					case 2001:
 						BlockState blockstate = Block.stateById(pData);
 						if (!blockstate.isAir()) {
-							SoundType soundtype = PlatformUtilsClient.getSoundType(blockstate, this, pPos);
+							SoundType soundtype = PlatformProvider.UTILS_CLIENT.getSoundType(blockstate, this, pPos);
 							this.playLocalSound(pPos, soundtype.getBreakSound(), SoundSource.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F, false);
 						}
 						
@@ -501,7 +502,7 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 	public void sendBlockUpdated(BlockPos pPos, BlockState pOldState, BlockState pNewState, int pFlags) {
 		// TODO: check
 		BlockEntity be = getBlockEntity(pPos);
-		if (be != null) PlatformUtils.updateModelData(this, be);
+		if (be != null) PlatformProvider.UTILS.updateModelData(this, be);
 		
 		ArrayList<BlockPos> positionsToRefresh = new ArrayList<>();
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -628,8 +629,8 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 		Minecraft.getInstance().level = this;
 		particleEngine.tick();
 		Minecraft.getInstance().level = tlevel;
-		
-		PlatformUtilsClient.preTick(this);
+
+		PlatformProvider.UTILS_CLIENT.preTick(this);
 		
 		AABB box = HitboxScaling.getOffsetAndScaledBox(Minecraft.getInstance().player.getBoundingBox(), Minecraft.getInstance().player.position(), upb, region.pos);
 		Vec3 vec = box.getCenter().subtract(0, box.getYsize() / 2, 0);
@@ -659,8 +660,8 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 			for (Entity entity : entitiesGrabbedByBlock)
 				((EntityAccessor) entity).setMotionScalar(1);
 		entitiesGrabbedByBlocks.clear();
-		
-		PlatformUtilsClient.postTick(this);
+
+		PlatformProvider.UTILS_CLIENT.postTick(this);
 	}
 	
 	@Override

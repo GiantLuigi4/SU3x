@@ -6,6 +6,7 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.utils.asm.AssortedQol;
@@ -55,7 +56,7 @@ public interface BlockEntityRendererMixin<T extends BlockEntity> {
 	@Overwrite
 	default boolean shouldRender(T pBlockEntity, Vec3 pCameraPos) {
 		if (pBlockEntity.getLevel() instanceof ITickerLevel tickerWorld)
-			return AssortedQol.scaleRender(getViewDistance(), PlatformUtils.getRenderBox(pBlockEntity), tickerWorld, pBlockEntity.getBlockPos(), pCameraPos);
+			return AssortedQol.scaleRender(getViewDistance(), PlatformProvider.UTILS.getRenderBox(pBlockEntity), tickerWorld, pBlockEntity.getBlockPos(), pCameraPos);
 		return Vec3.atCenterOf(pBlockEntity.getBlockPos()).closerThan(pCameraPos, this.getViewDistance());
 	}
 }

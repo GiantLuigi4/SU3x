@@ -30,8 +30,11 @@ File fl = file("subprojects.txt")
 FileInputStream fis = new FileInputStream(fl)
 String data = new String(fis.readAllBytes())
 for (String txt in data.split("\n")) {
-    include(txt)
-    include(txt + ":common")
-    include(txt + ":fabric")
-    include(txt + ":forge")
+    for (String suffix in new String[]{"", ":common", ":fabric", ":forge"}) {
+        include(txt + suffix)
+
+        ProjectDescriptor proj = project(":" + txt + suffix)
+        proj.projectDir = file(proj.path.replace(":", "/").replace("_", "/"))
+        proj.name = txt + suffix.replace(":", "_")
+    }
 }

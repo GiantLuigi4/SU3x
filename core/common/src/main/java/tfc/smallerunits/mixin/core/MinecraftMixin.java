@@ -19,6 +19,7 @@ import tfc.smallerunits.data.capability.SUCapabilityManager;
 import tfc.smallerunits.data.tracking.ICanUseUnits;
 import tfc.smallerunits.data.tracking.RaytraceData;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.utils.PositionalInfo;
@@ -96,7 +97,7 @@ public class MinecraftMixin {
 				unitUser.setResult(hitResult);
 			}
 			
-			double reach = PlatformUtils.getReach(player);// 154
+			double reach = PlatformProvider.UTILS.getReach(player);// 154
 			hitResult = player.pick(reach, 1, false);
 //			if (hitResult.getType() == HitResult.Type.MISS)
 //				hitResult = player.pick(reach, 1, false);

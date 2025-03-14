@@ -34,11 +34,12 @@ import tfc.smallerunits.data.capability.SUCapabilityManager;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.plat.net.PacketTarget;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.block.ParentLookup;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.simulation.level.UnitChunkHolder;
-import tfc.smallerunits.simulation.level.server.TickerServerLevel;
+import tfc.smallerunits.simulation.level.server.AbstractTickerServerLevel;
 import tfc.smallerunits.utils.math.Math1D;
 import tfc.smallerunits.utils.threading.ThreadLocals;
 
@@ -298,7 +299,7 @@ public class BasicVerticalChunk extends LevelChunk {
 				if (!section.getBlockState(j, k, l).is(block)) {
 					return null;
 				} else {
-					if (!this.level.isClientSide && !PlatformUtils.shouldCaptureBlockSnapshots(level)) {
+					if (!this.level.isClientSide && !PlatformProvider.UTILS.shouldCaptureBlockSnapshots(level)) {
 						pState.onPlace(this.level, offsetPos, blockstate, pIsMoving);
 					}
 
@@ -330,8 +331,8 @@ public class BasicVerticalChunk extends LevelChunk {
 	public void setUnsaved(boolean pUnsaved) {
 		if (pUnsaved) {
 			if (!super.isUnsaved()) {
-				if (level instanceof TickerServerLevel) {
-					((TickerServerLevel) level).saveWorld.markForSave(this);
+				if (level instanceof AbstractTickerServerLevel) {
+					((AbstractTickerServerLevel) level).saveWorld.markForSave(this);
 				}
 			}
 		}
@@ -510,7 +511,7 @@ public class BasicVerticalChunk extends LevelChunk {
 
 	public void maybeUnload() {
 		if (!level.isClientSide) {
-			if (!(level instanceof TickerServerLevel))
+			if (!(level instanceof AbstractTickerServerLevel))
 				return;
 		} else return;
 		BlockPos origin = new BlockPos(chunkPos.getMinBlockX(), yPos * 16, chunkPos.getMinBlockZ());
@@ -518,7 +519,7 @@ public class BasicVerticalChunk extends LevelChunk {
 		Level parent = ((ITickerLevel) level).getParent();
 		try {
 			if (parent == null) {
-				((TickerServerLevel) level).saveWorld.saveChunk(this);
+				((AbstractTickerServerLevel) level).saveWorld.saveChunk(this);
 				return;
 			}
 			boolean anyLoaded = false;
@@ -539,8 +540,8 @@ public class BasicVerticalChunk extends LevelChunk {
 
 			if (!anyLoaded) {
 				if (isUnsaved()) {
-					((TickerServerLevel) level).saveWorld.saveChunk(this);
-					((TickerServerLevel) level).unload(this);
+					((AbstractTickerServerLevel) level).saveWorld.saveChunk(this);
+					((AbstractTickerServerLevel) level).unload(this);
 					// after this point, block entities get cleared
 					// do NOT save after here
 					updateModificationTime(-1);
@@ -644,7 +645,7 @@ public class BasicVerticalChunk extends LevelChunk {
 			if (blockentity != null && blockentity != pBlockEntity) {
 				blockentity.setRemoved();
 			}
-			PlatformUtils.beLoaded(pBlockEntity, level);
+			PlatformProvider.UTILS.beLoaded(pBlockEntity, level);
 		}
 
 		if (!level.isClientSide) return;

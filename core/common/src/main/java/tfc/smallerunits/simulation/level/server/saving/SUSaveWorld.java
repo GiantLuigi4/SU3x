@@ -18,6 +18,7 @@ import net.minecraft.world.level.saveddata.SavedData;
 import tfc.smallerunits.data.access.DimensionDataStorageAccessor;
 import tfc.smallerunits.data.storage.RegionPos;
 import tfc.smallerunits.data.storage.UnitPallet;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.simulation.level.EntityManager;
@@ -148,7 +149,7 @@ public class SUSaveWorld {
 			}
 			
 			{
-				CompoundTag caps = PlatformUtils.chunkCapNbt(basicVerticalChunk);
+				CompoundTag caps = PlatformProvider.UTILS.chunkCapNbt(basicVerticalChunk);
 				if (caps != null && !caps.isEmpty()) {
 					tag.put("capabilities", caps);
 				}
@@ -272,7 +273,7 @@ public class SUSaveWorld {
 				((ITickerLevel) shell.level).loadTicks(tag.getCompound("ticks"));
 			
 			if (tag.contains("capabilities", Tag.TAG_COMPOUND))
-				PlatformUtils.readChunkCapNbt(shell, tag.getCompound("capabilities"));
+				PlatformProvider.UTILS.readChunkCapNbt(shell, tag.getCompound("capabilities"));
 			
 			File entityFile = getEntityFile(shell.getSectionPos());
 			if (entityFile.exists()) {

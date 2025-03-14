@@ -1,7 +1,7 @@
 package tfc.smallerunits.client.render.compat.sodium;
 
 import net.minecraft.ChatFormatting;
-import tfc.smallerunits.utils.config.annoconfg.util.ConfigEnum;
+import tfc.smallerunits.plat.config.annoconfg.util.ConfigEnum;
 
 public enum SodiumRenderMode implements ConfigEnum {
 	VANILLA(ChatFormatting.RED, "Vanilla Style (slow)", "vanilla"),

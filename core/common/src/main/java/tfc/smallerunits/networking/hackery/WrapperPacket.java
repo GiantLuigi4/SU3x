@@ -21,6 +21,7 @@ import tfc.smallerunits.data.access.SUScreenAttachments;
 import tfc.smallerunits.logging.Loggers;
 import tfc.smallerunits.plat.net.NetCtx;
 import tfc.smallerunits.plat.net.NetworkDirection;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 import tfc.smallerunits.utils.IHateTheDistCleaner;
@@ -231,7 +232,7 @@ public class WrapperPacket extends tfc.smallerunits.plat.net.Packet {
             if (isBundle) {
                 ((BundledPacketHandler) wrapped).handle(listener, context);
             } else if (context.pkt instanceof ClientboundCustomPayloadPacket clientboundCustomPayloadPacket) {
-                PlatformUtils.customPayload(clientboundCustomPayloadPacket, context, listener);
+                PlatformProvider.UTILS.customPayload(clientboundCustomPayloadPacket, context, listener);
             } else {
                 context.pkt.handle(listener);
             }

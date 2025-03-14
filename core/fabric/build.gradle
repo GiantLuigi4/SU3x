@@ -13,13 +13,13 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
-//    implementation rootProject.project(":core:common")
-    implementation project(":common")
+//    implementation rootProject.project(":shared_common")
+//    implementation project(":core:common")
 }
 
 loom {
-    if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
-        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accesswidener"))
+    if (project(":core:core_common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
+        accessWidenerPath.set(project(":core:core_common").file("src/main/resources/${mod_id}.accesswidener"))
     }
     mixin {
         defaultRefmapName.set("${mod_id}.refmap.json")

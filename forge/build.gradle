@@ -1,5 +1,5 @@
 plugins {
-    id 'multiloader-loader'
+    id 'multiloader-root-loader'
     id 'net.neoforged.moddev.legacyforge'
 }
 

@@ -26,9 +26,10 @@ import tfc.smallerunits.client.render.util.SUTesselator;
 import tfc.smallerunits.client.render.util.TextureScalingVertexBuilder;
 import tfc.smallerunits.data.storage.Region;
 import tfc.smallerunits.data.storage.RegionPos;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
-import tfc.smallerunits.simulation.level.client.TickerClientLevel;
+import tfc.smallerunits.simulation.level.client.AbstractTickerClientLevel;
 
 public class TileRendererHelper {
 	public static void setupStack(PoseStack stk, BlockEntity tile, BlockPos origin) {
@@ -47,10 +48,10 @@ public class TileRendererHelper {
 			stk.scale(scl, scl, scl);
 		}
 		
-		if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes() && PlatformUtils.isDevEnv()) {
+		if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes() && PlatformProvider.UTILS.isDevEnv()) {
 			LevelRenderer.renderLineBox(
 					stk, Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.LINES),
-					PlatformUtils.getRenderBox(tile), 1, 1, 1, 1
+					PlatformProvider.UTILS.getRenderBox(tile), 1, 1, 1, 1
 			);
 		}
 		stk.translate(
@@ -312,10 +313,10 @@ public class TileRendererHelper {
 	}
 	
 	public static void drawParticles(PoseStack pPoseStack, float pPartialTick, long pFinishNanoTime, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pProjectionMatrix, Region value, Level valueLevel, RenderBuffers renderBuffers, CallbackInfo ci) {
-		RegionPos pos = ((TickerClientLevel) valueLevel).getRegion().pos;
+		RegionPos pos = ((AbstractTickerClientLevel) valueLevel).getRegion().pos;
 		BlockPos bp = pos.toBlockPos();
 		
-		float scl = 1f / (((TickerClientLevel) valueLevel).getUPB());
+		float scl = 1f / (((AbstractTickerClientLevel) valueLevel).getUPB());
 		
 		PoseStack stack = new PoseStack();
 		stack.last().pose().mul(pPoseStack.last().pose());
@@ -327,7 +328,7 @@ public class TileRendererHelper {
 		if (Tesselator.getInstance() instanceof SUTesselator suTesselator) {
 			suTesselator.setOffset(bp.getX(), bp.getY(), bp.getZ());
 			// TODO: use forge method or smth
-			((TickerClientLevel) valueLevel).getParticleEngine().render(
+			((AbstractTickerClientLevel) valueLevel).getParticleEngine().render(
 					stack, renderBuffers.bufferSource(),
 					pLightTexture, pCamera, pPartialTick
 			);
@@ -340,7 +341,7 @@ public class TileRendererHelper {
 			stack.scale(scl, scl, scl);
 			stack.translate(pCamera.getPosition().x, pCamera.getPosition().y, pCamera.getPosition().z);
 			
-			((TickerClientLevel) valueLevel).getParticleEngine().render(
+			((AbstractTickerClientLevel) valueLevel).getParticleEngine().render(
 					stack, renderBuffers.bufferSource(),
 					pLightTexture, pCamera, pPartialTick
 			);
@@ -368,15 +369,15 @@ public class TileRendererHelper {
 	
 	public static void renderBE(BlockEntity tile, BlockPos origin, IFrustum frustum, PoseStack stk, BlockEntityRenderDispatcher blockEntityRenderDispatcher, float pct) {
 		if (tile.getLevel() == null) return; // idk how this happens, but ok?
-		if (new RegionPos(origin).equals(((TickerClientLevel) tile.getLevel()).region.pos)) {
-			int y = tile.getBlockPos().getY() / ((TickerClientLevel) tile.getLevel()).upb;
+		if (new RegionPos(origin).equals(((AbstractTickerClientLevel) tile.getLevel()).region.pos)) {
+			int y = tile.getBlockPos().getY() / ((AbstractTickerClientLevel) tile.getLevel()).upb;
 			BlockPos regionOrigin = new BlockPos(0, 0, 0);
 			if (tile.getLevel() instanceof ITickerLevel tkLvl) regionOrigin = tkLvl.getRegion().pos.toBlockPos();
 			y += regionOrigin.getY();
 			
 			if (y < origin.getY() + 16 &&
 					y >= origin.getY()) {
-				AABB renderBox = PlatformUtils.getRenderBox(tile);
+				AABB renderBox = PlatformProvider.UTILS.getRenderBox(tile);
 				if (tile.getLevel() instanceof ITickerLevel tkLvl) {
 					int upb = tkLvl.getUPB();
 					float scl = 1f / upb;
@@ -389,7 +390,7 @@ public class TileRendererHelper {
 							renderBox.maxZ * scl + regionOrigin.getZ()
 					);
 				}
-				if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes() && PlatformUtils.isDevEnv()) {
+				if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes() && PlatformProvider.UTILS.isDevEnv()) {
 					stk.pushPose();
 					LevelRenderer.renderLineBox(
 							stk, Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.LINES),

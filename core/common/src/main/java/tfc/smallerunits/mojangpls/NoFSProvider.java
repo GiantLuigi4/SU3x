@@ -1,6 +1,7 @@
 package tfc.smallerunits.mojangpls;
 
 import org.jetbrains.annotations.NotNull;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 
 import java.io.IOException;
@@ -204,7 +205,7 @@ public class NoFSProvider extends FileSystemProvider {
 			StringBuilder builder = new StringBuilder();
 			builder.append("-- INFO --\n");
 			builder.append(type.getName());
-			PlatformUtils.injectCrashReport("Smaller Units", builder::toString);
+			PlatformProvider.UTILS.injectCrashReport("Smaller Units", builder::toString);
 			throw new RuntimeException("Attribute could not be created, game will most likely crash regardless");
 		}
 	}
@@ -265,7 +266,7 @@ public class NoFSProvider extends FileSystemProvider {
 			StringBuilder builder = new StringBuilder();
 			builder.append("-- INFO --\n");
 			builder.append(type.getName());
-			PlatformUtils.injectCrashReport("Smaller Units", builder::toString);
+			PlatformProvider.UTILS.injectCrashReport("Smaller Units", builder::toString);
 			throw new RuntimeException("Attribute could not be created, game will most likely crash regardless");
 		}
 	}

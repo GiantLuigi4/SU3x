@@ -24,6 +24,7 @@ import tfc.smallerunits.client.render.storage.BufferStorage;
 import tfc.smallerunits.client.render.util.RenderWorld;
 import tfc.smallerunits.client.render.util.TranslatingVertexBuilder;
 import tfc.smallerunits.data.capability.ISUCapability;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.utils.PositionalInfo;
 import tfc.smallerunits.utils.math.Math1D;
@@ -175,7 +176,7 @@ public class SUVBOEmitter {
 						Minecraft.getInstance().getProfiler().popPush("get_data");
 						Object modelData = wld.getModelData(offsetPos);
 						Minecraft.getInstance().getProfiler().popPush("check_render");
-						if (PlatformUtils.canRenderIn(model, block, randomSource, modelData, chunkBufferLayer)) {
+						if (PlatformProvider.UTILS.canRenderIn(model, block, randomSource, modelData, chunkBufferLayer)) {
 							if (consumer == null) consumer = buffers.get(chunkBufferLayer);
 							
 							Minecraft.getInstance().getProfiler().popPush("translate");
@@ -185,7 +186,7 @@ public class SUVBOEmitter {
 									pTranslation.z + z * scl
 							);
 							Minecraft.getInstance().getProfiler().popPush("render");
-							PlatformUtils.tesselate(dispatcher,
+							PlatformProvider.UTILS.tesselate(dispatcher,
 									wld, model,
 									block, offsetPos, stk,
 									consumer, true,

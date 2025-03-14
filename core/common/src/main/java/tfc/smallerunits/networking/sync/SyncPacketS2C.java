@@ -22,6 +22,7 @@ import tfc.smallerunits.data.capability.SUCapabilityManager;
 import tfc.smallerunits.data.storage.UnitPallet;
 import tfc.smallerunits.plat.net.NetCtx;
 import tfc.smallerunits.plat.net.Packet;
+import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.plat.util.PlatformUtils;
 import tfc.smallerunits.simulation.level.ITickerLevel;
 
@@ -151,7 +152,7 @@ public class SyncPacketS2C extends Packet {
 
 					// this is jank, I should probably de-jankify it
 					try {
-						PlatformUtils.dataPacket(be, tag);
+						PlatformProvider.UTILS.dataPacket(be, tag);
 					} catch (Throwable ignored) {
 						be.load(tag);
 					}
