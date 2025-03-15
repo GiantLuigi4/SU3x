@@ -9,6 +9,7 @@ public class ForgeNetCtx extends NetCtx {
 	
 	public ForgeNetCtx(PacketListener handler, PacketSender responseSender, Player player, NetworkDirection direction, NetworkEvent.Context context) {
 		super(handler, responseSender, player, direction);
+		this.context = context;
 	}
 	
 	public Player getSender() {

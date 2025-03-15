@@ -11,7 +11,8 @@
         "data.FastCapabilityChunkMixin",
         "quality.EntityQolForge",
         "quality.PlayerMixin",
-        "self_impl.TickerServerLevelMixin"
+        "self_impl.TickerServerLevelMixin",
+        "self_impl.ToolProviderMixin"
     ],
     "client": [
         "quality.ParticleEngineAccessor",
