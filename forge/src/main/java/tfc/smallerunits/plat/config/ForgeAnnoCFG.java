@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-public class ForgeAnnoCFG {
+public class ForgeAnnoCFG extends AnnoCFG {
 	private ForgeConfigSpec mySpec;
 	
 	private final HashMap<String, ConfigEntry> handles = new HashMap<>();

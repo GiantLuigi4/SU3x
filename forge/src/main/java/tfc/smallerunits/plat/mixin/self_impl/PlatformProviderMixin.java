@@ -1,25 +1,21 @@
 package tfc.smallerunits.plat.mixin.self_impl;
 
 import net.minecraft.world.item.ItemStack;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
-import tfc.smallerunits.plat.util.PlatformProvider;
-import tfc.smallerunits.plat.util.ForgePlatformUtils;
-import tfc.smallerunits.plat.util.ForgePlatformUtilsClient;
-import tfc.smallerunits.plat.util.ForgeSUTabBuilder;
+import org.spongepowered.asm.mixin.*;
+import tfc.smallerunits.plat.util.*;
 
 import java.util.function.Supplier;
 
 @Mixin(value = PlatformProvider.class, remap = false)
 public class PlatformProviderMixin {
+    @Final
     @Shadow
     @Mutable
-    public static ForgePlatformUtils UTILS;
+    public static PlatformUtils UTILS;
+    @Final
     @Shadow
     @Mutable
-    public static ForgePlatformUtilsClient UTILS_CLIENT;
+    public static PlatformUtilsClient UTILS_CLIENT;
 
     static {
         UTILS = new ForgePlatformUtils();
@@ -30,7 +26,7 @@ public class PlatformProviderMixin {
      * @author GiantLuigi4
      */
     @Overwrite
-    public static ForgeSUTabBuilder makeTabBuilder(String name, Supplier<ItemStack> icon) {
+    public static SUTabBuilder makeTabBuilder(String name, Supplier<ItemStack> icon) {
         return new ForgeSUTabBuilder(name, icon);
     }
 }

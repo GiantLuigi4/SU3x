@@ -7,13 +7,10 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import tfc.smallerunits.plat.net.ForgePacketRegister;
-import tfc.smallerunits.plat.net.Packet;
 import tfc.smallerunits.plat.net.PacketTarget;
 
-import java.util.function.BiConsumer;
-
 @Mixin(value = PacketTarget.class, remap = false)
-public class PacketTargets {
+public class PacketTargetsMixin {
     @Shadow
     @Mutable
     public static PacketTarget SERVER;
