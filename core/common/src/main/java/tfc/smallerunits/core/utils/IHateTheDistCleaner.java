@@ -14,13 +14,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.joml.Vector3f;
 import tfc.smallerunits.core.TileResizingItem;
 import tfc.smallerunits.core.client.access.workarounds.ParticleEngineHolder;
 import tfc.smallerunits.core.client.render.compat.UnitParticleEngine;
 import tfc.smallerunits.core.simulation.level.client.AbstractTickerClientLevel;
-
-import java.util.concurrent.atomic.AtomicReference;
+import tfc.smallerunits.plat.internal.ToolProvider;
 
 /* this whole class should be unnecessary, however forge says that clean code is a concept dreamed of by idiots */
 /* really, what it is, is that forge wants to enforce that you don't reference client only code from common code */
@@ -28,13 +29,11 @@ import java.util.concurrent.atomic.AtomicReference;
 /* I make sure that my code is safe, but forge sees that I reference client code, and thus it throws an error with no obvious reason */
 /* it is stupid and I hate it because it causes this class to have to exist */
 public class IHateTheDistCleaner {
-	public static AtomicReference<ChunkRenderDispatcher.RenderChunk> currentRenderChunk = new AtomicReference<>();
-
-//	@OnlyIn(Dist.CLIENT)
-//	public static ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk) {
-//		currentRenderChunk.set(chunk);
-//		return chunk;
-//	}
+	@OnlyIn(Dist.CLIENT)
+	public static ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk) {
+		ToolProvider.currentRenderChunk.set(chunk);
+		return chunk;
+	}
 	
 	public static Level getClientLevel() {
 		return Minecraft.getInstance().level;

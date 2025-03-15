@@ -166,7 +166,7 @@ public class MixinConnector implements IMixinConfigPlugin {
 					for (AbstractInsnNode targetNode : targetNodes) {
 						InsnList list = new InsnList();
 						list.add(ASMAPI.buildMethodCall(
-								"tfc/smallerunits/plat/util/PlatformUtilsClient",
+								"tfc/smallerunits/core/utils/IHateTheDistCleaner",
 								"updateRenderChunk",
 								"(Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$RenderChunk;)Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$RenderChunk;", ASMAPI.MethodType.STATIC)
 						);

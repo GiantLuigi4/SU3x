@@ -41,6 +41,7 @@ import tfc.smallerunits.core.utils.BreakData;
 import tfc.smallerunits.core.utils.IHateTheDistCleaner;
 import tfc.smallerunits.core.utils.asm.AssortedQol;
 import tfc.smallerunits.core.utils.asm.ModCompatClient;
+import tfc.smallerunits.plat.internal.ToolProvider;
 
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixinBlocks {
@@ -209,8 +210,8 @@ public abstract class LevelRendererMixinBlocks {
 		ShaderInstance shaderinstance = RenderSystem.getShader();
 		Uniform uniform = shaderinstance.CHUNK_OFFSET;
 		
-		BlockPos origin = IHateTheDistCleaner.currentRenderChunk.get().getOrigin();
-		ChunkRenderDispatcher.CompiledChunk chunk = IHateTheDistCleaner.currentRenderChunk.get().compiled.get();
+		BlockPos origin = ToolProvider.currentRenderChunk.get().getOrigin();
+		ChunkRenderDispatcher.CompiledChunk chunk = ToolProvider.currentRenderChunk.get().compiled.get();
 		SUCapableChunk capable = ((SUCompiledChunkAttachments) chunk).getSUCapable();
 		
 		if (capable == null)
@@ -222,7 +223,7 @@ public abstract class LevelRendererMixinBlocks {
 			uniform.set((float) ((double) origin.getX() - pCamX), (float) ((double) origin.getY() - pCamY), (float) ((double) origin.getZ() - pCamZ));
 		
 		SU$Frustum.set(capturedFrustum != null ? capturedFrustum : cullingFrustum);
-		SURenderManager.drawChunk(((SUCompiledChunkAttachments) chunk), ((LevelChunk) capable), level, IHateTheDistCleaner.currentRenderChunk.get().getOrigin(), pRenderType, SU$Frustum, pCamX, pCamY, pCamZ, uniform);
+		SURenderManager.drawChunk(((SUCompiledChunkAttachments) chunk), ((LevelChunk) capable), level, ToolProvider.currentRenderChunk.get().getOrigin(), pRenderType, SU$Frustum, pCamX, pCamY, pCamZ, uniform);
 		return instance.isEmpty(pRenderType);
 	}
 

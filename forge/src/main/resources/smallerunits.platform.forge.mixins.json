@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "package": "tfc.smallerunits.plat.mixin",
   "refmap": "${mod_id}.refmap.json",
+  "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "self_impl.AbstractItemMixin",
