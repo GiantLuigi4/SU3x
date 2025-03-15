@@ -175,8 +175,6 @@ public abstract class SmallerUnits extends AbstractMod {
 	}
 	
 	private void setup() {
-//		if (PlatformProvider.UTILS.isLoaded("pehkui"))
-//			PehkuiSupport.setup();
 		setupCfg();
 	}
 

@@ -19,8 +19,8 @@ import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.storage.ServerLevelData;
 import org.jetbrains.annotations.Nullable;
 import tfc.smallerunits.core.simulation.level.server.AbstractTickerServerLevel;
-import tfc.smallerunits.core.utils.scale.ResizingUtils;
 import tfc.smallerunits.plat.CapabilityWrapper;
+import tfc.smallerunits.plat.internal.ToolProvider;
 import tfc.smallerunits.storage.IRegion;
 
 import java.util.List;
@@ -109,8 +109,8 @@ public class ForgeTickerServerLevel extends AbstractTickerServerLevel {
 				if (player == pPlayer) continue;
 				
 				double fScl = scl;
-				if (ResizingUtils.isResizingModPresent())
-					fScl *= 1 / ResizingUtils.getSize(player);
+				if (ToolProvider.RESIZING.isResizingModPresent())
+					fScl *= 1 / ToolProvider.RESIZING.getSize(player);
 				if (fScl > 1) fScl = 1 / fScl;
 				parent.get().playSound(
 						pPlayer,
@@ -140,8 +140,8 @@ public class ForgeTickerServerLevel extends AbstractTickerServerLevel {
 			if (lvl == null) return;
 			for (Player player : lvl.players()) {
 				double fScl = scl;
-				if (ResizingUtils.isResizingModPresent())
-					fScl *= 1 / ResizingUtils.getSize(player);
+				if (ToolProvider.RESIZING.isResizingModPresent())
+					fScl *= 1 / ToolProvider.RESIZING.getSize(player);
 				if (fScl > 1) fScl = 1 / fScl;
 				parent.get().playLocalSound(
 						finalPX, finalPY, finalPZ,

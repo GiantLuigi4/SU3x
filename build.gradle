@@ -7,6 +7,18 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     repositories.mavenCentral()
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url "https://cursemaven.com"
+                }
+            }
+            filter {
+                includeGroup "curse.maven"
+            }
+        }
+    }
     dependencies.compileOnly('org.jetbrains:annotations:26.0.2')
 }
 

@@ -78,9 +78,9 @@ import tfc.smallerunits.core.utils.config.CommonConfig;
 import tfc.smallerunits.core.utils.math.HitboxScaling;
 import tfc.smallerunits.core.utils.math.Math1D;
 import tfc.smallerunits.core.utils.math.Math3d;
-import tfc.smallerunits.core.utils.scale.ResizingUtils;
 import tfc.smallerunits.core.utils.storage.GroupMap;
 import tfc.smallerunits.core.utils.storage.VecMap;
+import tfc.smallerunits.plat.internal.ToolProvider;
 import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.storage.IRegion;
 
@@ -1019,8 +1019,8 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
 		double finalPX = pX;
 		double finalPY = pY;
 		double finalPZ = pZ;
-		if (ResizingUtils.isResizingModPresent())
-			scl *= 1 / ResizingUtils.getSize(Minecraft.getInstance().cameraEntity);
+		if (ToolProvider.RESIZING.isResizingModPresent())
+			scl *= 1 / ToolProvider.RESIZING.getSize(Minecraft.getInstance().cameraEntity);
 		if (scl > 1) scl = 1 / scl;
 		double finalScl = scl;
 		completeOnTick.add(() -> {

@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import tfc.smallerunits.core.utils.scale.ResizingUtils;
+import tfc.smallerunits.plat.internal.ToolProvider;
 
 import static tfc.smallerunits.core.utils.config.ServerConfig.GameplayOptions;
 
@@ -28,12 +28,12 @@ public class TileResizingItem extends Item {
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if (GameplayOptions.resizeOther) {
-			if (ResizingUtils.isResizingModPresent()) {
+			if (ToolProvider.RESIZING.isResizingModPresent()) {
 				if (target instanceof Player && attacker instanceof ServerPlayer) {
 					((ServerPlayer) attacker).getAdvancements().award(((ServerPlayer) attacker).level().getServer().getAdvancements().getAdvancement(new ResourceLocation("smallerunits:rude")), "strike_player");
 				}
 			}
-			ResizingUtils.resize(target, getScale());
+			ToolProvider.RESIZING.resize(target, getScale());
 		}
 		return GameplayOptions.hurtOther;
 	}
@@ -42,7 +42,7 @@ public class TileResizingItem extends Item {
 	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
 		if (GameplayOptions.resizeSelf) {
 			if (playerIn.isCrouching()) {
-				ResizingUtils.resize(playerIn, getScale());
+				ToolProvider.RESIZING.resize(playerIn, getScale());
 			}
 		}
 		return super.use(worldIn, playerIn, handIn);

@@ -19,8 +19,8 @@ import org.apache.commons.lang3.tuple.MutableTriple;
 import tfc.smallerunits.core.data.storage.RegionPos;
 import tfc.smallerunits.core.simulation.chunk.BasicVerticalChunk;
 import tfc.smallerunits.core.utils.math.HitboxScaling;
-import tfc.smallerunits.core.utils.scale.ResizingUtils;
 import tfc.smallerunits.level.SimpleTickerLevel;
+import tfc.smallerunits.plat.internal.ToolProvider;
 
 import java.util.Map;
 
@@ -81,7 +81,7 @@ public class PlatformQol {
 							if (entity.isPushedByFluid(fluidType)) {
 								Vec3 vec31 = fluidstate.getFlow(level, blockpos$mutableblockpos);
 								if (interim.getLeft() < 0.4D) {
-									vec31 = vec31.scale(interim.getLeft() / ResizingUtils.getActualSize(entity));
+									vec31 = vec31.scale(interim.getLeft() / ToolProvider.RESIZING.getActualSize(entity));
 								}
 								
 								Vec3 mid = interim.getMiddle();

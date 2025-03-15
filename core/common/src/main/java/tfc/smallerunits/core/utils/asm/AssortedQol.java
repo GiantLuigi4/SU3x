@@ -43,10 +43,10 @@ import tfc.smallerunits.core.data.storage.RegionPos;
 import tfc.smallerunits.core.simulation.level.ITickerLevel;
 import tfc.smallerunits.core.utils.config.ClientConfig;
 import tfc.smallerunits.core.utils.math.HitboxScaling;
-import tfc.smallerunits.core.utils.scale.ResizingUtils;
 import tfc.smallerunits.core.utils.selection.MutableVec3;
 import tfc.smallerunits.core.utils.selection.UnitHitResult;
 import tfc.smallerunits.core.utils.selection.UnitShape;
+import tfc.smallerunits.plat.internal.ToolProvider;
 import tfc.smallerunits.plat.util.PlatformProvider;
 
 import java.util.List;
@@ -161,7 +161,7 @@ public class AssortedQol {
 	}
 	
 	public static boolean scaleRender(double vd, AABB renderBox, ITickerLevel tickerWorld, BlockPos pPos, Vec3 pCameraPos) {
-		double sd = ResizingUtils.getActualSize(Minecraft.getInstance().player);
+		double sd = ToolProvider.RESIZING.getActualSize(Minecraft.getInstance().player);
 		double divisor = tickerWorld.getUPB();
 		
 		if (sd > (1d / divisor)) sd = 1;

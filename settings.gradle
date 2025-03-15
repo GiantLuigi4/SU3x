@@ -30,6 +30,7 @@ File fl = file("subprojects.txt")
 FileInputStream fis = new FileInputStream(fl)
 String data = new String(fis.readAllBytes())
 for (String txt in data.split("\n")) {
+    txt = txt.trim()
     for (String suffix in new String[]{"", ":common", ":fabric", ":forge"}) {
         include(txt + suffix)
 

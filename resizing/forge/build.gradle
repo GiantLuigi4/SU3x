@@ -4,10 +4,9 @@ plugins {
 }
 
 mixin {
-    add(sourceSets.main, "${mod_id}.core.refmap.json")
+    add(sourceSets.main, "${mod_id}.resizing.refmap.json")
 
-    config("${mod_id}.core.mixins.json")
-    config("${mod_id}.core.forge.mixins.json")
+    config("${mod_id}.resizing.mixins.json")
 }
 
 legacyForge {
@@ -45,23 +44,18 @@ legacyForge {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
-repositories {
-    flatDir {
-        dirs = ["libs"]
-    }
-}
-
 dependencies {
     compileOnly getProject(project, ":common")
     compileOnly project(":common")
+    compileOnly project(":core:core_common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
-    modImplementation ("tfc:su_base_forge:1.0")
+    modImplementation "curse.maven:pehkui-319596:5393101"
 }
 
 jar {
     finalizedBy('reobfJar')
     manifest.attributes([
-            "MixinConfigs": "${mod_id}.core.mixins.json,${mod_id}.core.forge.mixins.json"
+            "MixinConfigs": "${mod_id}.resizing.mixins.json"
     ])
 }
