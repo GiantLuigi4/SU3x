@@ -1,4 +1,4 @@
-package tfc.smallerunits.core.client.render.compat.sodium;
+package tfc.smallerunits.sodium.render;
 
 import net.minecraft.ChatFormatting;
 import tfc.smallerunits.plat.config.annoconfg.util.ConfigEnum;

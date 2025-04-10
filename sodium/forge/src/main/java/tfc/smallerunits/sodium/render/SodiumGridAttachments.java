@@ -1,4 +1,4 @@
-package tfc.smallerunits.core.client.render.compat.sodium;
+package tfc.smallerunits.sodium.render;
 
 import net.minecraft.world.level.ChunkPos;
 import tfc.smallerunits.core.client.access.tracking.SUCompiledChunkAttachments;

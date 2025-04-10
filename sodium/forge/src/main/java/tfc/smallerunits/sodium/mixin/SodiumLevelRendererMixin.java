@@ -3,7 +3,6 @@ package tfc.smallerunits.sodium.mixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import me.jellysquid.mods.sodium.client.render.SodiumWorldRenderer;
-import me.jellysquid.mods.sodium.client.render.chunk.ChunkRenderMatrices;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -18,6 +17,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tfc.smallerunits.sodium.render.SodiumFrustum;
+import tfc.smallerunits.sodium.render.SodiumRenderer;
 
 import java.util.SortedSet;
 
@@ -40,16 +41,6 @@ public abstract class SodiumLevelRendererMixin {
 	public void preRenderSomething(RenderType renderLayer, PoseStack matrixStack, double x, double y, double z, CallbackInfo ci) {
 		SodiumRenderer.render(
 				renderLayer, matrixStack, x, y, z, ci,
-				frustum, client, world, renderSectionManager
-		);
-	}
-
-	@Inject(at = @At("HEAD"), method = "drawChunkLayer", require = 0)
-	public void preRenderSomething_fabric(RenderType renderLayer, ChunkRenderMatrices matrixStack, double x, double y, double z, CallbackInfo ci) {
-		PoseStack stkc = new PoseStack();
-		stkc.last().pose().set(matrixStack.modelView());
-		SodiumRenderer.render(
-				renderLayer, stkc, x, y, z, ci,
 				frustum, client, world, renderSectionManager
 		);
 	}

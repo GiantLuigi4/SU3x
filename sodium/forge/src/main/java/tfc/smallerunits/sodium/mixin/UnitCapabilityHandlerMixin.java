@@ -14,9 +14,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import tfc.smallerunits.core.UnitSpace;
-import tfc.smallerunits.core.client.render.compat.sodium.SodiumGridAttachments;
-import tfc.smallerunits.core.client.render.compat.sodium.SodiumSUAttached;
 import tfc.smallerunits.core.data.capability.SUCapability;
+import tfc.smallerunits.sodium.render.SodiumGridAttachments;
+import tfc.smallerunits.sodium.render.SodiumSUAttached;
 
 @Mixin(value = SUCapability.class, remap = false)
 public class UnitCapabilityHandlerMixin {

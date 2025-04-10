@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tfc.smallerunits.core.utils.config.compat.ClientCompatConfig;
 import tfc.smallerunits.plat.util.PlatformProvider;
+import tfc.smallerunits.sodium.render.SodiumRenderMode;
 
 import java.util.List;
 
@@ -53,8 +53,8 @@ public class SodiumDebugOverlayMixin {
 			
 			if (foundSodium) {
 				strings.add(index, "SU Renderer: " +
-						ClientCompatConfig.RenderCompatOptions.sodiumRenderMode.formatting +
-						ClientCompatConfig.RenderCompatOptions.sodiumRenderMode.f3Text
+						SodiumRenderMode.VANILLA.formatting +
+						SodiumRenderMode.VANILLA.f3Text
 				);
 			}
 		}

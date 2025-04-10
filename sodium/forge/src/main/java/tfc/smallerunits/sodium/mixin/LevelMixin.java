@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.core.client.access.tracking.SUCapableChunk;
 import tfc.smallerunits.core.client.access.tracking.SUCompiledChunkAttachments;
 import tfc.smallerunits.core.client.render.SUChunkRender;
-import tfc.smallerunits.core.client.render.compat.sodium.SodiumGridAttachments;
+import tfc.smallerunits.sodium.render.SodiumGridAttachments;
 
 import java.util.HashMap;
 

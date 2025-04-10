@@ -42,7 +42,6 @@
     "client": [
         "LevelRendererMixin",
         "LevelRendererMixinBlocks",
-        "compat.optimization.sodium.LevelMixin",
         "core.ClientLevelMixin",
         "core.MinecraftMixin",
         "core.MultiPlayerGameModeMixin",
