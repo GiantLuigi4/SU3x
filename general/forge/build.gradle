@@ -1,0 +1,69 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+}
+
+mixin {
+    add(sourceSets.main, "${mod_id}.compat.refmap.json")
+
+    config("${mod_id}.compat.mixins.json")
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+//    validateAccessTransformers = true
+
+    def at = getProject(project, ':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = [at.path]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        client {
+            client()
+        }
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+dependencies {
+    compileOnly getProject(project, ":common")
+    compileOnly project(":common")
+    compileOnly project(":core:core_common")
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    modImplementation ("curse.maven:distant-horizons-508933:5649758")
+    modImplementation ("curse.maven:applied-energistics-2-223794:5641282")
+    modImplementation ("curse.maven:refined-storage-243076:4844585")
+    modImplementation ("curse.maven:integrated-dynamics-236307:5653425")
+    modImplementation ("curse.maven:cyclops-core-232758:5583765")
+    modImplementation ("curse.maven:common-capabilities-247007:5650234")
+    modImplementation ("curse.maven:chisels-bits-231095:5203366")
+    modImplementation ("curse.maven:framedblocks-441647:5629578")
+    modImplementation ("curse.maven:cc-tweaked-282001:5644984")
+}
+
+jar {
+    finalizedBy('reobfJar')
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.compat.mixins.json"
+    ])
+}

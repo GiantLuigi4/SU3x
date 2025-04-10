@@ -1,0 +1,22 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "tfc.smallerunits.general_compat.mixin",
+    "refmap": "${mod_id}.compat.refmap.json",
+    "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+        "chisel_and_bits.ChiselAndBitsMeshMixin",
+        "storage.ae2.IWishThisArrayCouldntBeAccessed",
+        "storage.integrated_dynamics.DimPosMixin",
+        "storage.integrated_dynamics.PacketCodecMixin",
+        "storage.integrated_dynamics.PartPosMixin",
+        "storage.refined_storage.RSNetworkNodeManagerMixin"
+    ],
+    "client": [
+        "distant_horizons.ForgeClientProxyMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}
