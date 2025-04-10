@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.core.simulation.level.ITickerLevel;
 
-@Mixin(ForgeServerProxy.class)
+@Mixin(value = ForgeServerProxy.class, remap = false)
 public class ForgeServerProxyMixin {
     // TODO
     @Inject(at = @At("HEAD"), method = "serverLevelLoadEvent", cancellable = true)

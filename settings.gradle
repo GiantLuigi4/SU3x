@@ -26,6 +26,8 @@ include("common")
 include("fabric")
 include("forge")
 
+include("fat")
+
 File fl = file("subprojects.txt")
 FileInputStream fis = new FileInputStream(fl)
 String data = new String(fis.readAllBytes())
