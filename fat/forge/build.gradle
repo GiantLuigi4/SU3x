@@ -1,13 +1,10 @@
 plugins {
-    id 'multiloader-loader'
+    id 'multiloader-common'
     id 'net.neoforged.moddev.legacyforge'
 }
 
-mixin {
-    add(sourceSets.main, "${mod_id}.core.refmap.json")
-
-    config("${mod_id}.core.mixins.json")
-    config("${mod_id}.core.forge.mixins.json")
+base {
+    archivesName = "smallerunits-forge-mc${minecraft_version}"
 }
 
 legacyForge {
@@ -15,10 +12,6 @@ legacyForge {
 
 //    validateAccessTransformers = true
 
-    def at = getProject(project, ':common').file('src/main/resources/META-INF/accesstransformer.cfg')
-    if (at.exists()) {
-        accessTransformers = [at.path]
-    }
     parchment {
         minecraftVersion = parchment_minecraft
         mappingsVersion = parchment_version
@@ -45,24 +38,15 @@ legacyForge {
 
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
-repositories {
-    flatDir {
-        dirs = ["libs"]
-    }
-}
-
 dependencies {
-    compileOnly getProject(project, ":common")
-    compileOnly project(":common")
-    modImplementation project(":forge")
-    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-
-//    modImplementation ("tfc:su_base_forge:1.1")
+    jarJar(project(":forge"))
+    jarJar(project(":core:core_forge"))
+    jarJar(project(":lithium:lithium_forge"))
+    jarJar(project(":resizing:resizing_forge"))
+    jarJar(project(":sodium:sodium_forge"))
+    jarJar(project(":general:general_forge"))
 }
 
 jar {
     finalizedBy('reobfJar')
-    manifest.attributes([
-            "MixinConfigs": "${mod_id}.core.mixins.json,${mod_id}.core.forge.mixins.json"
-    ])
 }

@@ -26,7 +26,16 @@ include("common")
 include("fabric")
 include("forge")
 
-include("fat")
+if (true) {
+    String txt = "fat"
+
+    for (String suffix in new String[]{"", ":fabric", ":forge"}) {
+        include(txt + suffix)
+        ProjectDescriptor proj = project(":" + txt + suffix)
+        proj.projectDir = file(proj.path.replace(":", "/").replace("_", "/"))
+        proj.name = txt + suffix.replace(":", "_")
+    }
+}
 
 File fl = file("subprojects.txt")
 FileInputStream fis = new FileInputStream(fl)
