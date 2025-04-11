@@ -95,7 +95,7 @@ public class ForgePlatformUtils extends PlatformUtils {
 		SimpleTickerLevel lvl = (SimpleTickerLevel) a;
 		
 		Vec3 pos = pEntity.getPosition(1);
-		BlockPos bp = lvl.getRegion().pos.toBlockPos();
+		BlockPos bp = lvl.getRegion().pos().toBlockPos();
 		pos = pos.scale(1d / lvl.getUPB());
 		pos = pos.add(bp.getX(), bp.getY(), bp.getZ());
 		return new PortalInfo(
@@ -130,7 +130,7 @@ public class ForgePlatformUtils extends PlatformUtils {
 			@Override
 			public PortalInfo getPortalInfo(Entity entity1, ServerLevel destWorld, Function<ServerLevel, PortalInfo> defaultPortalInfo) {
 				Vec3 pos = entity1.getPosition(1);
-				BlockPos bp = ((SimpleTickerLevel) serverLevel).getRegion().pos.toBlockPos();
+				BlockPos bp = ((SimpleTickerLevel) serverLevel).getRegion().pos().toBlockPos();
 				pos = pos.scale(1d / upb);
 				pos = pos.add(bp.getX(), bp.getY(), bp.getZ());
 				return new PortalInfo(

@@ -42,6 +42,7 @@
     "client": [
         "LevelRendererMixin",
         "LevelRendererMixinBlocks",
+        "client.access.LevelRendererAccessor",
         "core.ClientLevelMixin",
         "core.MinecraftMixin",
         "core.MultiPlayerGameModeMixin",

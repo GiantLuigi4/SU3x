@@ -23,6 +23,7 @@ import tfc.smallerunits.core.utils.IHateTheDistCleaner;
 import tfc.smallerunits.core.utils.threading.ThreadLocals;
 import tfc.smallerunits.plat.util.PlatformProvider;
 import tfc.smallerunits.storage.IRegion;
+import tfc.smallerunits.storage.IRegionPos;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -195,5 +196,10 @@ public class Region extends IRegion {
 
     public Level getExistingLevel(int upb) {
         return levels[upb];
+    }
+
+    @Override
+    public IRegionPos pos() {
+        return pos;
     }
 }

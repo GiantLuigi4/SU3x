@@ -1,4 +1,4 @@
- package tfc.smallerunits.flyhweel;
+ package tfc.smallerunits.flywheel;
 
 import net.minecraftforge.fml.common.Mod;
 

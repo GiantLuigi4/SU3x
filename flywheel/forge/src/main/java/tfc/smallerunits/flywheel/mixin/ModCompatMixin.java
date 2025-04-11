@@ -1,4 +1,4 @@
-package tfc.smallerunits.flyhweel.mixin;
+package tfc.smallerunits.flywheel.mixin;
 
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.spongepowered.asm.mixin.Mixin;

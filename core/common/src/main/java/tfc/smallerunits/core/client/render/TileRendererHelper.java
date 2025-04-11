@@ -40,9 +40,9 @@ public class TileRendererHelper {
 			int upb = tkLvl.getUPB();
 			scl = 1f / upb;
 			stk.translate(
-					tkLvl.getRegion().pos.toBlockPos().getX(),
-					tkLvl.getRegion().pos.toBlockPos().getY(),
-					tkLvl.getRegion().pos.toBlockPos().getZ()
+					tkLvl.getRegion().pos().toBlockPos().getX(),
+					tkLvl.getRegion().pos().toBlockPos().getY(),
+					tkLvl.getRegion().pos().toBlockPos().getZ()
 			);
 			stk.scale(scl, scl, scl);
 		}
@@ -371,7 +371,7 @@ public class TileRendererHelper {
 		if (new RegionPos(origin).equals(((AbstractTickerClientLevel) tile.getLevel()).region.pos)) {
 			int y = tile.getBlockPos().getY() / ((AbstractTickerClientLevel) tile.getLevel()).upb;
 			BlockPos regionOrigin = new BlockPos(0, 0, 0);
-			if (tile.getLevel() instanceof SimpleTickerLevel tkLvl) regionOrigin = tkLvl.getRegion().pos.toBlockPos();
+			if (tile.getLevel() instanceof SimpleTickerLevel tkLvl) regionOrigin = tkLvl.getRegion().pos().toBlockPos();
 			y += regionOrigin.getY();
 			
 			if (y < origin.getY() + 16 &&

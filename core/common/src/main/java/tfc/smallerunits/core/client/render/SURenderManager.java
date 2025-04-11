@@ -24,53 +24,54 @@ import tfc.smallerunits.core.utils.selection.MutableAABB;
 import java.util.ArrayList;
 
 public class SURenderManager {
-	public static void drawChunk(SUCompiledChunkAttachments attachments, LevelChunk chunk, Level world, BlockPos positionRendering, RenderType type, IFrustum frustum, double pCamX, double pCamY, double pCamZ, AbstractUniform uniform) {
-		SUChunkRender render = attachments.SU$getChunkRender();
-		drawChunk(render, attachments, chunk, world, positionRendering, type, frustum, pCamX, pCamY, pCamZ, uniform);
-	}
-	public static void drawChunk(SUChunkRender render, SUCompiledChunkAttachments attachments, LevelChunk chunk, Level world, BlockPos positionRendering, RenderType type, IFrustum frustum, double pCamX, double pCamY, double pCamZ, AbstractUniform uniform) {
-		if (chunk instanceof EmptyLevelChunk) return;
-		SUCapableChunk suCapable = ((SUCapableChunk) chunk);
-		ISUCapability capability = SUCapabilityManager.getCapability(chunk);
+    public static void drawChunk(SUCompiledChunkAttachments attachments, LevelChunk chunk, Level world, BlockPos positionRendering, RenderType type, IFrustum frustum, double pCamX, double pCamY, double pCamZ, AbstractUniform uniform) {
+        SUChunkRender render = attachments.SU$getChunkRender();
+        drawChunk(render, attachments, chunk, world, positionRendering, type, frustum, pCamX, pCamY, pCamZ, uniform);
+    }
 
-		if (type.equals(RenderType.solid())) {
-			int yRL = positionRendering.getY();
-			int yRM = positionRendering.getY() + 15;
+    public static void drawChunk(SUChunkRender render, SUCompiledChunkAttachments attachments, LevelChunk chunk, Level world, BlockPos positionRendering, RenderType type, IFrustum frustum, double pCamX, double pCamY, double pCamZ, AbstractUniform uniform) {
+        if (chunk instanceof EmptyLevelChunk) return;
+        SUCapableChunk suCapable = ((SUCapableChunk) chunk);
+        ISUCapability capability = SUCapabilityManager.getCapability(chunk);
 
-			SUVBOEmitter vboEmitter = ((SUCapableWorld) world).getVBOEmitter();
-			// TODO: frustrum check
-			ArrayList<BlockPos> notDrawn = new ArrayList<>();
-			ArrayList<BlockPos> notFreed = new ArrayList<>();
-			for (BlockPos pos : suCapable.SU$dirty()) {
-				if (pos.getY() >= yRL && pos.getY() <= yRM) {
+        if (type.equals(RenderType.solid())) {
+            int yRL = positionRendering.getY();
+            int yRM = positionRendering.getY() + 15;
+
+            SUVBOEmitter vboEmitter = ((SUCapableWorld) world).getVBOEmitter();
+            // TODO: frustrum check
+            ArrayList<BlockPos> notDrawn = new ArrayList<>();
+            ArrayList<BlockPos> notFreed = new ArrayList<>();
+            for (BlockPos pos : suCapable.SU$dirty()) {
+                if (pos.getY() >= yRL && pos.getY() <= yRM) {
                     if (!frustum.test(new AABB(pos)))
                         notDrawn.add(pos);
                     else render.addBuffers(pos, vboEmitter.genBuffers(chunk, suCapable, capability, pos));
                 } else notDrawn.add(pos);
-			}
-			for (BlockPos pos : suCapable.SU$toRemove()) {
-				if (pos.getY() >= yRL || pos.getY() < yRM) {
+            }
+            for (BlockPos pos : suCapable.SU$toRemove()) {
+                if (pos.getY() >= yRL || pos.getY() < yRM) {
                     render.freeBuffers(pos, vboEmitter);
                 } else notFreed.add(pos);
-			}
-			suCapable.SU$reset(notDrawn, notFreed);
+            }
+            suCapable.SU$reset(notDrawn, notFreed);
 
-			if (attachments.needsCull()) {
-				MutableAABB bounds = new MutableAABB(0, 0, 0, 0, 0, 0);
-				render.performCull(bounds, frustum);
-			}
-		}
+            if (attachments.needsCull()) {
+                MutableAABB bounds = new MutableAABB(0, 0, 0, 0, 0, 0);
+                render.performCull(bounds, frustum);
+            }
+        }
 
-		render.draw(type, uniform);
-	}
+        render.draw(type, uniform);
+    }
 
-	public static void drawEntity(LevelRenderer renderer, Level lvl, PoseStack stk, Camera cam, float pct, MultiBufferSource buffers, Entity entity) {
-		// TODO: glowing
-		((LevelRendererAccessor)renderer).invokeRenderEntity(
-				entity,
-				0, 0, 0,
-				pct, stk,
-				buffers
-		);
-	}
+    public static void drawEntity(LevelRenderer renderer, Level lvl, PoseStack stk, Camera cam, float pct, MultiBufferSource buffers, Entity entity) {
+        // TODO: glowing
+        ((LevelRendererAccessor) renderer).invokeRenderEntity(
+                entity,
+                0, 0, 0,
+                pct, stk,
+                buffers
+        );
+    }
 }

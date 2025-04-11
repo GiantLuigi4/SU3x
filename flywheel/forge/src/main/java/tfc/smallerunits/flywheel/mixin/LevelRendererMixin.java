@@ -1,4 +1,4 @@
-package tfc.smallerunits.flyhweel.mixin;
+package tfc.smallerunits.flywheel.mixin;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;

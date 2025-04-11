@@ -1,4 +1,4 @@
-package tfc.smallerunits.flyhweel.mixin;
+package tfc.smallerunits.flywheel.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.RenderType;

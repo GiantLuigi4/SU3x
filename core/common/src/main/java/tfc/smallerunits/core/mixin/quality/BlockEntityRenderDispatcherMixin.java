@@ -37,9 +37,9 @@ public class BlockEntityRenderDispatcherMixin<T extends BlockEntity> {
 		if (be.getLevel() instanceof SimpleTickerLevel tkLvl) {
 			Vec3 pos = camera.getPosition();
 			// TODO: test
-			mv3.x = (pos.x - tkLvl.getRegion().pos.toBlockPos().getX()) * (double) tkLvl.getUPB();
-			mv3.y = (pos.y - tkLvl.getRegion().pos.toBlockPos().getY()) * (double) tkLvl.getUPB();
-			mv3.z = (pos.z - tkLvl.getRegion().pos.toBlockPos().getZ()) * (double) tkLvl.getUPB();
+			mv3.x = (pos.x - tkLvl.getRegion().pos().toBlockPos().getX()) * (double) tkLvl.getUPB();
+			mv3.y = (pos.y - tkLvl.getRegion().pos().toBlockPos().getY()) * (double) tkLvl.getUPB();
+			mv3.z = (pos.z - tkLvl.getRegion().pos().toBlockPos().getZ()) * (double) tkLvl.getUPB();
 			return mv3;
 		}
 		return camera.getPosition();
