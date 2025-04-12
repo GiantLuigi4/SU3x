@@ -18,6 +18,8 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.fml.LogicalSide;
 import tfc.smallerunits.plat.internal.ToolProvider;
 
+import java.util.Objects;
+
 public class ForgePlatformUtilsClient extends PlatformUtilsClient {
 	public void postTick(ClientLevel fakeClientLevel) {
 		MinecraftForge.EVENT_BUS.post(new TickEvent.LevelTickEvent(LogicalSide.CLIENT, TickEvent.Phase.END, fakeClientLevel, () -> true));
@@ -54,5 +56,9 @@ public class ForgePlatformUtilsClient extends PlatformUtilsClient {
 	public ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk) {
 		ToolProvider.currentRenderChunk.set(chunk);
 		return chunk;
+	}
+
+	public void updateModelData(ClientLevel level, BlockEntity be) {
+		Objects.requireNonNull(level.getModelDataManager()).requestRefresh(be);
 	}
 }

@@ -36,7 +36,7 @@ legacyForge {
     }
 
     mods {
-        "${mod_id}" {
+        "${mod_id}_base" {
             sourceSet sourceSets.main
         }
     }

@@ -12,14 +12,14 @@ public class PlatformProviderMixin {
     @Shadow
     @Mutable
     public static PlatformUtils UTILS;
-    @Final
-    @Shadow
-    @Mutable
-    public static PlatformUtilsClient UTILS_CLIENT;
+//    @Final
+//    @Shadow
+//    @Mutable
+//    public static PlatformUtilsClient UTILS_CLIENT;
 
     static {
         UTILS = new ForgePlatformUtils();
-        UTILS_CLIENT = new ForgePlatformUtilsClient();
+//        if (UTILS.isClient()) UTILS_CLIENT = new ForgePlatformUtilsClient();
     }
 
     /**

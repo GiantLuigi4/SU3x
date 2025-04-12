@@ -39,4 +39,6 @@ public abstract class PlatformUtilsClient {
     public abstract SoundType getSoundType(BlockState blockstate, ClientLevel tickerClientLevel, BlockPos pPos);
 
     public abstract ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk);
+
+    public abstract void updateModelData(ClientLevel level, BlockEntity be);
 }

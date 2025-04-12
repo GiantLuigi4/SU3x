@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 public class PlatformProvider {
     public static final PlatformUtils UTILS = null;
-    public static final PlatformUtilsClient UTILS_CLIENT = null;
+//    public static final PlatformUtilsClient UTILS_CLIENT = null;
 
     public static SUTabBuilder makeTabBuilder(String name, Supplier<ItemStack> icon) {
         throw new RuntimeException("Check platform mixins");

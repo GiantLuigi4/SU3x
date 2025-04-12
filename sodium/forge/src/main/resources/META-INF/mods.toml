@@ -9,9 +9,9 @@ displayName = "${mod_name} (Sodium Support)" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional (see https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/)
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional (displayed in the mod UI)
 logoFile = "${mod_id}.png" #optional (needs to be in the root of your mod jar (root of your 'resources' folder))
-credits = "Support for sodium/embeddium" #optional
+credits = '''${credits}''' #optional
 authors = "${mod_author}" #optional
-description = '''${description}''' #mandatory (Supports multiline text)
+description = '''Support for sodium/embeddium''' #mandatory (Supports multiline text)
 [[dependencies.${mod_id}]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory

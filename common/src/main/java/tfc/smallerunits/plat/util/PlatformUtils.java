@@ -2,7 +2,6 @@ package tfc.smallerunits.plat.util;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -158,8 +157,6 @@ public abstract class PlatformUtils {
     public abstract void customPayload(ClientboundCustomPayloadPacket clientboundCustomPayloadPacket, Object context, PacketListener listener);
 
     public abstract void injectCrashReport(String smallerUnits, Supplier<String> o);
-
-    public abstract void updateModelData(ClientLevel level, BlockEntity be);
 
     public abstract int getLightEmission(BlockState state, BlockGetter level, BlockPos pPos);
 

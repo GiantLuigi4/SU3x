@@ -2,7 +2,6 @@ package tfc.smallerunits.plat.util;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
@@ -48,7 +47,6 @@ import tfc.smallerunits.plat.internal.ToolProvider;
 import tfc.smallerunits.plat.itf.CapabilityLike;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -238,10 +236,6 @@ public class ForgePlatformUtils extends PlatformUtils {
 	
 	public void injectCrashReport(String smallerUnits, Supplier<String> o) {
 		CrashReportCallables.registerCrashCallable("Smaller Units", o);
-	}
-	
-	public void updateModelData(ClientLevel level, BlockEntity be) {
-		Objects.requireNonNull(level.getModelDataManager()).requestRefresh(be);
 	}
 	
 	public int getLightEmission(BlockState state, BlockGetter level, BlockPos pPos) {

@@ -10,6 +10,9 @@ mixin {
     config("${mod_id}.core.forge.mixins.json")
 }
 
+evaluationDependsOn(":common")
+evaluationDependsOn(":forge")
+
 legacyForge {
     version = "${minecraft_version}-${forge_version}"
 
@@ -33,12 +36,24 @@ legacyForge {
         }
         server {
             server()
+            mixin {
+                config("${mod_id}.platform.forge.mixins.json")
+            }
         }
     }
 
     mods {
         "${mod_id}" {
             sourceSet sourceSets.main
+        }
+
+        project(":forge").legacyForge.mods.forEach { mod ->
+            project(":core:core_forge").legacyForge.mods.add(mod)
+        }
+
+        println("LIST MODS")
+        forEach { mod ->
+            println(mod.name)
         }
     }
 }
@@ -56,8 +71,6 @@ dependencies {
     compileOnly project(":common")
     modImplementation project(":forge")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
-
-//    modImplementation ("tfc:su_base_forge:1.1")
 }
 
 jar {

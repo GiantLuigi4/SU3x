@@ -8,6 +8,7 @@
   "mixins": [
     "self_impl.AbstractItemMixin",
     "self_impl.AnnoCfgMixin",
+    "self_impl.PlatformProviderClientMixin",
     "self_impl.PlatformProviderMixin",
     "self_impl.PlatformRegistryMixin",
     "self_impl.network.NetworkRegisterMixin",
