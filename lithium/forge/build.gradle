@@ -4,9 +4,9 @@ plugins {
 }
 
 mixin {
-    add(sourceSets.main, "${mod_id}.canary.refmap.json")
+    add(sourceSets.main, "${mod_base_id}.canary.refmap.json")
 
-    config("${mod_id}.canary.mixins.json")
+    config("${mod_base_id}.canary.mixins.json")
 }
 
 legacyForge {
@@ -56,6 +56,6 @@ dependencies {
 jar {
     finalizedBy('reobfJar')
     manifest.attributes([
-            "MixinConfigs": "${mod_id}.canary.mixins.json"
+            "MixinConfigs": "${mod_base_id}.canary.mixins.json"
     ])
 }

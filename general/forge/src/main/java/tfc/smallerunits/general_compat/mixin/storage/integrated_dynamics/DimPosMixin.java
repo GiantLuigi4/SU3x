@@ -1,7 +1,5 @@
 package tfc.smallerunits.general_compat.mixin.storage.integrated_dynamics;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -20,6 +18,7 @@ import tfc.smallerunits.core.data.storage.Region;
 import tfc.smallerunits.core.data.tracking.RegionalAttachments;
 import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.core.simulation.level.ITickerLevel;
+import tfc.smallerunits.core.utils.IHateTheDistCleaner;
 
 import java.lang.ref.WeakReference;
 
@@ -47,7 +46,7 @@ public abstract class DimPosMixin implements LevelDescripted {
     @Unique
     protected Level getLvl() {
         if (MinecraftHelpers.isClientSideThread()) {
-            ClientLevel world = Minecraft.getInstance().level;
+            Level world = IHateTheDistCleaner.getClientLevel();
             if (world != null && world.dimension().location().toString().equals(this.getLevel())) {
                 this.worldReference = new WeakReference(world);
                 return this.worldReference.get();

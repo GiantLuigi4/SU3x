@@ -1,6 +1,12 @@
 package tfc.smallerunits.flywheel.mixin;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.engine_room.flywheel.api.visualization.VisualizationManager;
+import dev.engine_room.flywheel.impl.event.RenderContextImpl;
+import dev.engine_room.flywheel.impl.visualization.VisualizationManagerImpl;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -37,12 +43,25 @@ public class CModCompatMixin {
 //                }
 //            }
 //        }
+        VisualizationManager manager = VisualizationManagerImpl.get(level);
+        RenderContextImpl ctx = new RenderContextImpl(
+                Minecraft.getInstance().levelRenderer,
+                (ClientLevel) level,
+                Minecraft.getInstance().renderBuffers(),
+                poseStack,
+                RenderSystem.getProjectionMatrix(),
+                RenderSystem.getModelViewMatrix(),
+                Minecraft.getInstance().getEntityRenderDispatcher().camera,
+                0
+        );
+
+        manager.renderDispatcher().afterEntities(ctx);
     }
 
     @Inject(at = @At("HEAD"), method = "drawBE", cancellable = true)
     private static void preDrawBE(BlockEntity be, BlockPos origin, IFrustum frustum, PoseStack stk, float tickDelta, CallbackInfo ci) {
-//        if (BackendManager.isBackendOn()) {
-//        }
+        VisualizationManager manager = VisualizationManagerImpl.get(be.getLevel());
+
 //        if (Backend.isOn())
 //            if (Backend.canUseInstancing(be.getLevel()))
 //                if (InstancedRenderRegistry.canInstance(be.getType()))

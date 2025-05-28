@@ -2,7 +2,7 @@
     "required": true,
     "minVersion": "0.8",
     "package": "tfc.smallerunits.general_compat.mixin",
-    "refmap": "${mod_id}.compat.refmap.json",
+    "refmap": "${mod_base_id}.compat.refmap.json",
     "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
     "compatibilityLevel": "JAVA_17",
     "mixins": [

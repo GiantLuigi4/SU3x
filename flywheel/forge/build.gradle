@@ -4,10 +4,13 @@ plugins {
 }
 
 mixin {
-    add(sourceSets.main, "${mod_id}.flywheel.refmap.json")
+    add(sourceSets.main, "${mod_base_id}.flywheel.refmap.json")
 
-    config("${mod_id}.flywheel.mixins.json")
+    config("${mod_base_id}.flywheel.mixins.json")
 }
+
+evaluationDependsOn(':forge')
+evaluationDependsOn(':core:core_forge')
 
 legacyForge {
     version = "${minecraft_version}-${forge_version}"
@@ -39,6 +42,19 @@ legacyForge {
         "${mod_id}" {
             sourceSet sourceSets.main
         }
+
+        project(":forge").legacyForge.mods.forEach { mod ->
+            project(":flywheel:flywheel_forge").legacyForge.mods.add(mod)
+        }
+
+        project(":core:core_forge").legacyForge.mods.forEach { mod ->
+            project(":flywheel:flywheel_forge").legacyForge.mods.add(mod)
+        }
+
+        println("LIST MODS")
+        forEach { mod ->
+            println(mod.name)
+        }
     }
 }
 
@@ -55,6 +71,10 @@ dependencies {
     compileOnly getProject(project, ":common")
     compileOnly project(":common")
     compileOnly project(":core:core_common")
+
+    modImplementation project(":forge")
+    modImplementation project(":core:core_forge")
+
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     modImplementation ("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:1.0.4-beta-232")
@@ -64,6 +84,6 @@ dependencies {
 jar {
     finalizedBy('reobfJar')
     manifest.attributes([
-            "MixinConfigs": "${mod_id}.flywheel.mixins.json"
+            "MixinConfigs": "${mod_base_id}.flywheel.mixins.json"
     ])
 }

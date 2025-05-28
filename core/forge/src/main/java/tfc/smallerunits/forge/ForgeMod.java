@@ -17,7 +17,7 @@ import tfc.smallerunits.core.SmallerUnits;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-@Mod("smallerunits")
+@Mod("smallerunits_core")
 public class ForgeMod extends SmallerUnits {
 	IEventBus forgeBus;
 	IEventBus modBus;

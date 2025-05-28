@@ -2,7 +2,7 @@
     "required": true,
     "minVersion": "0.8",
     "package": "tfc.smallerunits.sodium.mixin",
-    "refmap": "${mod_id}.flywheel.refmap.json",
+    "refmap": "${mod_base_id}.flywheel.refmap.json",
     "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
     "compatibilityLevel": "JAVA_17",
     "mixins": [

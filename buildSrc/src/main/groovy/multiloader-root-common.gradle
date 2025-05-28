@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-mod_id = "${mod_id}_${project.parent.name}"
+mod_id = "${mod_base_id}"
 base {
 //    archivesName = "${mod_id}-${project.name}-${minecraft_version}"
     archivesName = "${mod_id.replace("_", "-")}-${minecraft_version}"

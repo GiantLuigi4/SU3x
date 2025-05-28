@@ -4,9 +4,9 @@ plugins {
 }
 
 mixin {
-    add(sourceSets.main, "${mod_id}.resizing.refmap.json")
+    add(sourceSets.main, "${mod_base_id}.resizing.refmap.json")
 
-    config("${mod_id}.resizing.mixins.json")
+    config("${mod_base_id}.resizing.mixins.json")
 }
 
 legacyForge {
@@ -56,6 +56,6 @@ dependencies {
 jar {
     finalizedBy('reobfJar')
     manifest.attributes([
-            "MixinConfigs": "${mod_id}.resizing.mixins.json"
+            "MixinConfigs": "${mod_base_id}.resizing.mixins.json"
     ])
 }
