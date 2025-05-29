@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.core.data.storage.Region;
 import tfc.smallerunits.core.data.storage.RegionPos;
+import tfc.smallerunits.core.data.tracking.RegionClosable;
 import tfc.smallerunits.core.data.tracking.RegionalAttachments;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @Mixin(ClientLevel.class)
-public class ClientLevelMixin implements RegionalAttachments {
+public class ClientLevelMixin implements RegionalAttachments, RegionClosable {
 	@Unique
 	private final HashMap<RegionPos, Region> regionMap = new HashMap<>();
 	
@@ -67,5 +68,19 @@ public class ClientLevelMixin implements RegionalAttachments {
 		Region r = regionMap.getOrDefault(pos, null);
 		if (r == null) regionMap.put(pos, r = new Region(pos));
 		regionHandler.accept(pos, r);
+	}
+
+	@Unique
+	boolean SU$closed = false;
+
+	@Override
+	public void closeSURegions() {
+		if (!SU$closed) {
+			SU$closed = true;
+			for (Region value : regionMap.values()) {
+				value.close();
+			}
+			regionMap.clear();
+		}
 	}
 }

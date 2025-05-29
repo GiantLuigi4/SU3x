@@ -7,6 +7,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ChunkEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -139,5 +140,16 @@ public class ForgeMod extends SmallerUnits {
 	@Override
 	public void registerCapabilities() {
 		modBus.addListener(CapabilityProvider::onRegisterCapabilities);
+	}
+
+	@Override
+	public void onWorldUnload(Consumer<LevelAccessor> consumer) {
+		forgeBus.addListener(
+				EventPriority.NORMAL, true,
+				LevelEvent.Unload.class,
+				(evt) -> {
+					consumer.accept(evt.getLevel());
+				}
+		);
 	}
 }

@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.core.data.storage.Region;
 import tfc.smallerunits.core.data.storage.RegionPos;
+import tfc.smallerunits.core.data.tracking.RegionClosable;
 import tfc.smallerunits.core.data.tracking.RegionalAttachments;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @Mixin(ChunkMap.class)
-public class ChunkMapMixin implements RegionalAttachments {
+public class ChunkMapMixin implements RegionalAttachments, RegionClosable {
 	@Unique
 	private final HashMap<RegionPos, Region> regionMap = new HashMap<>();
 	
@@ -82,12 +83,29 @@ public class ChunkMapMixin implements RegionalAttachments {
 		if (r == null) regionMap.put(pos, r = new Region(pos));
 		regionHandler.accept(pos, r);
 	}
-	
+
+	@Unique
+	boolean SU$closed = false;
+
 	@Inject(at = @At("HEAD"), method = "close")
 	public void preClose(CallbackInfo ci) {
-		for (Region value : regionMap.values()) {
-			value.close();
+		if (!SU$closed) {
+			SU$closed = true;
+			for (Region value : regionMap.values()) {
+				value.close();
+			}
+			regionMap.clear();
 		}
-		regionMap.clear();
+	}
+
+	@Override
+	public void closeSURegions() {
+		if (!SU$closed) {
+			SU$closed = true;
+			for (Region value : regionMap.values()) {
+				value.close();
+			}
+			regionMap.clear();
+		}
 	}
 }

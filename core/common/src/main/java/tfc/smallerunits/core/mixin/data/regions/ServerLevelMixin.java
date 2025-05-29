@@ -7,13 +7,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import tfc.smallerunits.core.data.storage.Region;
 import tfc.smallerunits.core.data.storage.RegionPos;
+import tfc.smallerunits.core.data.tracking.RegionClosable;
 import tfc.smallerunits.core.data.tracking.RegionalAttachments;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
 
 @Mixin(ServerLevel.class)
-public class ServerLevelMixin implements RegionalAttachments {
+public class ServerLevelMixin implements RegionalAttachments, RegionClosable {
 	@Shadow
 	public ServerChunkCache chunkSource;
 	
@@ -30,5 +31,10 @@ public class ServerLevelMixin implements RegionalAttachments {
 	@Override
 	public Map<RegionPos, Region> SU$getRegionMap() {
 		return ((RegionalAttachments) chunkSource.chunkMap).SU$getRegionMap();
+	}
+
+	@Override
+	public void closeSURegions() {
+		((RegionClosable) chunkSource.chunkMap).closeSURegions();;
 	}
 }

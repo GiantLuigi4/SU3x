@@ -9,10 +9,12 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
+import tfc.smallerunits.core.client.access.tracking.SUVBOEmittingWorld;
 import tfc.smallerunits.core.crafting.CraftingRegistry;
 import tfc.smallerunits.core.data.capability.ISUCapability;
 import tfc.smallerunits.core.data.capability.SUCapabilityManager;
 import tfc.smallerunits.core.data.storage.Region;
+import tfc.smallerunits.core.data.tracking.RegionClosable;
 import tfc.smallerunits.core.data.tracking.RegionalAttachments;
 import tfc.smallerunits.core.networking.SUNetworkRegistry;
 import tfc.smallerunits.core.networking.hackery.InfoRegistry;
@@ -51,12 +53,12 @@ public abstract class SmallerUnits extends AbstractMod {
 			PlatformProvider.UTILS.isLoaded("embeddium") ||
 			PlatformProvider.UTILS.isLoaded("magnesium")
 			;
-	
+
 	private static final boolean isImmPrtlPresent = PlatformProvider.UTILS.isLoaded("imm_ptl_core");
 
 	public SmallerUnits() {
 		prepare();
-		
+
 		SUNetworkRegistry.init();
 		/* registries */
 		Registry.BLOCK_REGISTER.register();
@@ -107,8 +109,17 @@ public abstract class SmallerUnits extends AbstractMod {
 		}
 
 		registerTick(TickType.SERVER, Phase.END, SmallerUnits::onTick);
+
+		onWorldUnload((level) -> {
+			if (level instanceof RegionClosable closable) {
+				closable.closeSURegions();
+			}
+			if (level instanceof SUVBOEmittingWorld emittingWorld) {
+				emittingWorld.freeSUEmitter();
+			}
+		});
 	}
-	
+
 	private static final ArrayDeque<Runnable> enqueued = new ArrayDeque<>();
 
 	// this ended up being necessary, as without it, furnaces can end up deadlocing world loading
@@ -169,11 +180,11 @@ public abstract class SmallerUnits extends AbstractMod {
 	public static boolean isImmersivePortalsPresent() {
 		return isImmPrtlPresent;
 	}
-	
+
 	private void setupCfg() {
 		PlatformProvider.UTILS.delayConfigInit(null);
 	}
-	
+
 	private void setup() {
 		setupCfg();
 	}
@@ -185,7 +196,7 @@ public abstract class SmallerUnits extends AbstractMod {
 	public static boolean isIsOFPresent() {
 		return isOFPresent;
 	}
-	
+
 	public static boolean isSodiumPresent() {
 		return isSodiumPresent;
 	}
