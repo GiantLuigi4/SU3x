@@ -18,7 +18,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.BlockDestructionProgress;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.phys.AABB;
@@ -204,19 +203,23 @@ public class SodiumRenderer {
 		}
 		stk.popPose();
 
-		synchronized (capable.getTiles()) {
-			BlockEntity[] bes = new BlockEntity[0];
-			// TODO: debug????
-			try {
-				bes = capable.getTiles().toArray(bes);
-			} catch (Throwable ignored) {
-			}
-			for (BlockEntity tile : bes)
-				ModCompatClient.drawBE(
-						tile, origin, frustum,
-						stk, tickDelta
-				);
-		}
+//		synchronized (capable.getTiles()) {
+//			BlockEntity[] bes = new BlockEntity[0];
+//			// TODO: debug????
+//			try {
+//				bes = capable.getTiles().toArray(bes);
+//			} catch (Throwable ignored) {
+//			}
+//			for (BlockEntity tile : bes)
+//				ModCompatClient.drawBE(
+//						tile, origin, frustum,
+//						stk, tickDelta
+//				);
+//		}
+		((SUCompiledChunkAttachments) instance).SU$getChunkRender().drawBEs(
+				origin, stk,
+				frustum, tickDelta
+		);
 	}
 
 	public static void renderTEs(PoseStack matrices, RenderBuffers bufferBuilders, Long2ObjectMap<SortedSet<BlockDestructionProgress>> blockBreakingProgressions, Camera camera, float tickDelta, CallbackInfo ci, SodiumFrustum frustum, Minecraft client, ClientLevel level, RenderSectionManager renderSectionManager) {

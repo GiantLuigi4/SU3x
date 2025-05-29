@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -52,7 +51,7 @@ public abstract class LevelRendererMixinBlocks {
 	@Shadow
 	@Final
 	private BlockEntityRenderDispatcher blockEntityRenderDispatcher;
-	
+
 	@Shadow
 	private @Nullable Frustum capturedFrustum;
 	@Shadow
@@ -63,59 +62,59 @@ public abstract class LevelRendererMixinBlocks {
 	@Shadow
 	@Final
 	private Minecraft minecraft;
-	
+
 	@Shadow
 	protected abstract void renderChunkLayer(RenderType p_172994_, PoseStack p_172995_, double p_172996_, double p_172997_, double p_172998_, Matrix4f p_172999_);
 
 	@Shadow @Final private ObjectArrayList<LevelRenderer.RenderChunkInfo> renderChunksInFrustum;
 	@Unique
 	double pCamX, pCamY, pCamZ;
-	
+
 	@Inject(at = @At("HEAD"), method = "renderChunkLayer")
 	public void preStartDraw(RenderType j, PoseStack d0, double d1, double d2, double i, Matrix4f k, CallbackInfo ci) {
 		pCamX = d1;
 		pCamY = d2;
 		pCamZ = i;
 	}
-	
+
 	@Unique
 	VanillaFrustum SU$Frustum = new VanillaFrustum();
 	@Unique
 	float pct;
-	
+
 	@Inject(at = @At("HEAD"), method = "renderLevel")
 	public void preDrawLevel(PoseStack pPoseStack, float pPartialTick, long pFinishNanoTime, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pProjectionMatrix, CallbackInfo ci) {
 		pct = pPartialTick;
 	}
-	
+
 	@Inject(at = @At("HEAD"), method = "checkPoseStack")
 	public void preCheckMatrices(PoseStack pPoseStack, CallbackInfo ci) {
 		stk = pPoseStack;
 	}
-	
+
 	@Redirect(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$RenderChunk;getCompiledChunk()Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;"))
 	public ChunkRenderDispatcher.CompiledChunk preGetCompiledChunk(ChunkRenderDispatcher.RenderChunk instance) {
 		BlockPos origin = instance.getOrigin();
 		ChunkRenderDispatcher.CompiledChunk chunk = instance.compiled.get();
 		SUCapableChunk capable = ((SUCompiledChunkAttachments) chunk).getSUCapable();
-		
+
 		if (capable == null)
 			((SUCompiledChunkAttachments) chunk).setSUCapable(origin.getY(), capable = ((SUCapableChunk) level.getChunk(origin)));
-		
+
 		ISUCapability capability = SUCapabilityManager.getCapability((LevelChunk) capable);
 		if (capability == null) return instance.getCompiledChunk();
-		
+
 		UnitSpace[] spaces = capability.getUnits();
 		// no reason to do SU related rendering in chunks where SU has not been used
 		if (spaces.length == 0) return instance.getCompiledChunk();
-		
+
 		Frustum frustum = capturedFrustum != null ? capturedFrustum : cullingFrustum;
 		SU$Frustum.set(frustum);
-		
+
 		stk.pushPose();
 		Vec3 cam = Minecraft.getInstance().getEntityRenderDispatcher().camera.getPosition();
 		stk.translate(origin.getX() - cam.x, origin.getY() - cam.y, origin.getZ() - cam.z);
-		
+
 		/* draw indicators */
 		RenderType.solid().setupRenderState();
 		ShaderInstance shader = GameRenderer.getPositionColorShader();
@@ -128,7 +127,7 @@ public abstract class LevelRendererMixinBlocks {
 			shader.PROJECTION_MATRIX.upload();
 		}
 		TileRendererHelper.markNewFrame();
-		
+
 		boolean hammerHeld = IHateTheDistCleaner.isHammerHeld();
 		for (UnitSpace unit : spaces) {
 			if (AssortedQol.isInSection(unit, origin)) {
@@ -158,14 +157,14 @@ public abstract class LevelRendererMixinBlocks {
 				stk.popPose();
 			}
 		}
-		
+
 		shader.COLOR_MODULATOR.set(RenderSystem.getShaderColor());
 		shader.COLOR_MODULATOR.upload();
-		
+
 		VertexBuffer.unbind();
 		shader.clear();
 		RenderType.solid().clearRenderState();
-		
+
 		/* breaking overlays */
 		for (UnitSpace unit : capability.getUnits()) {
 			if (unit != null) {
@@ -183,45 +182,30 @@ public abstract class LevelRendererMixinBlocks {
 				}
 			}
 		}
-		
-		synchronized (capable.getTiles()) {
-			BlockEntity[] bes = new BlockEntity[0];
-			// TODO: debug????
-			try {
-				bes = capable.getTiles().toArray(bes);
-			} catch (Throwable ignored) {
-			}
-			stk.pushPose();
-			stk.translate(-origin.getX(), -origin.getY(), -origin.getZ());
-			for (BlockEntity tile : bes)
-				ModCompatClient.drawBE(
-						tile, origin, SU$Frustum,
-						stk, pct
-				);
-			stk.popPose();
-		}
+
+		((SUCompiledChunkAttachments) chunk).SU$getChunkRender().drawBEs(origin, stk, SU$Frustum, pct);
 		stk.popPose();
-		
+
 		return instance.getCompiledChunk();
 	}
-	
+
 	@Redirect(method = "renderChunkLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;isEmpty(Lnet/minecraft/client/renderer/RenderType;)Z"))
 	public boolean preDrawLayer(ChunkRenderDispatcher.CompiledChunk instance, RenderType pRenderType) {
 		ShaderInstance shaderinstance = RenderSystem.getShader();
 		Uniform uniform = shaderinstance.CHUNK_OFFSET;
-		
+
 		BlockPos origin = ToolProvider.currentRenderChunk.get().getOrigin();
 		ChunkRenderDispatcher.CompiledChunk chunk = ToolProvider.currentRenderChunk.get().compiled.get();
 		SUCapableChunk capable = ((SUCompiledChunkAttachments) chunk).getSUCapable();
-		
+
 		if (capable == null)
 			((SUCompiledChunkAttachments) chunk).setSUCapable(origin.getY(), capable = ((SUCapableChunk) level.getChunk(origin)));
 
 //		if (!capable.SU$getChunkRender().hasBuffers()) return instance.isEmpty(pRenderType);
-		
+
 		if (uniform != null)
 			uniform.set((float) ((double) origin.getX() - pCamX), (float) ((double) origin.getY() - pCamY), (float) ((double) origin.getZ() - pCamZ));
-		
+
 		SU$Frustum.set(capturedFrustum != null ? capturedFrustum : cullingFrustum);
 		SURenderManager.drawChunk(((SUCompiledChunkAttachments) chunk), ((LevelChunk) capable), level, ToolProvider.currentRenderChunk.get().getOrigin(), pRenderType, SU$Frustum, pCamX, pCamY, pCamZ, uniform);
 		return instance.isEmpty(pRenderType);

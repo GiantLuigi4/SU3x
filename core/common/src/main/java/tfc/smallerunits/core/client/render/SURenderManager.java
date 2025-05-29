@@ -46,7 +46,11 @@ public class SURenderManager {
                 if (pos.getY() >= yRL && pos.getY() <= yRM) {
                     if (!frustum.test(new AABB(pos)))
                         notDrawn.add(pos);
-                    else render.addBuffers(pos, vboEmitter.genBuffers(chunk, suCapable, capability, pos));
+                    else render.addBuffers(
+                            pos,
+                            vboEmitter.collectBEs(chunk, suCapable, capability, pos),
+                            vboEmitter.genBuffers(chunk, suCapable, capability, pos)
+                    );
                 } else notDrawn.add(pos);
             }
             for (BlockPos pos : suCapable.SU$toRemove()) {
