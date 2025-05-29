@@ -3,7 +3,7 @@
     "minVersion": "0.8",
     "package": "tfc.smallerunits.general_compat.mixin",
     "refmap": "${mod_base_id}.compat.refmap.json",
-    "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
+    "plugin": "tfc.smallerunits.general_compat.MixinConnector",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "chisel_and_bits.ChiselAndBitsMeshMixin",

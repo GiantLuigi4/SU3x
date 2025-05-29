@@ -3,7 +3,7 @@
     "minVersion": "0.8",
     "package": "tfc.smallerunits.flywheel.mixin",
     "refmap": "${mod_base_id}.flywheel.refmap.json",
-    "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
+    "plugin": "tfc.smallerunits.flywheel.MixinConnector",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
     ],

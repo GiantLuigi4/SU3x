@@ -50,3 +50,12 @@ dependencies {
 jar {
     finalizedBy('reobfJar')
 }
+
+tasks.build.dependsOn(
+        project(":forge").tasks.build,
+        project(":core:core_forge").tasks.build,
+        project(":lithium:lithium_forge").tasks.build,
+        project(":resizing:resizing_forge").tasks.build,
+        project(":sodium:sodium_forge").tasks.build,
+        project(":general:general_forge").tasks.build,
+)

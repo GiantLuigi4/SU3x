@@ -1,4 +1,4 @@
-package tfc.smallerunits.canary.mixin;
+package tfc.smallerunits.lithium.mixin.canary;
 
 import com.abdelaziz.canary.common.entity.CanaryEntityCollisions;
 import com.abdelaziz.canary.common.util.Pos;

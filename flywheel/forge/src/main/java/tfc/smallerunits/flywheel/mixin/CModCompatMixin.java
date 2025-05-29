@@ -19,9 +19,11 @@ public class CModCompatMixin {
     private static <T extends BlockEntity> void preDrawBE(T be, BlockPos origin, IFrustum frustum, PoseStack stk, float tickDelta, CallbackInfo ci) {
         if (BackendManager.isBackendOn()) {
             BlockEntityVisualizer<? super T> visualizer = (BlockEntityVisualizer<? super T>) VisualizerRegistry.getVisualizer(be.getType());
-            if (visualizer.skipVanillaRender(be)) {
-                ci.cancel();
-            }
+            // if there is no visualizer, then the render shouldn't be skipped
+            if (visualizer == null) return;
+
+            // elsewise, skip if the visualizer wants to skip
+            if (visualizer.skipVanillaRender(be)) ci.cancel();
         }
     }
 }

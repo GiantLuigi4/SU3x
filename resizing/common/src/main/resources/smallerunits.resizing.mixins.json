@@ -3,7 +3,6 @@
     "minVersion": "0.8",
     "package": "tfc.smallerunits.resizing.mixin",
     "refmap": "${mod_id}.resizing.refmap.json",
-    "plugin": "tfc.smallerunits.plat.asm.MixinConnector",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
         "ToolProviderMixin"

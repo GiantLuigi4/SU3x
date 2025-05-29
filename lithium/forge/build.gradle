@@ -51,6 +51,7 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     modImplementation "curse.maven:canary-665658:5089991"
+    modImplementation "curse.maven:radium-reforged-570017:5706069"
 }
 
 jar {

@@ -22,7 +22,7 @@ public class RegionMixin {
         VisualizationManager manager = VisualizationManagerImpl.get(parent);
         Minecraft.getInstance().level = level;
         if (manager == null) {
-            System.out.println(parent);
+//            System.out.println(parent);
         } else {
             manager.effects().queueAdd(((VisualContainer) added).getEffect());
         }
@@ -36,7 +36,7 @@ public class RegionMixin {
         VisualizationManager manager = VisualizationManagerImpl.get(parent);
         Minecraft.getInstance().level = clevel;
         if (manager == null) {
-            System.out.println(parent);
+//            System.out.println(parent);
         } else {
             manager.effects().queueRemove(((VisualContainer) level).getEffect());
         }

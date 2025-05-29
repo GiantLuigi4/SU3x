@@ -1,9 +1,9 @@
-package tfc.smallerunits.canary.mixin;
+package tfc.smallerunits.lithium.mixin.lithium;
 
-import com.abdelaziz.canary.common.block.BlockCountingSection;
-import com.abdelaziz.canary.common.block.BlockStateFlags;
-import com.abdelaziz.canary.common.entity.movement.ChunkAwareBlockCollisionSweeper;
-import com.abdelaziz.canary.common.util.Pos;
+import me.jellysquid.mods.lithium.common.block.BlockCountingSection;
+import me.jellysquid.mods.lithium.common.block.BlockStateFlags;
+import me.jellysquid.mods.lithium.common.entity.movement.ChunkAwareBlockCollisionSweeper;
+import me.jellysquid.mods.lithium.common.util.Pos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
@@ -105,7 +105,7 @@ public abstract class CollisionSweeperMixin {
         return 0;
     }
 
-    @Shadow @Final private Level level;
+    @Shadow @Final private Level world;
     @Unique
     boolean smallerunits$isSmallWorld = false;
 
@@ -118,11 +118,11 @@ public abstract class CollisionSweeperMixin {
     public void preNextSection(CallbackInfoReturnable<Boolean> cir) {
         if (smallerunits$isSmallWorld) {
             while (true) {
-                if (this.cachedChunk != null && this.chunkYIndex < Pos.SectionYIndex.getMaxYSectionIndexInclusive(this.level) && this.chunkYIndex < Pos.SectionYIndex.fromBlockCoord(this.level, expandMax(this.maxY))) {
+                if (this.cachedChunk != null && this.chunkYIndex < Pos.SectionYIndex.getMaxYSectionIndexInclusive(this.world) && this.chunkYIndex < Pos.SectionYIndex.fromBlockCoord(this.world, expandMax(this.maxY))) {
                     ++this.chunkYIndex;
                     this.cachedChunkSection = ((BasicVerticalChunk) this.cachedChunk).getSectionNullable(this.chunkYIndex);
                 } else {
-                    this.chunkYIndex = Mth.clamp(Pos.SectionYIndex.fromBlockCoord(this.level, expandMin(this.minY)), Pos.SectionYIndex.getMinYSectionIndex(this.level), Pos.SectionYIndex.getMaxYSectionIndexInclusive(this.level));
+                    this.chunkYIndex = Mth.clamp(Pos.SectionYIndex.fromBlockCoord(this.world, expandMin(this.minY)), Pos.SectionYIndex.getMinYSectionIndex(this.world), Pos.SectionYIndex.getMaxYSectionIndexInclusive(this.world));
                     if (this.chunkX < Pos.ChunkCoord.fromBlockCoord(expandMax(this.maxX))) {
                         ++this.chunkX;
                     } else {
@@ -135,9 +135,9 @@ public abstract class CollisionSweeperMixin {
                         ++this.chunkZ;
                     }
 
-                    BlockGetter view = this.level.getChunkForCollisions(this.chunkX, this.chunkZ);
+                    BlockGetter view = this.world.getChunkForCollisions(this.chunkX, this.chunkZ);
                     if (view instanceof ChunkAccess) {
-                        this.cachedChunk = (ChunkAccess) this.level.getChunkForCollisions(this.chunkX, this.chunkZ);
+                        this.cachedChunk = (ChunkAccess) this.world.getChunkForCollisions(this.chunkX, this.chunkZ);
                         if (this.cachedChunk != null) {
                             this.cachedChunkSection = ((BasicVerticalChunk) this.cachedChunk).getSectionNullable(this.chunkYIndex);
                         }
@@ -148,10 +148,10 @@ public abstract class CollisionSweeperMixin {
                     this.sectionOversizedBlocks = hasChunkSectionOversizedBlocks(this.cachedChunk, this.chunkYIndex);
                     int sizeExtension = this.sectionOversizedBlocks ? 1 : 0;
                     this.cEndX = Math.min(this.maxX + sizeExtension, Pos.BlockCoord.getMaxInSectionCoord(this.chunkX));
-                    int cEndY = Math.min(this.maxY + sizeExtension, Pos.BlockCoord.getMaxYInSectionIndex(this.level, this.chunkYIndex));
+                    int cEndY = Math.min(this.maxY + sizeExtension, Pos.BlockCoord.getMaxYInSectionIndex(this.world, this.chunkYIndex));
                     this.cEndZ = Math.min(this.maxZ + sizeExtension, Pos.BlockCoord.getMaxInSectionCoord(this.chunkZ));
                     this.cStartX = Math.max(this.minX - sizeExtension, Pos.BlockCoord.getMinInSectionCoord(this.chunkX));
-                    int cStartY = Math.max(this.minY - sizeExtension, Pos.BlockCoord.getMinYInSectionIndex(this.level, this.chunkYIndex));
+                    int cStartY = Math.max(this.minY - sizeExtension, Pos.BlockCoord.getMinYInSectionIndex(this.world, this.chunkYIndex));
                     this.cStartZ = Math.max(this.minZ - sizeExtension, Pos.BlockCoord.getMinInSectionCoord(this.chunkZ));
                     this.cX = this.cStartX;
                     this.cY = cStartY;

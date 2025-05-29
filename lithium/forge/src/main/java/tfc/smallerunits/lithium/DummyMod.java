@@ -1,4 +1,4 @@
- package tfc.smallerunits.canary;
+ package tfc.smallerunits.lithium;
 
 import net.minecraftforge.fml.common.Mod;
 
