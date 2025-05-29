@@ -11,6 +11,7 @@ mixin {
 
 evaluationDependsOn(':forge')
 evaluationDependsOn(':core:core_forge')
+evaluationDependsOn(':resizing:resizing_forge')
 
 legacyForge {
     version = "${minecraft_version}-${forge_version}"
@@ -28,6 +29,11 @@ legacyForge {
     runs {
         client {
             client()
+            mixin {
+                config("${mod_base_id}.platform.forge.mixins.json")
+                config("${mod_base_id}.core.forge.mixins.json")
+                config("${mod_base_id}.core.mixins.json")
+            }
         }
         data {
             data()
@@ -48,6 +54,10 @@ legacyForge {
         }
 
         project(":core:core_forge").legacyForge.mods.forEach { mod ->
+            project(":flywheel:flywheel_forge").legacyForge.mods.add(mod)
+        }
+
+        project(":resizing:resizing_forge").legacyForge.mods.forEach { mod ->
             project(":flywheel:flywheel_forge").legacyForge.mods.add(mod)
         }
 
@@ -72,13 +82,16 @@ dependencies {
     compileOnly project(":common")
     compileOnly project(":core:core_common")
 
-    modImplementation project(":forge")
-    modImplementation project(":core:core_forge")
+    runtimeOnly project(":forge")
+    runtimeOnly project(":core:core_forge")
+    runtimeOnly project(":resizing:resizing_forge")
 
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     modImplementation ("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:1.0.4-beta-232")
     modImplementation ("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:1.0.4-beta-232")
+    modImplementation ("curse.maven:vanillin-965702:6446560")
+    modImplementation ("curse.maven:pehkui-319596:5393101")
 }
 
 jar {

@@ -49,6 +49,10 @@ public class Region extends IRegion {
         chunksLoaded++;
     }
 
+    protected void onAddServerLevel(Level parent, Level added, int upb) {
+        // no-op; mixin target
+    }
+
     public AbstractTickerServerLevel getServerWorld(MinecraftServer srv, ServerLevel parent, int upb) {
         if (levels[upb] == null) {
             try {
@@ -80,6 +84,7 @@ public class Region extends IRegion {
                         false, 0, new ArrayList<>(), false,
                         parent, upb, this
                 );
+                onAddServerLevel(parent, levels[upb], upb);
             } catch (Throwable e) {
                 RuntimeException ex = new RuntimeException(e.getMessage(), e);
                 ex.setStackTrace(e.getStackTrace());
@@ -89,6 +94,10 @@ public class Region extends IRegion {
         }
 
         return (AbstractTickerServerLevel) levels[upb];
+    }
+
+    protected void onAddClientLevel(Level parent, Level added, int upb) {
+        // no-op; mixin target
     }
 
     public Level getClientWorld(Level parent, int upb) {
@@ -105,6 +114,7 @@ public class Region extends IRegion {
                         upb, this
                 );
                 levels[upb].isClientSide = true;
+                onAddClientLevel(parent, levels[upb], upb);
 //				TickerServerWorld lvl = ((TickerServerWorld) levels[upb]);
 //				lvl.lookup = pos -> {
 //					BlockPos bp = lvl.region.pos.toBlockPos().offset(
@@ -176,6 +186,14 @@ public class Region extends IRegion {
         return levels;
     }
 
+    protected void onServerLevelClosed(Level level) {
+        // no-op; mixin target
+    }
+
+    protected void onClientLevelClosed(Level level) {
+        // no-op; mixin target
+    }
+
     public void close() {
         for (Level level : levels) {
             try {
@@ -183,6 +201,9 @@ public class Region extends IRegion {
                     if (level instanceof AbstractTickerServerLevel) {
                         ((AbstractTickerServerLevel) level).saveWorld.saveLevel();
                         ((AbstractTickerServerLevel) level).saveWorld.saveAllChunks();
+                        onServerLevelClosed(level);
+                    } else {
+                        onClientLevelClosed(level);
                     }
                     PlatformProvider.UTILS.unloadLevel(level);
                     level.close();

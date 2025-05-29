@@ -37,6 +37,7 @@ import tfc.smallerunits.core.simulation.block.ParentLookup;
 import tfc.smallerunits.core.simulation.level.ITickerLevel;
 import tfc.smallerunits.core.simulation.level.UnitChunkHolder;
 import tfc.smallerunits.core.simulation.level.server.AbstractTickerServerLevel;
+import tfc.smallerunits.core.utils.asm.ModCompat;
 import tfc.smallerunits.core.utils.math.Math1D;
 import tfc.smallerunits.core.utils.threading.ThreadLocals;
 import tfc.smallerunits.plat.net.PacketTarget;
@@ -722,6 +723,7 @@ public class BasicVerticalChunk extends LevelChunk {
 				for (BlockEntity tile : ((SUCapableChunk) ac).getTiles()) {
 					if (tile.getBlockPos().equals(offsetPos)) {
 						toRemove.add(tile);
+						ModCompat.onRemoveBE(tile);
 					}
 				}
 				((SUCapableChunk) ac).getTiles().removeAll(toRemove);
