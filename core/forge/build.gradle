@@ -29,6 +29,9 @@ legacyForge {
     runs {
         client {
             client()
+            mixin {
+                config("${mod_base_id}.platform.forge.mixins.json")
+            }
         }
         data {
             data()
@@ -37,7 +40,7 @@ legacyForge {
         server {
             server()
             mixin {
-                config("${mod_id}.platform.forge.mixins.json")
+                config("${mod_base_id}.platform.forge.mixins.json")
             }
         }
     }
@@ -69,7 +72,8 @@ repositories {
 dependencies {
     compileOnly getProject(project, ":common")
     compileOnly project(":common")
-    modImplementation project(":forge")
+    runtimeOnly project(":forge")
+    modImplementation "fd:paco:1.0"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 

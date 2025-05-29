@@ -4,14 +4,17 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraftforge.client.model.data.ModelData;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.LevelEvent;
@@ -60,5 +63,13 @@ public class ForgePlatformUtilsClient extends PlatformUtilsClient {
 
 	public void updateModelData(ClientLevel level, BlockEntity be) {
 		Objects.requireNonNull(level.getModelDataManager()).requestRefresh(be);
+	}
+
+	@Override
+	public Object populateModelData(BlockAndTintGetter level, BlockPos pos, BlockState state, BakedModel model, Object modelData) {
+		return model.getModelData(
+				level, pos,
+				state, (ModelData) modelData
+		);
 	}
 }

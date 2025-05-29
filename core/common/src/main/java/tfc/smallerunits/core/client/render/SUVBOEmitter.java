@@ -28,6 +28,7 @@ import tfc.smallerunits.core.utils.PositionalInfo;
 import tfc.smallerunits.core.utils.math.Math1D;
 import tfc.smallerunits.core.utils.storage.DefaultedMap;
 import tfc.smallerunits.plat.util.PlatformProvider;
+import tfc.smallerunits.plat.util.PlatformProviderClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,10 +175,15 @@ public class SUVBOEmitter {
 						BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModel(block);
 						Minecraft.getInstance().getProfiler().popPush("get_data");
 						Object modelData = wld.getModelData(offsetPos);
+						modelData = PlatformProviderClient.UTILS.populateModelData(
+								wld, offsetPos,
+								block, model,
+								modelData
+						);
 						Minecraft.getInstance().getProfiler().popPush("check_render");
 						if (PlatformProvider.UTILS.canRenderIn(model, block, randomSource, modelData, chunkBufferLayer)) {
 							if (consumer == null) consumer = buffers.get(chunkBufferLayer);
-							
+
 							Minecraft.getInstance().getProfiler().popPush("translate");
 							pose.setTranslation(
 									pTranslation.x + x * scl,

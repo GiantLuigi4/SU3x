@@ -4,10 +4,12 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,4 +43,6 @@ public abstract class PlatformUtilsClient {
     public abstract ChunkRenderDispatcher.RenderChunk updateRenderChunk(ChunkRenderDispatcher.RenderChunk chunk);
 
     public abstract void updateModelData(ClientLevel level, BlockEntity be);
+
+    public abstract Object populateModelData(BlockAndTintGetter level, BlockPos pos, BlockState state, BakedModel model, Object modelData);
 }
