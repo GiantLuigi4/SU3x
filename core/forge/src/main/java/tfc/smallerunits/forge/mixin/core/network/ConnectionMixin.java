@@ -13,9 +13,9 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import tfc.smallerunits.core.data.access.PacketListenerAccessor;
 import tfc.smallerunits.core.networking.SUNetworkRegistry;
 import tfc.smallerunits.core.networking.hackery.WrapperPacket;
+import tfc.smallerunits.plat.itf.access.PacketListenerAccessor;
 import tfc.smallerunits.plat.net.PacketTarget;
 
 @Mixin(Connection.class)

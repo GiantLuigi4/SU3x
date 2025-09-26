@@ -1,7 +1,7 @@
 package tfc.smallerunits.resizing.pehkui;
 
 import net.minecraft.resources.ResourceLocation;
-import tfc.smallerunits.core.logging.Loggers;
+import tfc.smallerunits.common.logging.Loggers;
 import virtuoel.pehkui.api.ScaleData;
 import virtuoel.pehkui.api.ScaleModifier;
 import virtuoel.pehkui.api.ScaleRegistries;

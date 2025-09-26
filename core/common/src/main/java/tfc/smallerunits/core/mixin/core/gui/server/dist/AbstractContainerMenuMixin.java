@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tfc.smallerunits.core.utils.PositionalInfo;
+import tfc.smallerunits.common.UUIDs;
 import tfc.smallerunits.level.SimpleTickerLevel;
 import tfc.smallerunits.plat.util.PlatformProvider;
 
@@ -21,7 +21,7 @@ public class AbstractContainerMenuMixin {
 		if ($$1.level() instanceof SimpleTickerLevel) {
 			AttributeInstance instance = PlatformProvider.UTILS.getReachAttrib($$1);
 			if (instance == null) return;
-			AttributeModifier modifier = instance.getModifier(PositionalInfo.SU_REACH_UUID);
+			AttributeModifier modifier = instance.getModifier(UUIDs.SU_REACH_UUID);
 			if (modifier == null) return;
 			
 			cir.setReturnValue($$0.evaluate(

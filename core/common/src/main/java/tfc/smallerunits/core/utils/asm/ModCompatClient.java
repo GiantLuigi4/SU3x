@@ -6,8 +6,11 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import tfc.smallerunits.core.UnitSpace;
 import tfc.smallerunits.core.client.abstraction.IFrustum;
 import tfc.smallerunits.core.client.render.TileRendererHelper;
+
+import java.util.function.Supplier;
 
 public class ModCompatClient {
     /**
@@ -21,5 +24,11 @@ public class ModCompatClient {
      * mixin point; called after rendering a chunk layer
      */
     public static void postRenderLayer(RenderType type, PoseStack poseStack, double camX, double camY, double camZ, Level level) {
+    }
+
+    /**
+     * mixin point; called when a unit space gets marked as dirty due to a level renderer reload
+     */
+    public static void dirtyUnit(Supplier<UnitSpace> space) {
     }
 }

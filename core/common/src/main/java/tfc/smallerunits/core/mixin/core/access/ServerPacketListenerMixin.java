@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import tfc.smallerunits.core.data.access.PacketListenerAccessor;
+import tfc.smallerunits.plat.itf.access.PacketListenerAccessor;
 
 @Mixin(ServerGamePacketListenerImpl.class)
 public class ServerPacketListenerMixin implements PacketListenerAccessor {

@@ -18,9 +18,10 @@ import java.util.List;
 
 public class SUChunkRender {
     private final LevelChunk chunk;
-    private final ArrayList<TileInfo> buffers = new ArrayList<>();
+    final ArrayList<TileInfo> buffers = new ArrayList<>();
     boolean empty = true;
     boolean culled = false;
+    boolean allDirty = false;
 
     public boolean isEmpty() {
         return empty;
@@ -28,6 +29,14 @@ public class SUChunkRender {
 
     public SUChunkRender(LevelChunk chunk) {
         this.chunk = chunk;
+    }
+
+    public void dirty() {
+        allDirty = true;
+    }
+
+    public boolean isDirty() {
+        return allDirty;
     }
 
     public void draw(RenderType type, AbstractUniform uniform) {

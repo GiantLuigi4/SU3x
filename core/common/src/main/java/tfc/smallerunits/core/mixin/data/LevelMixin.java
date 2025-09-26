@@ -11,10 +11,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tfc.smallerunits.common.logging.Loggers;
 import tfc.smallerunits.core.client.access.tracking.SUCapableWorld;
 import tfc.smallerunits.core.client.access.tracking.SUVBOEmittingWorld;
 import tfc.smallerunits.core.client.render.SUVBOEmitter;
-import tfc.smallerunits.core.logging.Loggers;
 import tfc.smallerunits.plat.util.PlatformProvider;
 
 import java.util.function.Supplier;

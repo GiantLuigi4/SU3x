@@ -9,8 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import tfc.smallerunits.common.logging.Loggers;
 import tfc.smallerunits.core.UnitSpace;
-import tfc.smallerunits.core.logging.Loggers;
 
 import java.util.HashMap;
 

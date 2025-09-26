@@ -3,8 +3,8 @@ package tfc.smallerunits.core.networking.hackery;
 import net.minecraft.network.PacketListener;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.player.Player;
-import tfc.smallerunits.core.data.access.PacketListenerAccessor;
 import tfc.smallerunits.core.utils.PositionalInfo;
+import tfc.smallerunits.plat.itf.access.PacketListenerAccessor;
 
 import java.util.HashMap;
 

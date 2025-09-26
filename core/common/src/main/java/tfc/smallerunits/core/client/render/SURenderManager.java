@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.EmptyLevelChunk;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.AABB;
+import tfc.smallerunits.core.UnitSpace;
 import tfc.smallerunits.core.client.abstraction.IFrustum;
 import tfc.smallerunits.core.client.access.tracking.SUCapableChunk;
 import tfc.smallerunits.core.client.access.tracking.SUCapableWorld;
@@ -19,6 +20,7 @@ import tfc.smallerunits.core.client.access.tracking.SUCompiledChunkAttachments;
 import tfc.smallerunits.core.data.capability.ISUCapability;
 import tfc.smallerunits.core.data.capability.SUCapabilityManager;
 import tfc.smallerunits.core.mixin.client.access.LevelRendererAccessor;
+import tfc.smallerunits.core.utils.asm.ModCompatClient;
 import tfc.smallerunits.core.utils.selection.MutableAABB;
 
 import java.util.ArrayList;
@@ -35,6 +37,20 @@ public class SURenderManager {
         ISUCapability capability = SUCapabilityManager.getCapability(chunk);
 
         if (type.equals(RenderType.solid())) {
+            if (render.isDirty()) {
+                for (TileInfo buffer : render.buffers) {
+                    suCapable.SU$markDirty(buffer.pos);
+                    UnitSpace[] space = new UnitSpace[1];
+                    ModCompatClient.dirtyUnit(() -> {
+                        if (space[0] == null) {
+                            space[0] = capability.getUnit(buffer.pos);
+                        }
+                        return space[0];
+                    });
+                }
+                render.allDirty = false;
+            }
+
             int yRL = positionRendering.getY();
             int yRM = positionRendering.getY() + 15;
 

@@ -3,6 +3,20 @@ plugins {
     id 'fabric-loom'
 }
 
+evaluationDependsOn(":common")
+evaluationDependsOn(":fabric")
+
+repositories {
+    maven {
+        name 'jamies'
+        url 'https://maven.jamieswhiteshirt.com/libs-release'
+    }
+    maven {
+        name 'ladysnake'
+        url 'https://maven.ladysnake.org/releases'
+    }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {
@@ -13,11 +27,18 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
 
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.2"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:5.0.2"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:5.0.2"
+    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:2.3.0"
+
     implementation getProject(project, ":common")
     implementation project(":common")
+    implementation project(":fabric")
 }
 
 loom {
+    println(getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener"))
     if (getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
         accessWidenerPath.set(getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener"))
     }

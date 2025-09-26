@@ -1,4 +1,4 @@
-package tfc.smallerunits.core.data.access;
+package tfc.smallerunits.plat.itf.access;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

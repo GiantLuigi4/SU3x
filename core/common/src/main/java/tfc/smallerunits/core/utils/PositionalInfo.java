@@ -9,20 +9,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import tfc.smallerunits.common.UUIDs;
+import tfc.smallerunits.common.logging.Loggers;
 import tfc.smallerunits.core.UnitSpace;
 import tfc.smallerunits.core.data.access.EntityAccessor;
 import tfc.smallerunits.core.data.storage.Region;
 import tfc.smallerunits.core.data.storage.RegionPos;
 import tfc.smallerunits.core.data.tracking.RegionalAttachments;
-import tfc.smallerunits.core.logging.Loggers;
 import tfc.smallerunits.core.networking.hackery.NetworkingHacks;
 import tfc.smallerunits.core.simulation.level.ITickerLevel;
 import tfc.smallerunits.core.utils.config.CommonConfig;
 import tfc.smallerunits.core.utils.math.HitboxScaling;
 import tfc.smallerunits.plat.util.PlatformProvider;
-
-import java.util.Random;
-import java.util.UUID;
 
 public class PositionalInfo {
 	public final Vec3 pos;
@@ -30,7 +28,6 @@ public class PositionalInfo {
 	private final Level clientLevel; // immersive portals compat
 	public final AABB box;
 	public final float eyeHeight;
-	public static final UUID SU_REACH_UUID = new UUID(new Random(847329).nextLong(), new Random(426324).nextLong());
 	private boolean isReachSet = false;
 	private Object particleEngine = null;
 	public final Vec3 oPos;
@@ -63,9 +60,9 @@ public class PositionalInfo {
 	
 	public void scalePlayerReach(Player pPlayer, int upb) {
 		AttributeInstance instance = PlatformProvider.UTILS.getReachAttrib(pPlayer);
-		instance.removeModifier(SU_REACH_UUID);
+		instance.removeModifier(UUIDs.SU_REACH_UUID);
 		instance.addPermanentModifier(
-				new AttributeModifier(SU_REACH_UUID, "su:reach", upb, AttributeModifier.Operation.MULTIPLY_TOTAL)
+				new AttributeModifier(UUIDs.SU_REACH_UUID, "su:reach", upb, AttributeModifier.Operation.MULTIPLY_TOTAL)
 		);
 		isReachSet = true;
 	}
@@ -138,7 +135,7 @@ public class PositionalInfo {
 		if (isReachSet) {
 			if (pEntity instanceof LivingEntity livingEntity) {
 				AttributeInstance instance = PlatformProvider.UTILS.getReachAttrib(livingEntity);
-				instance.removeModifier(SU_REACH_UUID);
+				instance.removeModifier(UUIDs.SU_REACH_UUID);
 				isReachSet = false;
 			}
 		}
