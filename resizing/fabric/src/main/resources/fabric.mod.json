@@ -29,6 +29,15 @@
 	},
 	"suggests": {
 		"pehkui": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"parent": {
+				"id": "${mod_base_id}_fat",
+				"name": "${mod_name}",
+				"description": "${description}"
+			}
+		}
 	}
 }
   

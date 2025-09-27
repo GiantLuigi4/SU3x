@@ -21,5 +21,14 @@
 		"fabricloader": ">=0.14",
 		"minecraft": "${minecraft_version}",
 		"java": ">=17"
+	},
+	"custom": {
+		"modmenu": {
+			"parent": {
+				"id": "${mod_base_id}_fat",
+				"name": "${mod_name}",
+				"description": "${description}"
+			}
+		}
 	}
 }

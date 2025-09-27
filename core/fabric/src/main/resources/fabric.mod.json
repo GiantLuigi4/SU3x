@@ -39,6 +39,13 @@
 	"custom": {
 		"cardinal-components": [
 			"smallerunits:unit_space_cap"
-		]
+		],
+		"modmenu": {
+			"parent": {
+				"id": "${mod_base_id}_fat",
+				"name": "${mod_name}",
+				"description": "${description}"
+			}
+		}
 	}
 }

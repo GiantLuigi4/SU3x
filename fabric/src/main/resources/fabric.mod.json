@@ -25,6 +25,15 @@
 		"cardinal-components-chunk": "*",
 		"cardinal-components-world": "*",
 		"reach-entity-attributes": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"parent": {
+				"id": "${mod_base_id}_fat",
+				"name": "${mod_name}",
+				"description": "${description}"
+			}
+		}
 	}
 }
   
