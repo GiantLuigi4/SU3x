@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import tfc.smallerunits.plat.CapabilityWrapper;
 import tfc.smallerunits.plat.FabricCapabilityWrapper;
 
-@Mixin(CapabilityWrapper.class)
+@Mixin(value = CapabilityWrapper.class, remap = false)
 public class CapabilityWrapperMixin {
 	/**
 	 * @author GiantLuigi4

@@ -182,4 +182,9 @@ public class ForgeTickerServerLevel extends AbstractTickerServerLevel {
 			}
 		});
 	}
+	
+	@Override
+	protected Object __platformCapabilities() {
+		return getCapabilities();
+	}
 }

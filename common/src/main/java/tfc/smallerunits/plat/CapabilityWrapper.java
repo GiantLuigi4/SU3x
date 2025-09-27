@@ -7,11 +7,9 @@ public abstract class CapabilityWrapper {
 		throw new RuntimeException("Check self-impl mixins for corresponding platform");
     }
 
-    public void deserializeNBT(CompoundTag capabilities) {
-		throw new RuntimeException();
-	}
+    public abstract void deserializeNBT(CompoundTag capabilities);
 	
-	public CompoundTag serializeNBT() {
-		throw new RuntimeException();
-	}
+	public abstract CompoundTag serializeNBT();
+	
+	public abstract boolean isInvalid();
 }

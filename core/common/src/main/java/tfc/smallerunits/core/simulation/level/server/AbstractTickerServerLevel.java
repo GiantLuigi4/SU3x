@@ -1136,10 +1136,17 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 	
 	CapabilityWrapper wrapper;
 	
+	@Nullable
 	public CapabilityWrapper getCaps() {
-		if (wrapper == null) wrapper = CapabilityWrapper.of(this);
+		if (wrapper == null) {
+			Object o = this.__platformCapabilities();
+			if (o == null) return null;
+			wrapper = CapabilityWrapper.of(this.__platformCapabilities());
+		}
 		return wrapper;
 	}
+	
+	protected abstract Object __platformCapabilities();
 
 //	/* redstone */
 //	@Override

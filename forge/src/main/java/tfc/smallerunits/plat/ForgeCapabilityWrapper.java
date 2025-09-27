@@ -17,4 +17,9 @@ public class ForgeCapabilityWrapper extends CapabilityWrapper {
 	public CompoundTag serializeNBT() {
 		return dispatcher.serializeNBT();
 	}
+	
+	@Override
+	public boolean isInvalid() {
+		return dispatcher == null;
+	}
 }

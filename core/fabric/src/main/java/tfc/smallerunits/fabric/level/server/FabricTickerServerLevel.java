@@ -128,4 +128,9 @@ public class FabricTickerServerLevel extends AbstractTickerServerLevel {
 			}
 		});
 	}
+	
+	@Override
+	protected Object __platformCapabilities() {
+		return this;
+	}
 }

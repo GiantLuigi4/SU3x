@@ -17,4 +17,9 @@ public class FabricCapabilityWrapper extends CapabilityWrapper {
 	public CompoundTag serializeNBT() {
 		return provider.getComponentContainer().toTag(new CompoundTag());
 	}
+	
+	@Override
+	public boolean isInvalid() {
+		return false;
+	}
 }
