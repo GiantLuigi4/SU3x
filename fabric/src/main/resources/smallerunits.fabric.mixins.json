@@ -7,6 +7,7 @@
 	"mixins": [
 		"self_impl.AbstractItemMixin",
 		"self_impl.AnnoCfgMixin",
+		"self_impl.CapabilityWrapperMixin",
 		"self_impl.PlatformProviderClientMixin",
 		"self_impl.PlatformProviderMixin",
 		"self_impl.PlatformRegistryMixin",

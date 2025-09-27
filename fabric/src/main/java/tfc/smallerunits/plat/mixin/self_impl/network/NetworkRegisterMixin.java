@@ -10,9 +10,9 @@ import java.util.function.Predicate;
 
 @Mixin(value = PacketRegister.class, remap = false)
 public class NetworkRegisterMixin {
-    /**
-     * @author GiantLuigi4
-     */
+	/**
+	 * @author GiantLuigi4
+	 */
     @Overwrite
     public static PacketRegister of(ResourceLocation par1, String par2, Predicate<String> par3, Predicate<String> par4) {
         return new FabricPacketRegister(

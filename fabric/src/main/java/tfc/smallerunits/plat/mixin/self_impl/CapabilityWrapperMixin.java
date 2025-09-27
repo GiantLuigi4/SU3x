@@ -1,0 +1,17 @@
+package tfc.smallerunits.plat.mixin.self_impl;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import tfc.smallerunits.plat.CapabilityWrapper;
+import tfc.smallerunits.plat.FabricCapabilityWrapper;
+
+@Mixin(CapabilityWrapper.class)
+public class CapabilityWrapperMixin {
+	/**
+	 * @author GiantLuigi4
+	 */
+	@Overwrite
+	public static CapabilityWrapper of(Object par1) {
+		return new FabricCapabilityWrapper(par1);
+	}
+}

@@ -1,30 +1,30 @@
 {
-    "required": true,
-    "minVersion": "0.8",
-    "package": "tfc.smallerunits.forge.mixin",
-    "refmap": "${mod_base_id}.core.refmap.json",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-        "core.network.ConnectionMixin",
-        "core.network.NetworkContextMixin",
-        "data.FastCapabilityChunkMixin",
-        "quality.EntityQolForge",
-        "quality.PlayerMixin",
-        "self_impl.TickerServerLevelMixin",
-        "self_impl.ToolProviderMixin"
-    ],
-    "client": [
-        "core.LevelRendererMixinForge",
-        "core.gui.client.ForgeHooksClientMixin",
-        "core.gui.client.KeyboardHandlerMixin",
-        "core.gui.client.MouseHandlerMixin",
-        "core.gui.client.ScreenMixin",
-        "core.gui.client.expansion.DebugScreenOverlayMixin",
-        "quality.ParticleEngineAccessor",
-        "self_impl.RenderWorldMixin",
-        "self_impl.TickerClientLevelMixin"
-    ],
-    "injectors": {
-        "defaultRequire": 1
-    }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "tfc.smallerunits.forge.mixin",
+	"refmap": "${mod_base_id}.core.refmap.json",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"core.network.ConnectionMixin",
+		"core.network.NetworkContextMixin",
+		"data.FastCapabilityChunkMixin",
+		"quality.EntityQolForge",
+		"quality.PlayerMixin",
+		"self_impl.TickerServerLevelMixin",
+		"self_impl.ToolProviderMixin"
+	],
+	"client": [
+		"core.LevelRendererMixinForge",
+		"core.gui.client.ForgeHooksClientMixin",
+		"core.gui.client.KeyboardHandlerMixin",
+		"core.gui.client.MouseHandlerMixin",
+		"core.gui.client.ScreenMixin",
+		"core.gui.client.expansion.DebugScreenOverlayMixin",
+		"quality.ParticleEngineAccessor",
+		"self_impl.RenderWorldMixin",
+		"self_impl.TickerClientLevelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }
