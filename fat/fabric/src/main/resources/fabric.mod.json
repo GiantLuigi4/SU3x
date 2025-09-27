@@ -7,16 +7,15 @@
     "authors": [
         "${mod_author}"
     ],
-    "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
-    },
+	"contact": {
+		"sources": "https://github.com/GiantLuigi4/SU3x",
+		"issues": "https://github.com/GiantLuigi4/SU3x/issues"
+	},
     "license": "${license}",
-    "icon": "assets/modid/${mod_id}.png",
+	"icon": "assets/smallerunits/smaller_units.png",
     "environment": "*",
     "depends": {
         "fabricloader": ">=0.14",
-        "fabric": "*",
         "minecraft": "${minecraft_version}",
         "java": ">=17"
     }

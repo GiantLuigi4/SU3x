@@ -15,6 +15,9 @@ dependencies {
 
     implementation getProject(project, ":common")
     implementation project(":common")
+    implementation project(":core:core_common")
+
+    modImplementation "curse.maven:lithium-360438:6097158"
 }
 
 loom {

@@ -2,17 +2,17 @@
 	"schemaVersion": 1,
 	"id": "${mod_id}",
 	"version": "${version}",
-	"name": "${mod_name}",
-	"description": "${description}",
+	"name": "${mod_name} (Core)",
+	"description": "The core module for smaller units, contains the majority of the code",
 	"authors": [
 		"${mod_author}"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/GiantLuigi4/SU3x",
+		"issues": "https://github.com/GiantLuigi4/SU3x/issues"
 	},
 	"license": "${license}",
-	"icon": "assets/modid/${mod_id}.png",
+	"icon": "assets/smallerunits/smaller_units.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

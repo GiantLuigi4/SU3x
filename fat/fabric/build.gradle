@@ -1,13 +1,58 @@
 plugins {
+    id 'multiloader-common'
     id 'fabric-loom'
+}
+
+repositories {
+    maven {
+        name 'jitpack'
+        url 'https://jitpack.io'
+    }
+    maven {
+        name 'jamies'
+        url 'https://maven.jamieswhiteshirt.com/libs-release'
+    }
+    maven {
+        name 'ladysnake'
+        url 'https://maven.ladysnake.org/releases'
+    }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.layered {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
-    }
+    mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
+
+    modImplementation "curse.maven:pehkui-319596:4684391"
+    modImplementation 'com.github.Virtuoel:KanosConfig:0.4.1'
+    modImplementation "curse.maven:lithium-360438:6097158"
+    modImplementation "curse.maven:distant-horizons-508933:6791186"
+    modImplementation "curse.maven:applied-energistics-2-223794:6852915"
+
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.2"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:5.0.2"
+    modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:5.0.2"
+
+    compileOnly project(":common")
+    compileOnly project(":core:core_common")
+    compileOnly project(":lithium:lithium_common")
+    compileOnly project(":general:general_common")
+    compileOnly project(":resizing:resizing_common")
+
+    include(modImplementation project(":fabric")) {transitive = false}
+    include(modImplementation project(":core:core_fabric")) {transitive = false}
+    include(modImplementation project(":lithium:lithium_fabric")) {transitive = false}
+    include(modImplementation project(":general:general_fabric")) {transitive = false}
+    include(modImplementation project(":resizing:resizing_fabric")) {transitive = false}
+
+    include(modImplementation "com.jamieswhiteshirt:reach-entity-attributes:2.4.0")
 }
+
+tasks.build.dependsOn(
+        project(":fabric").tasks.build,
+        project(":core:core_fabric").tasks.build,
+        project(":lithium:lithium_fabric").tasks.build,
+        project(":general:general_fabric").tasks.build,
+        project(":resizing:resizing_fabric").tasks.build,
+)

@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "tfc.smallerunits.lithium.mixin",
+	"refmap": "${mod_id_dotted}.refmap.json",
+	"plugin": "tfc.smallerunits.lithium.MixinConnector",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"lithium.CollisionSweeperMixin",
+		"lithium.LithiumEntityCollisionsMixin"
+	],
+	"client": [
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

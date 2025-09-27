@@ -22,6 +22,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import tfc.smallerunits.common.logging.Loggers;
 import tfc.smallerunits.core.UnitSpace;
 import tfc.smallerunits.core.client.abstraction.IFrustum;
 import tfc.smallerunits.core.client.access.tracking.SUCapableChunk;
@@ -133,6 +134,13 @@ public class SodiumRenderer {
 			((SUCompiledChunkAttachments) instance).setSUCapable(origin.getY(), capable = ((SUCapableChunk) level.getChunk(origin)));
 
 		ISUCapability capability = SUCapabilityManager.getCapability((LevelChunk) capable);
+		if (capability == null) {
+			Loggers.SU_LOGGER.debug("Null capability received?");
+			Loggers.SU_LOGGER.debug(capable.toString());
+			Loggers.SU_LOGGER.debug(instance.toString());
+			Loggers.SU_LOGGER.debug(origin.toString());
+			return;
+		}
 
 		UnitSpace[] spaces = capability.getUnits();
 		// no reason to do SU related rendering in chunks where SU has not been used

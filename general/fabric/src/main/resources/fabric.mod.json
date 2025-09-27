@@ -1,36 +1,25 @@
 {
-    "schemaVersion": 1,
-    "id": "mod_id",
-    "version": "${version}",
-    "name": "${mod_name}",
-    "description": "${description}",
-    "authors": [
-        "${mod_author}"
-    ],
-    "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
-    },
-    "license": "${license}",
-    "icon": "assets/modid/${mod_id}.png",
-    "environment": "*",
-    "entrypoints": {
-        "main": [
-            "com.example.examplemod.ExampleMod"
-        ]
-    },
-    "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
-    ],
-    "depends": {
-        "fabricloader": ">=0.14",
-        "fabric": "*",
-        "minecraft": "${minecraft_version}",
-        "java": ">=17"
-    },
-    "suggests": {
-        "another-mod": "*"
-    }
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${version}",
+	"name": "${mod_name} (General Compat)",
+	"description": "Small patches to various mods to prevent crashes",
+	"authors": [
+		"${mod_author}"
+	],
+	"contact": {
+		"sources": "https://github.com/GiantLuigi4/SU3x",
+		"issues": "https://github.com/GiantLuigi4/SU3x/issues"
+	},
+	"license": "${license}",
+	"icon": "assets/smallerunits/smaller_units.png",
+	"environment": "*",
+	"mixins": [
+		"${mod_id_dotted}.compat.fabric.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14",
+		"minecraft": "${minecraft_version}",
+		"java": ">=17"
+	}
 }
-  

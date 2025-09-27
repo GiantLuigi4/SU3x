@@ -1,0 +1,19 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "tfc.smallerunits.general_compat.mixin",
+    "refmap": "${mod_id_dotted}.refmap.json",
+	"plugin": "tfc.smallerunits.general_compat.MixinConnector",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+		"distant_horizons.ServerAPIMixin",
+		"storage.ae2.IWishThisArrayCouldntBeAccessed"
+    ],
+    "client": [
+		"distant_horizons.ClientAPIMixin"
+    ],
+    "injectors": {
+      "defaultRequire": 1
+    }
+  }
+  
