@@ -73,7 +73,6 @@ dependencies {
     compileOnly getProject(project, ":common")
     compileOnly project(":common")
     runtimeOnly project(":forge")
-    modImplementation "fd:paco:1.0"
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 }
 

@@ -96,6 +96,7 @@ processResources {
             'mod_author'                : mod_author,
             'mod_id'                    : mod_id,
             'mod_base_id'               : mod_base_id,
+            'mod_id_dotted'             : mod_id.replace("_", "."),
             'license'                   : license,
             'description'               : project.description,
             "forge_version"             : forge_version,

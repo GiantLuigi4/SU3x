@@ -1134,7 +1134,12 @@ public abstract class AbstractTickerServerLevel extends ServerLevel implements I
 		return saveWorld.chunkExists(pos);
 	}
 	
-	public abstract CapabilityWrapper getCaps();
+	CapabilityWrapper wrapper;
+	
+	public CapabilityWrapper getCaps() {
+		if (wrapper == null) wrapper = CapabilityWrapper.of(this);
+		return wrapper;
+	}
 
 //	/* redstone */
 //	@Override

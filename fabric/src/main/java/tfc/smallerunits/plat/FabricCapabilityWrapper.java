@@ -3,7 +3,7 @@ package tfc.smallerunits.plat;
 import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
 import net.minecraft.nbt.CompoundTag;
 
-public class FabricCapabilityWrapper {
+public class FabricCapabilityWrapper extends CapabilityWrapper {
 	ComponentProvider provider;
 	
 	public FabricCapabilityWrapper(Object o) {

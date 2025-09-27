@@ -30,11 +30,12 @@ public class ParticleEngineAccessor implements tfc.smallerunits.plat.itf.access.
 	
 	@Override
 	public void copyProviders(ParticleEngine source) {
-		providers = ((tfc.smallerunits.plat.itf.access.ParticleEngineAccessor) source).getProviders();
+		//noinspection unchecked
+		providers = (Map<ResourceLocation, ParticleProvider<?>>) ((tfc.smallerunits.plat.itf.access.ParticleEngineAccessor) source).getProviders();
 	}
 	
 	@Override
-	public Map<ResourceLocation, ParticleProvider<?>> getProviders() {
+	public Map getProviders() {
 		return providers;
 	}
 }

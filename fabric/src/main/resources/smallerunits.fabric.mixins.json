@@ -1,0 +1,23 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "tfc.smallerunits.plat.mixin",
+	"refmap": "${mod_base_id}.refmap.json",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"self_impl.AbstractItemMixin",
+		"self_impl.AnnoCfgMixin",
+		"self_impl.PlatformProviderClientMixin",
+		"self_impl.PlatformProviderMixin",
+		"self_impl.PlatformRegistryMixin",
+		"self_impl.network.NetworkRegisterMixin",
+		"self_impl.network.PacketTargetsMixin"
+	],
+	"client": [
+	],
+	"server": [
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

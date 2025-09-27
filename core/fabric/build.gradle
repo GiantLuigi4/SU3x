@@ -30,7 +30,7 @@ dependencies {
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.0.2"
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-world:5.0.2"
     modImplementation "dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:5.0.2"
-    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:2.3.0"
+    modImplementation "com.jamieswhiteshirt:reach-entity-attributes:2.4.0"
 
     implementation getProject(project, ":common")
     implementation project(":common")
@@ -38,12 +38,11 @@ dependencies {
 }
 
 loom {
-    println(getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener"))
-    if (getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
-        accessWidenerPath.set(getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener"))
+    if (getProject(project, ":common").file("src/main/resources/${mod_id.replace("_", ".")}.accesswidener").exists()) {
+        accessWidenerPath.set(getProject(project, ":common").file("src/main/resources/${mod_id.replace("_", ".")}.accesswidener"))
     }
     mixin {
-        defaultRefmapName.set("${mod_base_id}.refmap.json")
+        defaultRefmapName.set("${mod_id.replace("_", ".")}.refmap.json")
     }
     runs {
         client {

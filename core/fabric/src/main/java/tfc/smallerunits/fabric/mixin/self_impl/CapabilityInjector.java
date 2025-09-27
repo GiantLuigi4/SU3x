@@ -7,20 +7,20 @@ import org.spongepowered.asm.mixin.Shadow;
 import tfc.smallerunits.plat.itf.CapabilityLike;
 
 @Mixin(CapabilityLike.class)
-public abstract class CapabilityInjector implements ComponentV3 {
+public interface CapabilityInjector extends ComponentV3 {
     @Shadow
-    public abstract CompoundTag serializeNBT(CompoundTag tag);
+    CompoundTag serializeNBT(CompoundTag tag);
 
     @Shadow
-    public abstract void deserializeNBT(CompoundTag nbt);
+    void deserializeNBT(CompoundTag nbt);
 
     @Override
-    public void readFromNbt(CompoundTag tag) {
+    default void readFromNbt(CompoundTag tag) {
         deserializeNBT(tag);
     }
 
     @Override
-    public void writeToNbt(CompoundTag tag) {
+    default void writeToNbt(CompoundTag tag) {
         serializeNBT(tag);
     }
 }

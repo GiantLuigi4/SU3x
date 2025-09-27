@@ -1,0 +1,2 @@
+renderChunkLayer : m -> net/minecraft/class_761 method_3251(Lnet/minecraft/class_1921;Lnet/minecraft/class_4587;DDDLorg/joml/Matrix4f;)V
+getCompiledChunk : m -> net/minecraft/class_846$class_851 method_3677()Lnet/minecraft/class_846$class_849;

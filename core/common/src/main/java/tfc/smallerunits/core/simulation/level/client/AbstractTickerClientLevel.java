@@ -1001,7 +1001,15 @@ public class AbstractTickerClientLevel extends ClientLevel implements ITickerLev
     public boolean chunkExists(SectionPos pos) {
         return false;
     }
-
+	
+	public void playSeededSound(@javax.annotation.Nullable Player player, Entity entity, Holder<SoundEvent> sound, SoundSource category, float volume, float pitch, long seed) {
+		// TODO: SU entity bound sound instance
+//		if (player == this.minecraft.player) {
+//			this.minecraft.getSoundManager().play(new EntityBoundSoundInstance((SoundEvent)sound.value(), category, volume, pitch, entity, seed));
+//		}
+		super.playSeededSound(player, entity, sound, category, volume, pitch, seed);
+	}
+	
     @Override
     public void playSound(
             double pX, double pY, double pZ,

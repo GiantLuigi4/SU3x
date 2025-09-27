@@ -1,37 +1,44 @@
 {
-    "schemaVersion": 1,
-    "id": "${mod_id}",
-    "version": "${version}",
-    "name": "${mod_name}",
-    "description": "${description}",
-    "authors": [
-        "${mod_author}"
-    ],
-    "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
-    },
-    "license": "${license}",
-    "icon": "assets/modid/${mod_id}.png",
-    "environment": "*",
-    "entrypoints": {
-        "main": [
-            "tfc.smallerunits.fabric.FabricMod"
-        ]
-    },
-    "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
-    ],
-    "accessWidener": "smallerunits_core.accesswidener",
-    "depends": {
-        "fabricloader": ">=0.14",
-        "fabric": "*",
-        "minecraft": "${minecraft_version}",
-        "java": ">=17"
-    },
-    "suggests": {
-        "another-mod": "*"
-    }
+	"schemaVersion": 1,
+	"id": "${mod_id}",
+	"version": "${version}",
+	"name": "${mod_name}",
+	"description": "${description}",
+	"authors": [
+		"${mod_author}"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "${license}",
+	"icon": "assets/modid/${mod_id}.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"tfc.smallerunits.fabric.FabricMod"
+		],
+		"cardinal-components": [
+			"tfc.smallerunits.fabric.ComponentRegistry"
+		]
+	},
+	"mixins": [
+		"${mod_id_dotted}.mixins.json",
+		"${mod_id_dotted}.fabric.mixins.json"
+	],
+	"accessWidener": "${mod_id_dotted}.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.14",
+		"fabric": "*",
+		"minecraft": "${minecraft_version}",
+		"java": ">=17",
+		"cardinal-components-chunk": "*",
+		"cardinal-components-world": "*",
+		"reach-entity-attributes": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"smallerunits:unit_space_cap"
+		]
+	}
 }
-  

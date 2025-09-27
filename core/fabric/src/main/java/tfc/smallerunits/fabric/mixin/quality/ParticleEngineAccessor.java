@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.core.client.render.compat.UnitParticleEngine;
 
+import java.util.Map;
+
 @Mixin(ParticleEngine.class)
 public class ParticleEngineAccessor implements tfc.smallerunits.plat.itf.access.ParticleEngineAccessor {
 	@Final
@@ -28,11 +30,12 @@ public class ParticleEngineAccessor implements tfc.smallerunits.plat.itf.access.
 	
 	@Override
 	public void copyProviders(ParticleEngine source) {
-		providers = ((tfc.smallerunits.plat.itf.access.ParticleEngineAccessor) source).getProviders();
+		//noinspection unchecked
+		providers = (Int2ObjectMap<ParticleProvider<?>>) ((tfc.smallerunits.plat.itf.access.ParticleEngineAccessor) source).getProviders();
 	}
 	
 	@Override
-	public Int2ObjectMap<ParticleProvider<?>> getProviders() {
+	public Map getProviders() {
 		return providers;
 	}
 }

@@ -1,0 +1,35 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "tfc.smallerunits.fabric.mixin",
+	"refmap": "${mod_id_dotted}.refmap.json",
+	"compatibilityLevel": "JAVA_17",
+	"mixins": [
+		"core.network.BlockableEventLoopMixin",
+		"core.network.ClientPlayNetworkingMixin",
+		"core.network.ConnectionMixin",
+		"core.network.ServerPlayNetworkAddonMixin",
+		"core.network.ServerPlayNetworkingMixin",
+		"data.FastCapabilityChunkMixin",
+		"quality.EntityQolFabric",
+		"quality.LivingEntityMixin",
+		"quality.MinecraftMixin",
+		"quality.ReachEntityAttributesMixin",
+		"self_impl.CapabilityInjector",
+		"self_impl.TickerServerLevelMixin",
+		"self_impl.ToolProviderMixin"
+	],
+	"client": [
+		"core.LevelRendererMixinFabric",
+		"core.gui.client.KeyboardHandlerMixin",
+		"core.gui.client.MouseHandlerMixin",
+		"core.gui.client.ScreenMixin",
+		"core.gui.client.expansion.DebugScreenOverlayMixin",
+		"quality.ParticleEngineAccessor",
+		"self_impl.RenderWorldMixin",
+		"self_impl.TickerClientLevelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

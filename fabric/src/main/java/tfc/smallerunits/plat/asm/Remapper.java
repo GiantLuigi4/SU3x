@@ -69,4 +69,16 @@ public class Remapper {
 	
 	public record MappingInfo(String owner, String method, String desc) {
 	}
+	
+	public static MappingInfo infoFrom(TargetReference reference) {
+		if (reference.getType() == TargetReference.TargetType.METHOD || reference.getType() == TargetReference.TargetType.FIELD) {
+			return new MappingInfo(
+					reference.getClassName(),
+					reference.getPropertyName(),
+					reference.getDescriptor()
+			);
+		} else {
+			throw new RuntimeException("Unsupported: class");
+		}
+	}
 }
