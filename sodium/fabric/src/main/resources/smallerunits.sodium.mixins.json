@@ -6,13 +6,11 @@
 	"plugin": "tfc.smallerunits.sodium.MixinConnector",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"LevelMixin",
-		"RenderSectionMixin",
-		"SodiumDebugOverlayMixin",
-		"SodiumLevelRendererMixin",
-		"UnitCapabilityHandlerMixin"
 	],
 	"client": [
+		"BuiltSectionMixin",
+		"ChunkBuilderMeshingTaskMixin",
+		"SectionBuilderMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

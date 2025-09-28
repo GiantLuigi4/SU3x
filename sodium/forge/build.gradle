@@ -9,6 +9,10 @@ mixin {
     config("${mod_base_id}.sodium.mixins.json")
 }
 
+evaluationDependsOn(':forge')
+evaluationDependsOn(':core:core_forge')
+evaluationDependsOn(':resizing:resizing_forge')
+
 legacyForge {
     version = "${minecraft_version}-${forge_version}"
 
@@ -25,6 +29,11 @@ legacyForge {
     runs {
         client {
             client()
+            mixin {
+                config("${mod_base_id}.platform.forge.mixins.json")
+                config("${mod_base_id}.core.forge.mixins.json")
+                config("${mod_base_id}.core.mixins.json")
+            }
         }
         data {
             data()
@@ -39,6 +48,23 @@ legacyForge {
         "${mod_id}" {
             sourceSet sourceSets.main
         }
+
+        project(":forge").legacyForge.mods.forEach { mod ->
+            project(":sodium:sodium_forge").legacyForge.mods.add(mod)
+        }
+
+        project(":core:core_forge").legacyForge.mods.forEach { mod ->
+            project(":sodium:sodium_forge").legacyForge.mods.add(mod)
+        }
+
+        project(":resizing:resizing_forge").legacyForge.mods.forEach { mod ->
+            project(":sodium:sodium_forge").legacyForge.mods.add(mod)
+        }
+
+        println("LIST MODS")
+        forEach { mod ->
+            println(mod.name)
+        }
     }
 }
 
@@ -50,7 +76,7 @@ dependencies {
     compileOnly project(":core:core_common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
-    implementation "curse.maven:embeddium-908741:5681725"
+    modImplementation "curse.maven:embeddium-908741:5681725"
     compileOnly "curse.maven:oculus-581495:5299671"
 }
 
