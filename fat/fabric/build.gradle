@@ -39,12 +39,14 @@ dependencies {
     compileOnly project(":lithium:lithium_common")
     compileOnly project(":general:general_common")
     compileOnly project(":resizing:resizing_common")
+    compileOnly project(":sodium:sodium_common")
 
     include(modImplementation project(":fabric")) {transitive = false}
     include(modImplementation project(":core:core_fabric")) {transitive = false}
     include(modImplementation project(":lithium:lithium_fabric")) {transitive = false}
     include(modImplementation project(":general:general_fabric")) {transitive = false}
     include(modImplementation project(":resizing:resizing_fabric")) {transitive = false}
+    include(modImplementation project(":sodium:sodium_fabric")) {transitive = false}
 
     include(modImplementation "com.jamieswhiteshirt:reach-entity-attributes:2.4.0")
 }
@@ -55,4 +57,5 @@ tasks.build.dependsOn(
         project(":lithium:lithium_fabric").tasks.build,
         project(":general:general_fabric").tasks.build,
         project(":resizing:resizing_fabric").tasks.build,
+        project(":sodium:sodium_fabric").tasks.build,
 )
