@@ -11,5 +11,6 @@ public class MixinConnector extends BasePlugin {
 	    dependencies.put("tfc.smallerunits.sodium.mixin.SectionBuilderMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
 	    dependencies.put("tfc.smallerunits.sodium.mixin.SodiumRendererMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
 	    dependencies.put("tfc.smallerunits.sodium.mixin.ChunkBuilderMeshingTaskMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
+	    dependencies.put("tfc.smallerunits.sodium.mixin.WorldSliceMixin", "me.jellysquid.mods.sodium.mixin.core.render.world.WorldRendererMixin");
     }
 }

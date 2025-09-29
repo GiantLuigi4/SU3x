@@ -30,6 +30,7 @@ import tfc.smallerunits.core.client.access.tracking.FastCapabilityHandler;
 import tfc.smallerunits.core.client.access.tracking.SUCapableChunk;
 import tfc.smallerunits.core.data.capability.ISUCapability;
 import tfc.smallerunits.sodium.ChunkBuildResults;
+import tfc.smallerunits.sodium.WorldSliceAccessor;
 
 @Mixin(value = ChunkBuilderMeshingTask.class)
 public class ChunkBuilderMeshingTaskMixin {
@@ -68,7 +69,7 @@ public class ChunkBuilderMeshingTaskMixin {
 			int minX, int minY, int minZ, int maxX, int maxY, int maxZ,
 			BlockPos.MutableBlockPos blockPos, BlockPos.MutableBlockPos modelOffset
 	) {
-		__chunk = cache.getWorldSlice().world.getChunk(
+		__chunk = ((WorldSliceAccessor) (Object) cache.getWorldSlice()).getLevel().getChunk(
 				render.getChunkX(),
 				render.getChunkZ()
 		);

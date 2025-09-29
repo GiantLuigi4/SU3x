@@ -14,7 +14,8 @@
 		"RenderSectionMixin",
 		"RenderSectionMixin1",
 		"SectionBuilderMixin",
-		"SodiumRendererMixin"
+		"SodiumRendererMixin",
+		"WorldSliceMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

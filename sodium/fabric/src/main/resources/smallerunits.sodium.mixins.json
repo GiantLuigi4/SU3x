@@ -10,9 +10,14 @@
 	"client": [
 		"BuiltSectionMixin",
 		"ChunkBuilderMeshingTaskMixin",
-		"SectionBuilderMixin"
+		"RenderListMixin",
+		"RenderSectionMixin",
+		"RenderSectionMixin1",
+		"SectionBuilderMixin",
+		"SodiumRendererMixin",
+		"WorldSliceMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
 	}
-}
+}4
