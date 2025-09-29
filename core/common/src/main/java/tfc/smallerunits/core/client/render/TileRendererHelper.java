@@ -31,21 +31,13 @@ import tfc.smallerunits.level.SimpleTickerLevel;
 import tfc.smallerunits.plat.util.PlatformProvider;
 
 public class TileRendererHelper {
-	public static void setupStack(PoseStack stk, BlockEntity tile, BlockPos origin) {
-		stk.pushPose();
-		
-		Level lvl = tile.getLevel();
-		float scl = 1;
-		if (lvl instanceof SimpleTickerLevel tkLvl) {
-			int upb = tkLvl.getUPB();
-			scl = 1f / upb;
-			stk.translate(
-					tkLvl.getRegion().pos().toBlockPos().getX(),
-					tkLvl.getRegion().pos().toBlockPos().getY(),
-					tkLvl.getRegion().pos().toBlockPos().getZ()
-			);
-			stk.scale(scl, scl, scl);
-		}
+	public static void setupStack(PoseStack stk, BlockEntity tile, BlockPos origin, BlockPos regionOrigin, float scl) {
+		stk.translate(
+				regionOrigin.getX(),
+				regionOrigin.getY(),
+				regionOrigin.getZ()
+		);
+		stk.scale(scl, scl, scl);
 		
 		if (Minecraft.getInstance().getEntityRenderDispatcher().shouldRenderHitBoxes() && PlatformProvider.UTILS.isDevEnv()) {
 			LevelRenderer.renderLineBox(
@@ -53,6 +45,7 @@ public class TileRendererHelper {
 					PlatformProvider.UTILS.getRenderBox(tile), 1, 1, 1, 1
 			);
 		}
+
 		stk.translate(
 				tile.getBlockPos().getX(),
 				tile.getBlockPos().getY(),
@@ -92,18 +85,18 @@ public class TileRendererHelper {
 		
 		if (lastScale == -1)
 			GameRenderer.getPositionColorShader().apply();
-
+		
 		if (consumer == null) {
 			if (buffers[upb - 1] != null) {
 				if (lastScale != upb) {
 					buffers[upb - 1].bind();
 					lastScale = upb;
 				}
-
+				
 				stk.pushPose();
-
+				
 				stk.translate(pos.getX() - ox, pos.getY() - oy, pos.getZ() - oz);
-
+				
 				ShaderInstance instance = RenderSystem.getShader();
 				if (lastType != type) {
 					if (instance.COLOR_MODULATOR != null) {
@@ -116,11 +109,11 @@ public class TileRendererHelper {
 					instance.MODEL_VIEW_MATRIX.set(stk.last().pose());
 					instance.MODEL_VIEW_MATRIX.upload();
 				}
-
+				
 				buffers[upb - 1].draw();
-
+				
 				stk.popPose();
-
+				
 				return;
 			}
 		}
@@ -377,9 +370,10 @@ public class TileRendererHelper {
 			if (y < origin.getY() + 16 &&
 					y >= origin.getY()) {
 				AABB renderBox = PlatformProvider.UTILS.getRenderBox(tile);
+				float scl = 1;
 				if (tile.getLevel() instanceof SimpleTickerLevel tkLvl) {
 					int upb = tkLvl.getUPB();
-					float scl = 1f / upb;
+					scl = 1f / upb;
 					renderBox = new AABB(
 							renderBox.minX * scl + regionOrigin.getX(),
 							renderBox.minY * scl + regionOrigin.getY(),
@@ -398,7 +392,8 @@ public class TileRendererHelper {
 					stk.popPose();
 				}
 				if (frustum.test(renderBox)) {
-					TileRendererHelper.setupStack(stk, tile, origin);
+					stk.pushPose();
+					TileRendererHelper.setupStack(stk, tile, origin, regionOrigin, scl);
 					blockEntityRenderDispatcher.render(
 							tile, pct,
 							stk, Minecraft.getInstance().renderBuffers().bufferSource()

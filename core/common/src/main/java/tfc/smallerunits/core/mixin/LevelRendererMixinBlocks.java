@@ -185,7 +185,7 @@ public abstract class LevelRendererMixinBlocks {
             }
         }
 
-        ((SUCompiledChunkAttachments) chunk).SU$getChunkRender().drawBEs(origin, stk, SU$Frustum, pct);
+        ((SUCompiledChunkAttachments) chunk).SU$getChunkRender().drawBEs(origin, stk, SU$Frustum, pct, false);
         stk.popPose();
 
         return instance.getCompiledChunk();

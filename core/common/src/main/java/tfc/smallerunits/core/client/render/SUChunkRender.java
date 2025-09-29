@@ -108,13 +108,15 @@ public class SUChunkRender {
             BlockPos origin,
             PoseStack stk,
             IFrustum SU$Frustum,
-            float pct
+            float pct,
+            boolean sodium
     ) {
         if (!isEmpty()) {
             if (culled) return;
 
             stk.pushPose();
-            stk.translate(-origin.getX(), -origin.getY(), -origin.getZ());
+			if (!sodium)
+				stk.translate(-origin.getX(), -origin.getY(), -origin.getZ());
             for (TileInfo buffer : buffers) {
                 for (BlockEntity blockEntity : buffer.blockEntities) {
                     ModCompatClient.drawBE(

@@ -10,7 +10,6 @@ import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionManager;
 import me.jellysquid.mods.sodium.client.render.chunk.lists.ChunkRenderList;
 import me.jellysquid.mods.sodium.client.render.chunk.lists.SortedRenderLists;
-import me.jellysquid.mods.sodium.client.render.chunk.region.RenderRegion;
 import me.jellysquid.mods.sodium.client.util.iterator.ByteIterator;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -61,15 +60,10 @@ public class SodiumRenderer {
 		instance.setSampler("Sampler0", RenderSystem.getShaderTexture(0));
 		instance.setSampler("Sampler2", RenderSystem.getShaderTexture(2));
 		if (instance.MODEL_VIEW_MATRIX != null) instance.MODEL_VIEW_MATRIX.set(poseStack.last().pose());
-//		if (instance.MODEL_VIEW_MATRIX != null) instance.MODEL_VIEW_MATRIX.set(new Matrix4f().identity());
-//		if (instance.PROJECTION_MATRIX != null) instance.PROJECTION_MATRIX.set(new Matrix4f().identity());
 		if (instance.PROJECTION_MATRIX != null) instance.PROJECTION_MATRIX.set(RenderSystem.getProjectionMatrix());
 		instance.apply();
 		if (instance.MODEL_VIEW_MATRIX != null) instance.MODEL_VIEW_MATRIX.upload();
 		if (instance.PROJECTION_MATRIX != null) instance.PROJECTION_MATRIX.upload();
-		
-		int min = level.getMinBuildHeight();
-		int max = level.getMaxBuildHeight();
 		
 		Uniform uniform = instance.CHUNK_OFFSET;
 		
@@ -82,7 +76,6 @@ public class SodiumRenderer {
 			while (iterator.hasNext()) {
 				int element = iterator.nextByteAsInt();
 				RenderSection section = renderList.getRegion().getSection(element);
-				// TODO: cull
 				
 				int y = section.getChunkY();
 				
@@ -174,7 +167,6 @@ public class SodiumRenderer {
 							frustum,
 							unit.pos, unit.unitsPerBlock, unit.isNatural,
 							hammerHeld, unit.isEmpty(), null, stk,
-//						LightTexture.pack(level.getBrightness(LightLayer.BLOCK, unit.pos), level.getBrightness(LightLayer.SKY, unit.pos)),
 							LightTexture.pack(0, 0),
 							origin.getX(), origin.getY(), origin.getZ()
 					);
@@ -212,22 +204,10 @@ public class SodiumRenderer {
 		}
 		stk.popPose();
 
-//		synchronized (capable.getTiles()) {
-//			BlockEntity[] bes = new BlockEntity[0];
-//			// TODO: debug????
-//			try {
-//				bes = capable.getTiles().toArray(bes);
-//			} catch (Throwable ignored) {
-//			}
-//			for (BlockEntity tile : bes)
-//				ModCompatClient.drawBE(
-//						tile, origin, frustum,
-//						stk, tickDelta
-//				);
-//		}
 		((SUCompiledChunkAttachments) instance).SU$getChunkRender().drawBEs(
 				origin, stk,
-				frustum, tickDelta
+				frustum, tickDelta,
+				true
 		);
 	}
 	
@@ -239,26 +219,26 @@ public class SodiumRenderer {
 		stk.pushPose();
 		stk.translate(-camera.getPosition().x, -camera.getPosition().y, -camera.getPosition().z);
 		
-		while (lists.hasNext()) {
-			ChunkRenderList chunkrenderlist = lists.next();
-			RenderRegion renderregion = chunkrenderlist.getRegion();
-			ByteIterator byteiterator = chunkrenderlist.sectionsWithGeometryIterator(false);
-			if (byteiterator != null) {
-				while (byteiterator.hasNext()) {
-					int i = byteiterator.nextByteAsInt();
-					RenderSection rendersection = renderregion.getSection(i);
-					
-					origin.set(rendersection.getChunkX() << 4, rendersection.getChunkY() << 4, rendersection.getChunkZ() << 4);
-					
-					renderSection(
-							origin, rendersection, stk,
-							bufferBuilders, blockBreakingProgressions,
-							tickDelta, ci, frustum,
-							client, level
-					);
-				}
+		SortedRenderLists renderLists = renderSectionManager.getRenderLists();
+		Iterator<ChunkRenderList> renderListIterator = renderLists.iterator();
+		renderListIterator.forEachRemaining(renderList -> {
+			ByteIterator iterator = ((RenderListAttachments) renderList).smallerUnits$sectionsWithUnitSpacesIterator(false);
+			if (iterator == null) return;
+			
+			while (iterator.hasNext()) {
+				int element = iterator.nextByteAsInt();
+				RenderSection section = renderList.getRegion().getSection(element);
+				
+				origin.set(section.getChunkX() << 4, section.getChunkY() << 4, section.getChunkZ() << 4);
+				
+				renderSection(
+						origin, section, stk,
+						bufferBuilders, blockBreakingProgressions,
+						tickDelta, ci, frustum,
+						client, level
+				);
 			}
-		}
+		});
 		stk.popPose();
 	}
 }

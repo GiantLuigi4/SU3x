@@ -226,7 +226,8 @@ public class SodiumRenderer {
 //		}
 		((SUCompiledChunkAttachments) instance).SU$getChunkRender().drawBEs(
 				origin, stk,
-				frustum, tickDelta
+				frustum, tickDelta,
+				true
 		);
 	}
 
