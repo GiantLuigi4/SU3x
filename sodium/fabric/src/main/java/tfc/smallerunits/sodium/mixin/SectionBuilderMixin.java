@@ -14,7 +14,7 @@ import tfc.smallerunits.sodium.ChunkBuildResults;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(value = BuiltSectionInfo.Builder.class, remap = false)
+@Mixin(value = BuiltSectionInfo.Builder.class)
 public class SectionBuilderMixin implements ChunkBuildResults {
 	@Unique
 	List<UnitSpace> spaces = new ArrayList<>();
@@ -38,7 +38,7 @@ public class SectionBuilderMixin implements ChunkBuildResults {
 		spaces.addAll(all);
 	}
 	
-	@Inject(at = @At("RETURN"), method = "build")
+	@Inject(at = @At("RETURN"), method = "build", remap = false)
 	public void postBuild(CallbackInfoReturnable<BuiltSectionInfo> cir) {
 		((ChunkBuildResults) cir.getReturnValue()).smallerUnits$addAll(spaces);
 		((ChunkBuildResults) cir.getReturnValue()).smallerUnits$setCapability(capability);

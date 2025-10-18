@@ -3,8 +3,10 @@ package tfc.smallerunits.core.mixin.core.access;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.Connection;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import tfc.smallerunits.core.data.access.EntityAccessor;
@@ -14,6 +16,8 @@ import tfc.smallerunits.plat.itf.access.PacketListenerAccessor;
 public class ClientPacketListenerMixin implements PacketListenerAccessor {
 	@Shadow
 	private ClientLevel level;
+	
+	@Shadow @Final private Connection connection;
 	
 	@Override
 	public void setWorld(Level lvl) {
@@ -26,5 +30,10 @@ public class ClientPacketListenerMixin implements PacketListenerAccessor {
 	@Override
 	public Player getPlayer() {
 		return Minecraft.getInstance().player;
+	}
+	
+	@Override
+	public Connection getConnection() {
+		return connection;
 	}
 }

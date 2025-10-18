@@ -1,10 +1,12 @@
 package tfc.smallerunits.core.mixin.core.access;
 
+import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import tfc.smallerunits.plat.itf.access.PacketListenerAccessor;
@@ -14,6 +16,8 @@ public class ServerPacketListenerMixin implements PacketListenerAccessor {
 	@Shadow
 	public ServerPlayer player;
 	
+	@Shadow @Final private Connection connection;
+	
 	@Override
 	public void setWorld(Level lvl) {
 		this.player.setServerLevel((ServerLevel) lvl);
@@ -22,5 +26,10 @@ public class ServerPacketListenerMixin implements PacketListenerAccessor {
 	@Override
 	public Player getPlayer() {
 		return player;
+	}
+	
+	@Override
+	public Connection getConnection() {
+		return connection;
 	}
 }

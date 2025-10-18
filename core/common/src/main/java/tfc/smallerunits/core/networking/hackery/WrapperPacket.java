@@ -3,7 +3,6 @@ package tfc.smallerunits.core.networking.hackery;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.ConnectionProtocol;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.PacketListener;
@@ -175,8 +174,11 @@ public class WrapperPacket extends tfc.smallerunits.plat.net.Packet {
 
     protected void doHandle(NetCtx ctx) {
         NetworkingHacks.increaseBlockPosPrecision.set(true);
-        //TODO is it SERVERBOUND?
-        NetworkContext context = new NetworkContext(new Connection(PacketFlow.SERVERBOUND), ((PacketListenerAccessor) ctx.getHandler()).getPlayer(), ((Packet) this.wrapped));
+        NetworkContext context = new NetworkContext(
+                ((PacketListenerAccessor) ctx.getHandler()).getConnection(),
+                ((PacketListenerAccessor) ctx.getHandler()).getPlayer(),
+                ((Packet) this.wrapped)
+        );
 
         PositionalInfo info = new PositionalInfo(context.player);
 

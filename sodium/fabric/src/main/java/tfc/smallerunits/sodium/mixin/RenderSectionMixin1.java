@@ -8,7 +8,7 @@ import tfc.smallerunits.core.client.access.tracking.SUCompiledChunkAttachments;
 import tfc.smallerunits.core.client.render.SUChunkRender;
 import tfc.smallerunits.sodium.ChunkBuildResults;
 
-@Mixin(value = RenderSection.class, remap = false)
+@Mixin(value = RenderSection.class)
 public class RenderSectionMixin1 implements SUCompiledChunkAttachments {
 	@Unique
 	private SUChunkRender compChunk;

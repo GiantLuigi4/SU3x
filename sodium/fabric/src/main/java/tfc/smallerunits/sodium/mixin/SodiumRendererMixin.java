@@ -23,7 +23,7 @@ import tfc.smallerunits.sodium.render.SodiumRenderer;
 
 import java.util.SortedSet;
 
-@Mixin(value = SodiumWorldRenderer.class, remap = false)
+@Mixin(value = SodiumWorldRenderer.class)
 public class SodiumRendererMixin {
 	@Shadow
 	private RenderSectionManager renderSectionManager;

@@ -17,7 +17,7 @@ import tfc.smallerunits.sodium.RenderSectionAttachments;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(value = RenderSection.class, remap = false)
+@Mixin(value = RenderSection.class)
 public class RenderSectionMixin implements ChunkBuildResults, RenderSectionAttachments {
 	@Shadow
 	private int flags;
@@ -52,7 +52,7 @@ public class RenderSectionMixin implements ChunkBuildResults, RenderSectionAttac
 		return !spaces.isEmpty();
 	}
 	
-	@Inject(at = @At("RETURN"), method = "setRenderState")
+	@Inject(at = @At("RETURN"), method = "setRenderState", remap = false)
 	public void postSetRenderState(BuiltSectionInfo info, CallbackInfo ci) {
 		spaces = ((ChunkBuildResults) info).smallerUnits$getAll();
 		capability = ((ChunkBuildResults) info).smallerUnits$getCapability();

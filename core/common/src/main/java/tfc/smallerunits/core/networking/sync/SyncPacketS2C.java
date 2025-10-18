@@ -100,14 +100,14 @@ public class SyncPacketS2C extends Packet {
 
 				// TODO: adjust player position and whatnot
 				
-//				{
-//					BlockState state = chunk.getBlockState(syncPacket.realPos);
-//					try {
+				{
+					BlockState state = chunk.getBlockState(syncPacket.realPos);
+					try {
 //						chunk.setBlockState(syncPacket.realPos, tfc.smallerunits.core.Registry.UNIT_SPACE.get().defaultBlockState(), false);
-//						chunk.getLevel().sendBlockUpdated(syncPacket.realPos, state, Registry.UNIT_SPACE.get().defaultBlockState(), 0);
-//					} catch (Throwable ignored) {
-//					}
-//				}
+						chunk.getLevel().sendBlockUpdated(syncPacket.realPos, state, Registry.UNIT_SPACE.get().defaultBlockState(), 0);
+					} catch (Throwable ignored) {
+					}
+				}
 				
 				space.unitsPerBlock = syncPacket.upb;
 				space.setUpb(space.unitsPerBlock);
