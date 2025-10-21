@@ -3,6 +3,10 @@ plugins {
     id 'fabric-loom'
 }
 
+base {
+    archivesName = "smallerunits-fabric-mc${minecraft_version}"
+}
+
 repositories {
     maven {
         name 'jitpack'

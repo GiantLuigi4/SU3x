@@ -18,7 +18,7 @@ dependencies {
     implementation project(":core:core_common")
 
     modImplementation "curse.maven:distant-horizons-508933:6791186"
-    modImplementation "curse.maven:applied-energistics-2-223794:6852915"
+    modImplementation "curse.maven:applied-energistics-2-223794:7096604"
 }
 
 loom {
@@ -26,7 +26,7 @@ loom {
         accessWidenerPath.set(getProject(project, ":common").file("src/main/resources/${mod_id}.accesswidener"))
     }
     mixin {
-        defaultRefmapName.set("${mod_base_id}.refmap.json")
+        defaultRefmapName.set("${mod_base_id}.general.refmap.json")
     }
     runs {
         client {

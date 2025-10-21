@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import tfc.smallerunits.common.logging.Loggers;
 import tfc.smallerunits.plat.internal.ToolProvider;
+import tfc.smallerunits.plat.itf.IMayManageModelData;
 
 public class FabricPlatformUtilsClient extends PlatformUtilsClient {
 	public void postTick(ClientLevel fakeClientLevel) {
@@ -68,7 +69,6 @@ public class FabricPlatformUtilsClient extends PlatformUtilsClient {
 
 	@Override
 	public Object populateModelData(BlockAndTintGetter level, BlockPos pos, BlockState state, BakedModel model, Object modelData) {
-		Loggers.SU_LOGGER.warn("Populate model data NYI for fabric in FabricPlatformUtilsClient");
-		return null;
+		return ((IMayManageModelData) level).getModelData(pos);
 	}
 }

@@ -79,7 +79,7 @@ public class SodiumRenderer {
 				
 				int y = section.getChunkY();
 				
-				SUCapableChunk capable = ((ChunkBuildResults)section).getCapable();
+				SUCapableChunk capable = ((ChunkBuildResults) section).getCapable();
 				SUCompiledChunkAttachments attachments = (SUCompiledChunkAttachments) section;
 				SUChunkRender render = attachments.SU$getChunkRender();
 				if (render == null) {
@@ -203,8 +203,16 @@ public class SodiumRenderer {
 			}
 		}
 		stk.popPose();
-
-		((SUCompiledChunkAttachments) instance).SU$getChunkRender().drawBEs(
+		
+		SUCompiledChunkAttachments attachments = (SUCompiledChunkAttachments) instance;
+		SUChunkRender render = attachments.SU$getChunkRender();
+		
+		if (render == null) {
+			attachments.setSUCapable(instance.getChunkY(), capable);
+			render = attachments.SU$getChunkRender();
+		}
+		
+		render.drawBEs(
 				origin, stk,
 				frustum, tickDelta,
 				true

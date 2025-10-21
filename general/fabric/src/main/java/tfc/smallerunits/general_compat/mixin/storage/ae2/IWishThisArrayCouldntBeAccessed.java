@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import tfc.smallerunits.core.simulation.chunk.BasicVerticalChunk;
 
-@Mixin(value = CompassService.class, remap = false)
+@Mixin(value = CompassService.class)
 public class IWishThisArrayCouldntBeAccessed {
     @Inject(at = @At("HEAD"), method = "updateArea(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;)V", cancellable = true)
     private static void updateArea(ServerLevel level, ChunkAccess chunk, CallbackInfo ci) {
